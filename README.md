@@ -24,3 +24,7 @@ bash system-setup/install-ubuntu.sh
 ## License
 
 MIT License
+
+## Future releases
+
+* add instructions for macOS
