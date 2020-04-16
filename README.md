@@ -9,6 +9,6 @@
 
 ## Execute installation script
 
-## LICENSE
+## License
 
 MIT License
