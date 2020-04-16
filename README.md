@@ -7,6 +7,12 @@
 
 ## Clone this repository
 
+Clone the repository into your local machine with:
+
+```bash
+git clone https://github.com/AngryMaciek/system-setup.git
+```
+
 ## Execute installation script
 
 ## License
