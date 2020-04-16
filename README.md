@@ -5,15 +5,21 @@
 
 ## Install Git
 
-## Clone this repository
+## Clone the repository
 
-Clone the repository into your local machine with:
-
+Use `git` command to clone this repository into your local machine:
 ```bash
 git clone https://github.com/AngryMaciek/system-setup.git
 ```
 
 ## Execute installation script
+
+Depending on your operating system please execute one of the following installation scripts.
+
+Ubuntu-based Linux distributions:
+```bash
+bash system-setup/install-ubuntu.sh
+```
 
 ## License
 
