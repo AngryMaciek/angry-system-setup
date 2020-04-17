@@ -30,11 +30,18 @@ if [[ $(id -u) -ne 0 ]]
         exit 1
 fi
 
+# check the CPU architecture
+CPU_arch=$(uname -m)
+if [ CPU_arch != "x86_64" ]
+    then
+        echo $(date)
+        echo "This script only works on 64bit systems, sorry!"
+        echo "Exiting..."
+        echo $SEP
+        exit 1
+fi
 
 
-#CPU_arch=$(uname -m)
-#if [ CPU_arch == "x86_64" ]; then
-#fi
 
 
 #cleanup () {
@@ -139,37 +146,17 @@ apt-get remove firefox --yes
 apt-get remove firefox-locale-en --yes
 echo $SEP
 
+# download and install miniconda
+echo $(date)
+echo "Installing Miniconda3"
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+rm -f Miniconda3-latest-Linux-x86_64.sh
+source .bashrc
+echo $SEP
 
 
 
-
-
-
-
-
-
-# download miniconda
-
-#CPU_arch=$(uname -m)
-#if [ CPU_arch == "x86_64" ]; then
-#  Miniconda_installer="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
-#elif [ CPU_arch == "i386" ] | [ CPU_arch == "i686" ]; then
-#  Miniconda_installer="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86.sh"
-#fi
-#wget Miniconda_installer
-
-# install miniconda
-
-#if [ CPU_arch == "x86_64" ]; then
-#  bash Miniconda3-latest-Linux-x86_64.sh
-#elif [ CPU_arch == "i386" ] | [ CPU_arch == "i686" ]; then
-#  bash Miniconda3-latest-Linux-x86.sh
-#fi
-
-#rm -f Miniconda3-latest-Linux-x86_64.sh
-#rm -f Miniconda3-latest-Linux-x86.sh
-
-#source .bashrc
 
 
 
@@ -191,6 +178,8 @@ echo $SEP
 #chmod +x textfile-templates/template
 
 #source .bashrc
+
+
 
 
 
@@ -224,7 +213,6 @@ echo $SEP
 #shellckech and lint this script at the end!
 
 # test commands at the end! add --version afer every install?
-
 
 
 
