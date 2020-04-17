@@ -16,7 +16,7 @@
 cd $HOME
 
 # backup old configs
-mkdir backup || exit_on_error "Dicectory 'backup' already exists."
+mkdir backup || 1 "Dicectory 'backup' already exists."
 
 
 # install my bash configuration
