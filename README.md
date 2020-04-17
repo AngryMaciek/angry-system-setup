@@ -1,7 +1,9 @@
 # Setup instructions for a fresh OS
 *Maciek Bak*  
 
-This is a very small repository of mine which allows me to quickly re-create my working environment completely from scratch. Contains config files, external repos, software installation commands and much more! No more pain after re-installing the operating system :wink:
+This is a very small repository of mine which allows me to quickly re-create my working environment completely from scratch.  
+Contains config files, external repos, software installation commands and much more!  
+No more pain after re-installing the operating system :wink:
 
 ## Install Git
 
