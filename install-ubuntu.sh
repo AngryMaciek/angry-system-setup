@@ -70,7 +70,7 @@ apt-get install gfortran
 
 # install important software:
 apt-get install guake
-apt-get intall terminator
+apt-get install terminator
 apt-get install tmux
 apt-get install sshfs
 
