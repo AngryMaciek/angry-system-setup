@@ -26,7 +26,6 @@
 #set -x  # facilitates debugging by printing out executed commands
 
 set -euo pipefail
-set -x
 
 #user_dir=$PWD
 #pipeline_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
@@ -47,7 +46,7 @@ cd $HOME
 
 # install git if it has not been already installed
 # (the newest version available)
-#apt-get install git
+apt-get install git --yes
 
 # backup old configs
 #mkdir backup || echo "Dicectory 'backup' already exists."
