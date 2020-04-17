@@ -134,6 +134,9 @@ echo $(date)
 echo "Uninstalling unnecessary software"
 apt-get remove rhythmbox --yes
 apt-get remove rhythmbox-data --yes
+apt-get remove thunderbird --yes
+apt-get remove firefox --yes
+apt-get remove firefox-locale-en --yes
 echo $SEP
 
 
@@ -221,3 +224,14 @@ echo $SEP
 #shellckech and lint this script at the end!
 
 # test commands at the end! add --version afer every install?
+
+
+
+
+
+
+
+
+# todo:
+# install sublime
+# remove other unnecessary software
