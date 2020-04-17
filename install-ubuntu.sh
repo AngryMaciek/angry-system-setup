@@ -129,14 +129,12 @@ echo $SEP
 # sublime
 # https://linuxize.com/post/how-to-install-sublime-text-3-on-ubuntu-18-04/
 
-
-
-
-
-
-
 # remove unnecessary software
-
+echo $(date)
+echo "Uninstalling unnecessary software"
+apt-get install remove rhythmbox --yes
+apt-get install remove rhythmbox-data --yes
+echo $SEP
 
 
 
