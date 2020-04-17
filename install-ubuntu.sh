@@ -13,7 +13,7 @@
 #
 ###############################################################################
 
-SEP="##################################################"
+SEP="############################################################"
 echo $SEP
 
 echo $(date)
@@ -78,16 +78,30 @@ echo $SEP
 #touch custom_bash/bashrc.local
 #source .bashrc
 
-# update and upgrade ????
-apt-get update
+
+
+
+
+
+
+# update package lists
+echo $(date)
+echo "Updating package lists"
+apt-get update --yes
+echo $SEP
+
+# fetch new versions of installed packages
+echo $(date)
+echo "Upgrading installed packages"
 apt-get upgrade --yes
+echo $SEP
 
 # install compilers
 echo $(date)
 echo "Installing GCC, G++, GFORTRAN compilers"
-apt-get install gcc
-apt-get install g++
-apt-get install gfortran
+apt-get install gcc --yes
+apt-get install g++ --yes
+apt-get install gfortran --yes
 echo $SEP
 
 
@@ -102,11 +116,13 @@ echo $SEP
 # visual studio vs sublime
 
 
-
-
-
-
 # remove unnecessary software
+
+
+
+
+
+
 
 # download miniconda
 
