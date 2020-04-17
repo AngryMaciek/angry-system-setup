@@ -2,14 +2,14 @@
 
 ###############################################################################
 #
-#   [TITLE, DESCRIPTION]
+#   Working environment setup for fresh operating system
 #
 #   AUTHOR: Maciej_Bak
 #   AFFILIATION: Swiss_Institute_of_Bioinformatics
 #   CONTACT: wsciekly.maciek@gmail.com
 #   CREATED: 16-04-2020
 #   LICENSE: MIT
-#   USAGE: bash install-ubuntu.sh
+#   USAGE: sudo bash install-ubuntu.sh
 #
 ###############################################################################
 
@@ -61,10 +61,14 @@ echo "Installing Git version control system"
 apt-get install git --yes
 echo $SEP
 
+
+
+
+
 # backup old configs
-mkdir backup || echo "Directory 'backup' already exists."
-cp .bashrc backup/.bashrc # always present
-cp .gitconfig backup/.gitconfig # present after git installation
+#mkdir backup || echo "Directory 'backup' already exists."
+#cp .bashrc backup/.bashrc # always present
+#cp .gitconfig backup/.gitconfig # present after git installation
 
 
 
@@ -104,16 +108,26 @@ apt-get install g++ --yes
 apt-get install gfortran --yes
 echo $SEP
 
-
 # install important software:
-#apt-get install guake
-#apt-get install terminator
-#apt-get install tmux
-#apt-get install sshfs
-
+echo $(date)
+echo "Installing specified software"
+apt-get install guake --yes
+apt-get install terminator --yes
+apt-get install tmux --yes
+apt-get install sshfs --yes
+echo $SEP
 
 # Chrome
 # visual studio vs sublime
+
+
+
+
+
+
+
+
+
 
 
 # remove unnecessary software
