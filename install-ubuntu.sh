@@ -25,6 +25,9 @@
 #set -u  # ensures that script exits when unset variables are used
 #set -x  # facilitates debugging by printing out executed commands
 
+set -euo pipefail
+set -x
+
 #user_dir=$PWD
 #pipeline_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 #cd "$pipeline_dir"
@@ -44,35 +47,35 @@ cd $HOME
 
 # install git if it has not been already installed
 # (the newest version available)
-apt-get install git
+#apt-get install git
 
 # backup old configs
-mkdir backup || echo "Dicectory 'backup' already exists."
-cp .bashrc backup/.bashrc # always present
-cp .gitconfig backup/.gitconfig
+#mkdir backup || echo "Dicectory 'backup' already exists."
+#cp .bashrc backup/.bashrc # always present
+#cp .gitconfig backup/.gitconfig
 
 # install my bash configuration
 # https://github.com/AngryMaciek/custom_bash
-git clone https://github.com/AngryMaciek/custom_bash.git
-ln -s custom_bash/bashrc .bashrc
+#git clone https://github.com/AngryMaciek/custom_bash.git
+#ln -s custom_bash/bashrc .bashrc
 # place all the local bash configs into bashrc.local
-touch custom_bash/bashrc.local
-source .bashrc
+#touch custom_bash/bashrc.local
+#source .bashrc
 
 # update and upgrade ????
-apt-get update
+#apt-get update
 #apt-get upgrade --yes
 
 # install compilers
-apt-get install gcc
-apt-get install g++
-apt-get install gfortran
+#apt-get install gcc
+#apt-get install g++
+#apt-get install gfortran
 
 # install important software:
-apt-get install guake
-apt-get install terminator
-apt-get install tmux
-apt-get install sshfs
+#apt-get install guake
+#apt-get install terminator
+#apt-get install tmux
+#apt-get install sshfs
 
 
 # Chrome
