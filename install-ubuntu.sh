@@ -31,9 +31,6 @@ if [[ $(id -u) -ne 0 ]]
 fi
 
 
-
-
-
 #cleanup () {
 #    rc=$?
 #    rm -rf backup
@@ -42,18 +39,17 @@ fi
 #}
 #trap cleanup EXIT
 
-#set -eo pipefail  # ensures that script exits at first command that exits with non-zero status
-#set -u  # ensures that script exits when unset variables are used
-#set -x  # facilitates debugging by printing out executed commands
 
+
+
+# exit script on first non-zero exit-status command
+# exit script when unset variables are used
+# do not mask the return code
 set -euo pipefail
 
-#user_dir=$PWD
-#pipeline_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-#cd "$pipeline_dir"
-
-
-
+# remember paths
+user_dir=$PWD
+repository_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 # work in home directory
 cd $HOME
@@ -65,10 +61,13 @@ echo "Installing Git version control system"
 apt-get install git --yes
 echo $SEP
 
+
 # backup old configs
 #mkdir backup || echo "Dicectory 'backup' already exists."
 #cp .bashrc backup/.bashrc # always present
 #cp .gitconfig backup/.gitconfig
+
+
 
 # install my bash configuration
 # https://github.com/AngryMaciek/custom_bash
