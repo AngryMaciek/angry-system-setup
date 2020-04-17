@@ -61,11 +61,12 @@ echo "Installing Git version control system"
 apt-get install git --yes
 echo $SEP
 
-
 # backup old configs
-#mkdir backup || echo "Dicectory 'backup' already exists."
-#cp .bashrc backup/.bashrc # always present
-#cp .gitconfig backup/.gitconfig
+mkdir backup || echo "Directory 'backup' already exists."
+cp .bashrc backup/.bashrc # always present
+cp .gitconfig backup/.gitconfig # present after git installation
+
+
 
 
 
