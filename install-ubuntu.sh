@@ -43,45 +43,45 @@ fi
 cd $HOME
 
 # install git if it has not been already installed
-# (the newest version)
+# (the newest version available)
 apt-get install git
 
 # backup old configs
-#mkdir backup || echo "Dicectory 'backup' already exists."
-#cp .bashrc backup/.bashrc # always present
-#cp .gitconfig backup/.gitconfig
-
-
-
+mkdir backup || echo "Dicectory 'backup' already exists."
+cp .bashrc backup/.bashrc # always present
+cp .gitconfig backup/.gitconfig
 
 # install my bash configuration
 # https://github.com/AngryMaciek/custom_bash
-#$ git clone https://github.com/AngryMaciek/custom_bash.git
-#$ ln -s custom_bash/bashrc .bashrc
-#$ touch custom_bash/bashrc.local
+git clone https://github.com/AngryMaciek/custom_bash.git
+ln -s custom_bash/bashrc .bashrc
+# place all the local bash configs into bashrc.local
+touch custom_bash/bashrc.local
+source .bashrc
 
-# copy all the current local bash configs into bashrc.local
+# update and upgrade ????
+apt-get update
+apt-get upgrade
+
+# install important software:
+apt-get install guake
+apt-get intall terminator
+apt-get install tmux
+apt-get install sshfs
 
 
-# install cool software:
-# iterm
-# terminator
-# sshfs
 # Chrome
-# tmux
 # visual studio vs sublime
 
 
-
+# install compilers
+apt-get install gcc
+apt-get install g++
+apt-get install gfortran
 
 
 
 # remove unnecessary software
-
-# update and upgrade apt
-
-# Ubuntu comes with gcc and gfortran compilers
-# test that
 
 # download miniconda
 
@@ -142,9 +142,7 @@ apt-get install git
 #git clone https://github.com/AngryMaciek/conda-envs.git
 
 
-
-
-# make symlinks to gitconfig dotfile
+ copy mi .gitfconfig
 
 #sc4da
 #custom pylintrc
@@ -152,4 +150,5 @@ apt-get install git
 
 
 #shellckech and lint this script at the end!
-#trap? just like Alex does
+
+# test commands at the end!
