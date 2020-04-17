@@ -24,7 +24,7 @@ echo $SEP
 if [[ $(id -u) -ne 0 ]]
     then
         echo $(date)
-        echo "Please run the script as root."
+        echo "Please run the script as root"
         echo "Exiting..."
         echo $SEP
         exit 1
