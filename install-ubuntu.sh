@@ -44,7 +44,7 @@ cd $HOME
 
 # install git if it has not been already installed
 # (the newest version)
-sudo apt-get install git
+apt-get install git
 
 # backup old configs
 #mkdir backup || echo "Dicectory 'backup' already exists."
