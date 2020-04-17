@@ -123,8 +123,8 @@ apt-get install terminator --yes
 apt-get install tmux --yes
 apt-get install sshfs --yes
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-apt-get install ./google-chrome-stable_current_amd64.deb
-rf -f google-chrome-stable_current_amd64.deb
+apt-get install ./google-chrome-stable_current_amd64.deb --yes
+rm -f google-chrome-stable_current_amd64.deb
 echo $SEP
 # sublime
 # https://linuxize.com/post/how-to-install-sublime-text-3-on-ubuntu-18-04/
@@ -135,11 +135,11 @@ echo $SEP
 
 
 
-
-
-
-
 # remove unnecessary software
+
+
+
+
 
 
 
@@ -170,8 +170,6 @@ echo $SEP
 
 #source .bashrc
 
-# what should I have in conda base? nothing!
-
 
 
 
@@ -196,6 +194,8 @@ echo $SEP
 
 
 
+
+
 # install my cookiecutters
 # https://github.com/AngryMaciek/cookiecutters
 #conda install -c conda-forge cookiecutter
@@ -204,7 +204,6 @@ echo $SEP
 # install my conda env recipes
 # https://github.com/AngryMaciek/conda-envs
 #git clone https://github.com/AngryMaciek/conda-envs.git
-
 
 # copy mi .gitfconfig
 
