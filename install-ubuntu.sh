@@ -30,20 +30,28 @@
 #cd "$pipeline_dir"
 
 
+# check for root privileges
+if [[ $(id -u) -ne 0 ]]
+    then
+        echo "Please run the script as root."
+        echo "Exiting..."
+        echo $(date)
+        exit 1
+fi
 
-
-if [[ $(id -u) -ne 0 ]] ; then echo "Please run the script as root" ; exit 1 ; fi
-
-#cd $HOME
+# work in home directory
+cd $HOME
 
 # install git if it has not been already installed
 # (the newest version)
-#sudo apt-get install git
+sudo apt-get install git
 
 # backup old configs
 #mkdir backup || echo "Dicectory 'backup' already exists."
 #cp .bashrc backup/.bashrc # always present
 #cp .gitconfig backup/.gitconfig
+
+
 
 
 # install my bash configuration
@@ -54,6 +62,7 @@ if [[ $(id -u) -ne 0 ]] ; then echo "Please run the script as root" ; exit 1 ; f
 
 # copy all the current local bash configs into bashrc.local
 
+
 # install cool software:
 # iterm
 # terminator
@@ -61,6 +70,9 @@ if [[ $(id -u) -ne 0 ]] ; then echo "Please run the script as root" ; exit 1 ; f
 # Chrome
 # tmux
 # visual studio vs sublime
+
+
+
 
 
 
