@@ -5,6 +5,15 @@
 
 ## Install Git
 
+[Git](https://git-scm.com/) is an open source version control system. In principle one can download this repository manually, as a compressed package, but I highly recommend to install `git` first and then use it to pull all the files automatically.  
+
+Please install `git ` with one of the following commands.
+
+Ubuntu-based Linux distributions (installation requires root privileges):
+```bash
+sudo apt-get install git
+```
+
 ## Clone the repository
 
 Use `git` command to clone this repository into your local machine:
@@ -12,11 +21,11 @@ Use `git` command to clone this repository into your local machine:
 git clone https://github.com/AngryMaciek/system-setup.git
 ```
 
-## Execute installation script
+## Execute setup script
 
 Depending on your operating system please execute one of the following installation scripts.
 
-Ubuntu-based Linux distributions:
+Ubuntu-based Linux distributions (execution requires root privileges):
 ```bash
 bash system-setup/install-ubuntu.sh
 ```
@@ -28,28 +37,3 @@ MIT License
 ## Future releases
 
 * add instructions for macOS
-
-
-
-
-# Pylint config file
-*Maciej_Bak  
-Swiss_Institute_of_Bioinformatics*
-
-[Pylint](https://www.pylint.org/) is a very powerful software to rate the quality of your Python code.
-This small repository contains just my configuration file for the analyses.
-It was generated based on `pylint 2.3.1`.
-
-In order to use it (assuming you have installed the tool itself): 
-
-1. Clone the repository
-   ```bash
-   cd;
-   git clone https://github.com/AngryMaciek/custom_pylintrc.git;
-   ```
-
-2. Provide the path to the config file for each `pylint` execution:
-
-   ```bash
-   pylint --rcfile=$HOME/custom_pylintrc/pylintrc {FILE}
-   ```
