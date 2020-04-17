@@ -15,8 +15,8 @@
 
 cd $HOME
 
-
-# backup old git config and bashrc'
+# backup old configs
+mkdir backup || exit_on_error "Dicectory 'backup' already exists."
 
 
 # install my bash configuration
