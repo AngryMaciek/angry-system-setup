@@ -20,6 +20,16 @@ echo $(date)
 echo "Script Started"
 echo $SEP
 
+# check for root privileges
+if [[ $(id -u) -ne 0 ]]
+    then
+        echo $(date)
+        echo "Please run the script as root."
+        echo "Exiting..."
+        echo $SEP
+        exit 1
+fi
+
 
 
 
