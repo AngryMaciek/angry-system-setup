@@ -108,7 +108,7 @@ apt-get install sshfs
 
 #source .bashrc
 
-
+# what should I have in conda base? nothing!
 
 
 
@@ -148,6 +148,9 @@ apt-get install sshfs
 
 #sc4da
 #custom pylintrc merge that repo into this one
+
+# create alias
+# pylint --rcfile=$HOME/custom_pylintrc/pylintrc {FILE}
 
 # install gnome shell
 # restart!
