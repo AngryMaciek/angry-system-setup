@@ -132,8 +132,8 @@ echo $SEP
 # remove unnecessary software
 echo $(date)
 echo "Uninstalling unnecessary software"
-apt-get install remove rhythmbox --yes
-apt-get install remove rhythmbox-data --yes
+apt-get remove rhythmbox --yes
+apt-get remove rhythmbox-data --yes
 echo $SEP
 
 
