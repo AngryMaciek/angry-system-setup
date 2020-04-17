@@ -32,7 +32,7 @@ fi
 
 # check the CPU architecture
 CPU_arch=$(uname -m)
-if [ CPU_arch != "x86_64" ]
+if [[ CPU_arch != "x86_64" ]]
     then
         echo $(date)
         echo "This script only works on 64bit systems, sorry!"
