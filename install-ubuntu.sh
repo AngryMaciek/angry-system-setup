@@ -13,6 +13,17 @@
 #
 ###############################################################################
 
+SEP="##################################################"
+echo $SEP
+
+echo $(date)
+echo "Script Started"
+echo $SEP
+
+
+
+
+
 #cleanup () {
 #    rc=$?
 #    rm -rf backup
@@ -27,30 +38,22 @@
 
 set -euo pipefail
 
-SEP="##################################################"
-
 #user_dir=$PWD
 #pipeline_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 #cd "$pipeline_dir"
 
 
-# check for root privileges
-if [[ $(id -u) -ne 0 ]]
-    then
-        echo $SEP
-        echo "Please run the script as root."
-        echo "Exiting..."
-        echo $(date)
-        echo $SEP
-        exit 1
-fi
+
 
 # work in home directory
 cd $HOME
 
 # install git if it has not been already installed
 # (the newest version available)
+echo $(date)
+echo "Installing Git version control system"
 apt-get install git --yes
+echo $SEP
 
 # backup old configs
 #mkdir backup || echo "Dicectory 'backup' already exists."
@@ -66,13 +69,17 @@ apt-get install git --yes
 #source .bashrc
 
 # update and upgrade ????
-#apt-get update
-#apt-get upgrade --yes
+apt-get update
+apt-get upgrade --yes
 
 # install compilers
-#apt-get install gcc
-#apt-get install g++
-#apt-get install gfortran
+echo $(date)
+echo "Installing GCC, G++, GFORTRAN compilers"
+apt-get install gcc
+apt-get install g++
+apt-get install gfortran
+echo $SEP
+
 
 # install important software:
 #apt-get install guake
