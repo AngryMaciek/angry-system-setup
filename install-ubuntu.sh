@@ -147,7 +147,7 @@ apt-get install sshfs
 # copy mi .gitfconfig
 
 #sc4da
-#custom pylintrc
+#custom pylintrc merge that repo into this one
 
 # install gnome shell
 # restart!
