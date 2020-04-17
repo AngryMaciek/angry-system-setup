@@ -31,6 +31,12 @@ if [[ $(id -u) -ne 0 ]]
 fi
 
 
+
+#CPU_arch=$(uname -m)
+#if [ CPU_arch == "x86_64" ]; then
+#fi
+
+
 #cleanup () {
 #    rc=$?
 #    rm -rf backup
@@ -111,14 +117,17 @@ echo $SEP
 # install important software:
 echo $(date)
 echo "Installing specified software"
+apt-get install wget --yes
 apt-get install guake --yes
 apt-get install terminator --yes
 apt-get install tmux --yes
 apt-get install sshfs --yes
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+apt-get install google-chrome-stable_current_amd64.deb
+rf -f google-chrome-stable_current_amd64.deb
 echo $SEP
-
-# Chrome
-# visual studio vs sublime
+# sublime
+# https://linuxize.com/post/how-to-install-sublime-text-3-on-ubuntu-18-04/
 
 
 
@@ -214,4 +223,4 @@ echo $SEP
 
 #shellckech and lint this script at the end!
 
-# test commands at the end!
+# test commands at the end! add --version afer every install?
