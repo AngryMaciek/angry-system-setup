@@ -61,7 +61,12 @@ source .bashrc
 
 # update and upgrade ????
 apt-get update
-apt-get upgrade
+#apt-get upgrade --yes
+
+# install compilers
+apt-get install gcc
+apt-get install g++
+apt-get install gfortran
 
 # install important software:
 apt-get install guake
@@ -74,10 +79,7 @@ apt-get install sshfs
 # visual studio vs sublime
 
 
-# install compilers
-apt-get install gcc
-apt-get install g++
-apt-get install gfortran
+
 
 
 
@@ -142,12 +144,15 @@ apt-get install gfortran
 #git clone https://github.com/AngryMaciek/conda-envs.git
 
 
- copy mi .gitfconfig
+# copy mi .gitfconfig
 
 #sc4da
 #custom pylintrc
 
+# install gnome shell
+# restart!
 
+# if some step goes wrong redirect a message to a log file
 
 #shellckech and lint this script at the end!
 
