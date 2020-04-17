@@ -123,7 +123,7 @@ apt-get install terminator --yes
 apt-get install tmux --yes
 apt-get install sshfs --yes
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-apt-get install google-chrome-stable_current_amd64.deb
+apt-get install ./google-chrome-stable_current_amd64.deb
 rf -f google-chrome-stable_current_amd64.deb
 echo $SEP
 # sublime
