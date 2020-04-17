@@ -27,6 +27,8 @@
 
 set -euo pipefail
 
+SEP="##################################################"
+
 #user_dir=$PWD
 #pipeline_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 #cd "$pipeline_dir"
@@ -35,9 +37,11 @@ set -euo pipefail
 # check for root privileges
 if [[ $(id -u) -ne 0 ]]
     then
+        echo $SEP
         echo "Please run the script as root."
         echo "Exiting..."
         echo $(date)
+        echo $SEP
         exit 1
 fi
 
@@ -153,6 +157,8 @@ apt-get install git --yes
 
 # create alias
 # pylint --rcfile=$HOME/custom_pylintrc/pylintrc {FILE}
+
+# redirecting stdout and stderr to separate files
 
 # install gnome shell
 # restart!
