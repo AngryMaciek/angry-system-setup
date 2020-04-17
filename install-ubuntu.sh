@@ -150,7 +150,7 @@ echo $SEP
 echo $(date)
 echo "Installing Miniconda3"
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-bash Miniconda3-latest-Linux-x86_64.sh
+yes yes | bash Miniconda3-latest-Linux-x86_64.sh
 rm -f Miniconda3-latest-Linux-x86_64.sh
 source .bashrc
 echo $SEP
