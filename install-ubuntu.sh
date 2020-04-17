@@ -13,19 +13,45 @@
 #
 ###############################################################################
 
-cd $HOME
+#cleanup () {
+#    rc=$?
+#    rm -rf backup
+#    cd "$user_dir"
+#    echo "Exit status: $rc"
+#}
+#trap cleanup EXIT
+
+#set -eo pipefail  # ensures that script exits at first command that exits with non-zero status
+#set -u  # ensures that script exits when unset variables are used
+#set -x  # facilitates debugging by printing out executed commands
+
+#user_dir=$PWD
+#pipeline_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+#cd "$pipeline_dir"
+
+
+
+
+if [[ $(id -u) -ne 0 ]] ; then echo "Please run the script as root" ; exit 1 ; fi
+
+#cd $HOME
+
+# install git if it has not been already installed
+# (the newest version)
+#sudo apt-get install git
 
 # backup old configs
-mkdir backup || echo "Dicectory 'backup' already exists."
+#mkdir backup || echo "Dicectory 'backup' already exists."
+#cp .bashrc backup/.bashrc # always present
+#cp .gitconfig backup/.gitconfig
 
 
 # install my bash configuration
 # https://github.com/AngryMaciek/custom_bash
 #$ git clone https://github.com/AngryMaciek/custom_bash.git
-# backup current bash configuration
-#$ mv .bashrc .bashrc_backup
 #$ ln -s custom_bash/bashrc .bashrc
 #$ touch custom_bash/bashrc.local
+
 # copy all the current local bash configs into bashrc.local
 
 # install cool software:
