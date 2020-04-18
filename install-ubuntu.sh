@@ -94,15 +94,15 @@ echo $SEP
 
 # install my bash configuration
 # https://github.com/AngryMaciek/custom_bash
-#echo $(date)
-#echo "Configuring bash"
-#git clone https://github.com/AngryMaciek/custom_bash.git
-#rm -f .bashrc
-#ln -s custom_bash/bashrc .bashrc
-# bashrc.local is an additional space for all local bash configuration
-#touch custom_bash/bashrc.local
-#source .bashrc
-#echo $SEP
+echo $(date)
+echo "Configuring bash"
+git clone https://github.com/AngryMaciek/custom_bash.git
+rm -f .bashrc
+ln -s custom_bash/bashrc .bashrc
+ bashrc.local is an additional space for all local bash configuration
+touch custom_bash/bashrc.local
+source .bashrc
+echo $SEP
 
 # update package lists
 echo $(date)
@@ -264,6 +264,7 @@ sleep 60
 #======================================
 
 # todo:
+# trap function
 # install sublime
 # remove other unnecessary software
 # miniconda YES
