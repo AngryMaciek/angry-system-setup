@@ -154,10 +154,9 @@ set +e
 echo $(date)
 echo "Uninstalling unnecessary software"
 apt-get purge rhythmbox --yes
-
-rhythmbox || echo "rhythmbox removed"
-
 apt-get purge rhythmbox-data --yes
+hash rhythmbox 2>/dev/null && exit 1
+
 apt-get purge thunderbird --yes
 apt-get purge firefox --yes
 apt-get purge firefox-locale-en --yes
@@ -263,10 +262,9 @@ sleep 60
 #======================================
 
 # todo:
+# remove other unnecessary software
 # trap function
 # install sublime
-# remove other unnecessary software
-# miniconda YES
 # install gnome 3 shell
 # if some step goes wrong redirect a message to a log file, redirecting stdout and stderr to separate files
 # #shellckech and lint this script at the end!
