@@ -143,6 +143,8 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 apt-get install ./google-chrome-stable_current_amd64.deb --yes
 google-chrome --version
 rm -f google-chrome-stable_current_amd64.deb
+apt-get install vim --yes
+vim --version
 echo $SEP
 # sublime
 # https://linuxize.com/post/how-to-install-sublime-text-3-on-ubuntu-18-04/
@@ -156,15 +158,23 @@ echo "Uninstalling unnecessary software"
 apt-get purge rhythmbox --yes
 apt-get purge rhythmbox-data --yes
 hash rhythmbox 2>/dev/null && exit 1
-
 apt-get purge thunderbird --yes
+hash thunderbird 2>/dev/null && exit 1
 apt-get purge firefox --yes
 apt-get purge firefox-locale-en --yes
+hash firefox 2>/dev/null && exit 1
 echo $SEP
 
 # exit on first non-zero exit status command
 set -e
 
+# download and install Miniconda3
+echo $(date)
+echo "Installing Miniconda3"
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+rm -f Miniconda3-latest-Linux-x86_64.sh
+echo $SEP
 
 
 
@@ -172,36 +182,6 @@ set -e
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# download and install miniconda
-#echo $(date)
-#echo "Installing Miniconda3"
-#wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-#bash Miniconda3-latest-Linux-x86_64.sh
-#rm -f Miniconda3-latest-Linux-x86_64.sh
-#source .bashrc
-#echo $SEP
 
 
 
