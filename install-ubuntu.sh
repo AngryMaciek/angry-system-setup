@@ -99,7 +99,7 @@ echo "Configuring bash"
 git clone https://github.com/AngryMaciek/custom_bash.git
 rm -f .bashrc
 ln -s custom_bash/bashrc .bashrc
- bashrc.local is an additional space for all local bash configuration
+# bashrc.local is an additional space for all local bash configuration
 touch custom_bash/bashrc.local
 source .bashrc
 echo $SEP
