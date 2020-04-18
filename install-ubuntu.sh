@@ -117,43 +117,65 @@ echo $SEP
 echo $(date)
 echo "Installing GCC, G++, GFORTRAN compilers"
 apt-get install gcc --yes
+gcc --version
 apt-get install g++ --yes
+g++ --version
 apt-get install gfortran --yes
+gfortran --version
 echo $SEP
 
 # install important software:
 echo $(date)
 echo "Installing specified software"
 apt-get install wget --yes
+wget --version
 apt-get install guake --yes
+guake --help
 apt-get install terminator --yes
+terminator --version
 apt-get install tmux --yes
+tmux -c 'tmux installed'
 apt-get install sshfs --yes
+sshfs --version
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 apt-get install ./google-chrome-stable_current_amd64.deb --yes
+google-chrome --version
 rm -f google-chrome-stable_current_amd64.deb
 echo $SEP
 # sublime
 # https://linuxize.com/post/how-to-install-sublime-text-3-on-ubuntu-18-04/
 
+# temporarily allow non-zero exit commands
+set +e
+
 # remove unnecessary software
 echo $(date)
 echo "Uninstalling unnecessary software"
-apt-get remove rhythmbox --yes
-apt-get remove rhythmbox-data --yes
-apt-get remove thunderbird --yes
-apt-get remove firefox --yes
-apt-get remove firefox-locale-en --yes
+apt-get purge rhythmbox --yes
+
+rhythmbox || echo "rhythmbox removed"
+
+apt-get purge rhythmbox-data --yes
+apt-get purge thunderbird --yes
+apt-get purge firefox --yes
+apt-get purge firefox-locale-en --yes
 echo $SEP
 
+# exit on first non-zero exit status command
+set -e
+
+
+
+
+
 # download and install miniconda
-echo $(date)
-echo "Installing Miniconda3"
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-yes yes | bash Miniconda3-latest-Linux-x86_64.sh
-rm -f Miniconda3-latest-Linux-x86_64.sh
-source .bashrc
-echo $SEP
+#echo $(date)
+#echo "Installing Miniconda3"
+#wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+#bash Miniconda3-latest-Linux-x86_64.sh
+#rm -f Miniconda3-latest-Linux-x86_64.sh
+#source .bashrc
+#echo $SEP
 
 
 
@@ -195,31 +217,23 @@ echo $SEP
 # https://github.com/AngryMaciek/conda-envs
 #git clone https://github.com/AngryMaciek/conda-envs.git
 
-# copy mi .gitfconfig
-
 #sc4da
-#custom pylintrc merge that repo into this one
 
+#custom pylintrc merge that repo into this one
 # create alias
 # pylint --rcfile=$HOME/custom_pylintrc/pylintrc {FILE}
 
-# redirecting stdout and stderr to separate files
-
-# install gnome shell
-# restart!
-
-# if some step goes wrong redirect a message to a log file
-
-#shellckech and lint this script at the end!
-
-# test commands at the end! add --version afer every install?
 
 
+# finish with rebooting the system
+#reboot
 
-
-
-
+#======================================
 
 # todo:
 # install sublime
 # remove other unnecessary software
+# miniconda YES
+# install gnome shell
+# if some step goes wrong redirect a message to a log file, redirecting stdout and stderr to separate files
+# #shellckech and lint this script at the end!
