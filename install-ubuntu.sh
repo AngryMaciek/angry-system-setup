@@ -101,7 +101,7 @@ rm -f .bashrc
 ln -s custom_bash/bashrc .bashrc
 # bashrc.local is an additional space for all local bash configuration
 touch custom_bash/bashrc.local
-source .bashrc
+exec .bashrc
 echo $SEP
 
 # update package lists
