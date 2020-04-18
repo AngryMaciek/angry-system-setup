@@ -74,32 +74,35 @@ echo "Installing Git version control system"
 apt-get install git --yes
 echo $SEP
 
-
-
-
-
 # backup old configs
-#mkdir backup || echo "Directory 'backup' already exists."
-#cp .bashrc backup/.bashrc # always present
-#cp .gitconfig backup/.gitconfig # present after git installation
-
-
-
-
+echo $(date)
+echo "Backing up old config files"
+if [[ -d "backup" ]]
+    then
+        echo "Directory '~/backup' already exists!"
+        echo "Exiting..."
+        echo $SEP
+        exit 1
+fi
+mkdir backup
+cp .bashrc backup/.bashrc # .bashrc is always present
+if [[ -f .gitconfig ]]
+    then
+        cp .gitconfig backup/.gitconfig
+fi
+echo $SEP
 
 # install my bash configuration
 # https://github.com/AngryMaciek/custom_bash
+#echo $(date)
+#echo "Configuring bash"
 #git clone https://github.com/AngryMaciek/custom_bash.git
+#rm -f .bashrc
 #ln -s custom_bash/bashrc .bashrc
-# place all the local bash configs into bashrc.local
+# bashrc.local is an additional space for all local bash configuration
 #touch custom_bash/bashrc.local
 #source .bashrc
-
-
-
-
-
-
+#echo $SEP
 
 # update package lists
 echo $(date)
@@ -163,6 +166,31 @@ echo $SEP
 
 # exit on first non-zero exit status command
 set -e
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -232,12 +260,16 @@ echo $SEP
 sleep 60
 #reboot
 
+
 #======================================
 
 # todo:
 # install sublime
 # remove other unnecessary software
 # miniconda YES
-# install gnome shell
+# install gnome 3 shell
 # if some step goes wrong redirect a message to a log file, redirecting stdout and stderr to separate files
 # #shellckech and lint this script at the end!
+# set a wallpaper, screen resolution: xdpyinfo | awk '/dimensions/{print $2}'
+# move icons!
+# https://askubuntu.com/questions/66914/how-to-change-desktop-background-from-command-line-in-unity
