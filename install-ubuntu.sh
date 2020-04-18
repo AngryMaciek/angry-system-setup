@@ -134,7 +134,7 @@ guake --help
 apt-get install terminator --yes
 terminator --version
 apt-get install tmux --yes
-tmux -c 'tmux installed'
+hash tmux
 apt-get install sshfs --yes
 sshfs --version
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -224,8 +224,12 @@ set -e
 # pylint --rcfile=$HOME/custom_pylintrc/pylintrc {FILE}
 
 
-
 # finish with rebooting the system
+echo $(date)
+echo "Setup completed successfully!"
+echo "System will reboot in 60s"
+echo $SEP
+sleep 60
 #reboot
 
 #======================================
