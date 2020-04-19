@@ -179,34 +179,13 @@ conda --version
 rm -f Miniconda3-latest-Linux-x86_64.sh
 echo $SEP
 
-
-
-
-
-
-
-
-
-
-
-
-
 # install my textfile templates
 # https://github.com/AngryMaciek/textfile-templates
-#git clone https://github.com/AngryMaciek/textfile-templates.git;
+git clone https://github.com/AngryMaciek/textfile-templates.git
+echo "export PATH=$PATH\":$HOME/textfile-templates\""
 
-#vim .bash_profle
-# add the following line into the profile file:
-# export PATH=$PATH":$HOME/textfile-templates"
-
-#vim textfile-templates/template
-
+#touch custom_bash/bashrc.local
 #chmod +x textfile-templates/template
-
-#source .bashrc
-
-
-
 
 
 
