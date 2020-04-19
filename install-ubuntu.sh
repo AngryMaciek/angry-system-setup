@@ -226,6 +226,19 @@ git clone https://github.com/AngryMaciek/SC4DA.git
 conda env create --prefix SC4DA/env --file SC4DA/conda_packages.yaml
 echo $SEP
 
+# set a wallpaper
+# https://askubuntu.com/questions/66914/how-to-change-desktop-background-from-command-line-in-unity
+echo $(date)
+echo "Setting a wallpaper"
+RESOLUTION=$(xdpyinfo | awk '/dimensions/{print $2}')
+echo $RESOLUTION
+#if [[ $RESOLUTION == "1366x768" ]]
+#    then
+#        echo "Exiting..."
+#fi
+echo $SEP
+
+
 # finish with rebooting the system
 echo $(date)
 echo "Setup completed successfully!"
@@ -247,7 +260,6 @@ sleep 60
 # test pylintrc automatic detection
 # conda envs issue! bug? try on fresh OS
 # R env fails
-# if some step goes wrong redirect a message to a log file, redirecting stdout and stderr to separate files
-# set a wallpaper, screen resolution: xdpyinfo | awk '/dimensions/{print $2}'
-# https://askubuntu.com/questions/66914/how-to-change-desktop-background-from-command-line-in-unity
+# if some step goes wrong redirect a message to a log file,
+# redirecting stdout and stderr to separate files
 # #shellckech and lint this script at the end!
