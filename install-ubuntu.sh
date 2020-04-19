@@ -13,7 +13,7 @@
 #
 ###############################################################################
 
-echo "Please type sudo password:"
+echo "Please type root password:"
 sudo echo "Password correct"
 
 SEP="############################################################"
@@ -24,14 +24,14 @@ echo "Script Started"
 echo $SEP
 
 # check for root privileges
-if [[ $(id -u) -ne 0 ]]
-    then
-        echo $(date)
-        echo "Please run the script as root"
-        echo "Exiting..."
-        echo $SEP
-        exit 1
-fi
+#if [[ $(id -u) -ne 0 ]]
+#    then
+#        echo $(date)
+#        echo "Please run the script as root"
+#        echo "Exiting..."
+#        echo $SEP
+#        exit 1
+#fi
 
 # check the CPU architecture
 CPU_arch=$(uname -m)
@@ -74,7 +74,7 @@ cd $HOME
 # (the newest version available)
 echo $(date)
 echo "Installing Git version control system"
-apt-get install git --yes
+sudo apt-get install git --yes
 echo $SEP
 
 # backup old configs
@@ -109,44 +109,44 @@ echo $SEP
 # update package lists
 echo $(date)
 echo "Updating package lists"
-apt-get update --yes
+sudo apt-get update --yes
 echo $SEP
 
 # fetch new versions of installed packages
 echo $(date)
 echo "Upgrading installed packages"
-apt-get upgrade --yes
+sudo apt-get upgrade --yes
 echo $SEP
 
 # install compilers
 echo $(date)
 echo "Installing GCC, G++, GFORTRAN compilers"
-apt-get install gcc --yes
+sudo apt-get install gcc --yes
 gcc --version
-apt-get install g++ --yes
+sudo apt-get install g++ --yes
 g++ --version
-apt-get install gfortran --yes
+sudo apt-get install gfortran --yes
 gfortran --version
 echo $SEP
 
 # install important software:
 echo $(date)
 echo "Installing specified software"
-apt-get install wget --yes
+sudo apt-get install wget --yes
 wget --version
-apt-get install guake --yes
+sudo apt-get install guake --yes
 guake --help
-apt-get install terminator --yes
+sudo apt-get install terminator --yes
 terminator --version
-apt-get install tmux --yes
+sudo apt-get install tmux --yes
 hash tmux
-apt-get install sshfs --yes
+sudo apt-get install sshfs --yes
 sshfs --version
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-apt-get install ./google-chrome-stable_current_amd64.deb --yes
+sudo apt-get install ./google-chrome-stable_current_amd64.deb --yes
 google-chrome --version
 rm -f google-chrome-stable_current_amd64.deb
-apt-get install vim --yes
+sudo apt-get install vim --yes
 vim --version
 echo $SEP
 # sublime
@@ -158,13 +158,13 @@ set +e
 # remove unnecessary software
 echo $(date)
 echo "Uninstalling unnecessary software"
-apt-get purge rhythmbox --yes
-apt-get purge rhythmbox-data --yes
+sudo apt-get purge rhythmbox --yes
+sudo apt-get purge rhythmbox-data --yes
 hash rhythmbox 2>/dev/null && exit 1
-apt-get purge thunderbird --yes
+sudo apt-get purge thunderbird --yes
 hash thunderbird 2>/dev/null && exit 1
-apt-get purge firefox --yes
-apt-get purge firefox-locale-en --yes
+sudo apt-get purge firefox --yes
+sudo apt-get purge firefox-locale-en --yes
 hash firefox 2>/dev/null && exit 1
 echo $SEP
 
@@ -175,7 +175,7 @@ set -e
 echo $(date)
 echo "Installing Miniconda3"
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-sudo -u $SUDO_USER bash Miniconda3-latest-Linux-x86_64.sh -b -p miniconda3
+bash Miniconda3-latest-Linux-x86_64.sh -b -p miniconda3
 eval "$($HOME/miniconda3/bin/conda shell.bash hook)"
 conda init
 conda --version
@@ -186,8 +186,8 @@ echo $SEP
 # https://github.com/AngryMaciek/conda-envs
 echo $(date)
 echo "Building conda environments"
-sudo -u $SUDO_USER git clone https://github.com/AngryMaciek/conda-envs.git
-sudo -u $SUDO_USER bash conda-envs/Nextflow/create-virtual-environment.sh
+git clone https://github.com/AngryMaciek/conda-envs.git
+bash conda-envs/Nextflow/create-virtual-environment.sh
 echo $SEP
 
 
