@@ -179,16 +179,28 @@ conda --version
 rm -f Miniconda3-latest-Linux-x86_64.sh
 echo $SEP
 
+# install my conda env recipes
+# https://github.com/AngryMaciek/conda-envs
+git clone https://github.com/AngryMaciek/conda-envs.git
+# and build them!
+
+
+
+
+
+
+
+
+
+
+
 # install my textfile templates
 # https://github.com/AngryMaciek/textfile-templates
-git clone https://github.com/AngryMaciek/textfile-templates.git
-echo "export PATH=$PATH\":$HOME/textfile-templates\""
-
-#touch custom_bash/bashrc.local
+#git clone https://github.com/AngryMaciek/textfile-templates.git
+#EXPORT_LINE="export PATH=$PATH\":$HOME/textfile-templates\""
+#echo $'\n\n' >> custom_bash/bashrc.local
+#echo $EXPORT_LINE >> custom_bash/bashrc.local
 #chmod +x textfile-templates/template
-
-
-
 
 
 
@@ -202,16 +214,6 @@ echo "export PATH=$PATH\":$HOME/textfile-templates\""
 # https://github.com/AngryMaciek/cookiecutters
 #conda install -c conda-forge cookiecutter
 #git clone https://github.com/AngryMaciek/cookiecutters.git;
-
-# install my conda env recipes
-# https://github.com/AngryMaciek/conda-envs
-#git clone https://github.com/AngryMaciek/conda-envs.git
-# and build them!
-
-
-
-
-
 
 
 
