@@ -23,15 +23,15 @@ echo $(date)
 echo "Script Started"
 echo $SEP
 
-# check for root privileges
-#if [[ $(id -u) -ne 0 ]]
-#    then
-#        echo $(date)
-#        echo "Please run the script as root"
-#        echo "Exiting..."
-#        echo $SEP
-#        exit 1
-#fi
+# check root privileges
+if [[ $(id -u) -eq 0 ]]
+    then
+        echo $(date)
+        echo "Do not run the script as root, run as a regular user"
+        echo "Exiting..."
+        echo $SEP
+        exit 1
+fi
 
 # check the CPU architecture
 CPU_arch=$(uname -m)
@@ -192,7 +192,6 @@ echo $SEP
 
 
 
-# add sudo
 # conda create env?
 
 
