@@ -173,15 +173,11 @@ echo $(date)
 echo "Installing Miniconda3"
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh -b -p miniconda3
-#eval "$($HOME/miniconda3/bin/conda shell.bash hook)"
+eval "$($HOME/miniconda3/bin/conda shell.bash hook)"
 conda init
+conda --version
 rm -f Miniconda3-latest-Linux-x86_64.sh
 echo $SEP
-
-
-
-
-# make source .bashrc work from the script
 
 
 
