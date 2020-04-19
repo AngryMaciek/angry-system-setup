@@ -13,6 +13,9 @@
 #
 ###############################################################################
 
+echo "Please type sudo password:"
+sudo echo "Password correct"
+
 SEP="############################################################"
 echo $SEP
 
@@ -186,6 +189,24 @@ echo "Building conda environments"
 sudo -u $SUDO_USER git clone https://github.com/AngryMaciek/conda-envs.git
 sudo -u $SUDO_USER bash conda-envs/Nextflow/create-virtual-environment.sh
 echo $SEP
+
+
+
+# add sudo
+# conda create env?
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
