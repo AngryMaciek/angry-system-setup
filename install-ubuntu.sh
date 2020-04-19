@@ -171,6 +171,14 @@ echo $SEP
 # exit on first non-zero exit status command
 set -e
 
+# install my textfile templates
+# https://github.com/AngryMaciek/textfile-templates
+git clone https://github.com/AngryMaciek/textfile-templates.git
+EXPORT_LINE="export PATH=$PATH\":$HOME/textfile-templates\""
+echo $'\n\n' >> custom_bash/bashrc.local
+echo $EXPORT_LINE >> custom_bash/bashrc.local
+chmod +x textfile-templates/template
+
 # download and install Miniconda3
 echo $(date)
 echo "Installing Miniconda3"
@@ -192,38 +200,12 @@ echo $SEP
 
 
 
-# conda create env?
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# install my textfile templates
-# https://github.com/AngryMaciek/textfile-templates
-#git clone https://github.com/AngryMaciek/textfile-templates.git
-#EXPORT_LINE="export PATH=$PATH\":$HOME/textfile-templates\""
-#echo $'\n\n' >> custom_bash/bashrc.local
-#echo $EXPORT_LINE >> custom_bash/bashrc.local
-#chmod +x textfile-templates/template
 
 
 
