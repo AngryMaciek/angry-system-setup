@@ -218,14 +218,13 @@ bash conda-envs/R/create-virtual-environment.sh
 bash conda-envs/Snakemake/create-virtual-environment.sh
 echo $SEP
 
-
-
-
-
-#sc4da
-
-
-
+# install my general data analytic env
+# https://github.com/AngryMaciek/SC4DA
+echo $(date)
+echo "Building main development environment (SC4DA)"
+git clone https://github.com/AngryMaciek/SC4DA.git
+conda env create --prefix SC4DA/env --file SC4DA/conda_packages.yaml
+echo $SEP
 
 # finish with rebooting the system
 echo $(date)
@@ -236,7 +235,9 @@ sleep 60
 #reboot
 
 
-#======================================
+
+
+#===================================================================
 
 # todo:
 # remove other unnecessary software
