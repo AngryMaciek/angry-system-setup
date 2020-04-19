@@ -183,7 +183,7 @@ echo $SEP
 # https://github.com/AngryMaciek/conda-envs
 echo $(date)
 echo "Building conda environments"
-git clone https://github.com/AngryMaciek/conda-envs.git
+sudo -u $SUDO_USER git clone https://github.com/AngryMaciek/conda-envs.git
 sudo -u $SUDO_USER bash conda-envs/Nextflow/create-virtual-environment.sh
 echo $SEP
 
