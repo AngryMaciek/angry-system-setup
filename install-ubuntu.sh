@@ -231,13 +231,9 @@ echo $SEP
 echo $(date)
 echo "Setting a wallpaper"
 RESOLUTION=$(xdpyinfo | awk '/dimensions/{print $2}')
-echo $RESOLUTION
-#if [[ $RESOLUTION == "1366x768" ]]
-#    then
-#        echo "Exiting..."
-#fi
+gsettings set org.gnome.desktop.background picture-uri \
+file://$HOME/system-setup/wallpaper-ubuntu/$RESOLUTION.jpg
 echo $SEP
-
 
 # finish with rebooting the system
 echo $(date)
