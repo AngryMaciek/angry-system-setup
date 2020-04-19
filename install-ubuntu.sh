@@ -249,13 +249,11 @@ sleep 60
 #===================================================================
 
 # todo:
-# remove other unnecessary software
 # trap function
 # install sublime
 # install gnome 3 shell
-# test pylintrc automatic detection
+# remove other unnecessary software
+# test pylintrc automatic detection $ test gitconfig
 # conda envs issue! bug? try on fresh OS
 # R env fails
-# if some step goes wrong redirect a message to a log file,
-# redirecting stdout and stderr to separate files
 # #shellckech and lint this script at the end!
