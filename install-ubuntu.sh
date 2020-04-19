@@ -214,7 +214,7 @@ echo "Building conda environments"
 git clone https://github.com/AngryMaciek/conda-envs.git
 bash conda-envs/Nextflow/create-virtual-environment.sh
 bash conda-envs/Python_Jupyter/create-virtual-environment.sh
-bash conda-envs/R/create-virtual-environment.sh
+#bash conda-envs/R/create-virtual-environment.sh
 bash conda-envs/Snakemake/create-virtual-environment.sh
 echo $SEP
 
@@ -245,8 +245,9 @@ sleep 60
 # install sublime
 # install gnome 3 shell
 # test pylintrc automatic detection
+# conda envs issue! bug? try on fresh OS
+# R env fails
 # if some step goes wrong redirect a message to a log file, redirecting stdout and stderr to separate files
-# #shellckech and lint this script at the end!
 # set a wallpaper, screen resolution: xdpyinfo | awk '/dimensions/{print $2}'
-# move icons!
 # https://askubuntu.com/questions/66914/how-to-change-desktop-background-from-command-line-in-unity
+# #shellckech and lint this script at the end!
