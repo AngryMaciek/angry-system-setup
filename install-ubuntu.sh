@@ -98,8 +98,8 @@ echo $SEP
 # copy the dotflies
 echo $(date)
 echo "Copying configuration files"
-cp repository_dir/dotfiles/.gitconfig .gitconfig
-cp repository_dir/dotfiles/.pylintrc .pylintrc
+cp $repository_dir/dotfiles/.gitconfig .gitconfig
+cp $repository_dir/dotfiles/.pylintrc .pylintrc
 echo $SEP
 
 # install my bash configuration
