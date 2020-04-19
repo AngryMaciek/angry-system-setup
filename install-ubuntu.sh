@@ -91,8 +91,15 @@ mkdir backup
 cp .bashrc backup/.bashrc # .bashrc is always present
 if [[ -f .gitconfig ]]
     then
-        cp .gitconfig backup/.gitconfig
+        mv .gitconfig backup/.gitconfig
 fi
+echo $SEP
+
+# copy the dotflies
+echo $(date)
+echo "Copying configuration files"
+cp repository_dir/dotfiles/.gitconfig .gitconfig
+cp repository_dir/dotfiles/.pylintrc .pylintrc
 echo $SEP
 
 # install my bash configuration
@@ -173,11 +180,21 @@ set -e
 
 # install my textfile templates
 # https://github.com/AngryMaciek/textfile-templates
+echo $(date)
+echo "Cloning textfile templates"
 git clone https://github.com/AngryMaciek/textfile-templates.git
-EXPORT_LINE="export PATH=$PATH\":$HOME/textfile-templates\""
+EXPORT_TEMPLATES="export PATH=$PATH\":$HOME/textfile-templates\""
 echo $'\n\n' >> custom_bash/bashrc.local
-echo $EXPORT_LINE >> custom_bash/bashrc.local
+echo $EXPORT_TEMPLATES >> custom_bash/bashrc.local
 chmod +x textfile-templates/template
+echo $SEP
+
+# install my cookiecutters
+# https://github.com/AngryMaciek/cookiecutters
+echo $(date)
+echo "Cloning cookiecutters"
+git clone https://github.com/AngryMaciek/cookiecutters.git;
+echo $SEP
 
 # download and install Miniconda3
 echo $(date)
@@ -196,32 +213,10 @@ echo $(date)
 echo "Building conda environments"
 git clone https://github.com/AngryMaciek/conda-envs.git
 bash conda-envs/Nextflow/create-virtual-environment.sh
+bash conda-envs/Python_Jupyter/create-virtual-environment.sh
+bash conda-envs/R/create-virtual-environment.sh
+bash conda-envs/Snakemake/create-virtual-environment.sh
 echo $SEP
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# install my cookiecutters
-# https://github.com/AngryMaciek/cookiecutters
-#conda install -c conda-forge cookiecutter
-#git clone https://github.com/AngryMaciek/cookiecutters.git;
-
-
-
 
 
 
@@ -229,9 +224,7 @@ echo $SEP
 
 #sc4da
 
-#custom pylintrc merge that repo into this one
-# create alias
-# pylint --rcfile=$HOME/custom_pylintrc/pylintrc {FILE}
+
 
 
 # finish with rebooting the system
@@ -250,6 +243,7 @@ sleep 60
 # trap function
 # install sublime
 # install gnome 3 shell
+# test pylintrc automatic detection
 # if some step goes wrong redirect a message to a log file, redirecting stdout and stderr to separate files
 # #shellckech and lint this script at the end!
 # set a wallpaper, screen resolution: xdpyinfo | awk '/dimensions/{print $2}'
