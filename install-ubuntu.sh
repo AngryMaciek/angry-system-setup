@@ -20,7 +20,7 @@ SEP="############################################################"
 echo $SEP
 
 echo $(date)
-echo "Script Started"
+echo "Script started"
 echo $SEP
 
 # check root privileges
@@ -248,12 +248,11 @@ sleep 60
 
 #===================================================================
 
-# todo:
+# aliases conda-
 # trap function
 # install sublime
 # install gnome 3 shell
 # remove other unnecessary software
 # test pylintrc automatic detection $ test gitconfig
-# conda envs issue! bug? try on fresh OS
 # R env fails
 # #shellckech and lint this script at the end!
