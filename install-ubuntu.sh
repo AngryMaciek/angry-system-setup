@@ -172,7 +172,7 @@ set -e
 echo $(date)
 echo "Installing Miniconda3"
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-bash Miniconda3-latest-Linux-x86_64.sh -b -p miniconda3
+sudo -u $SUDO_USER bash Miniconda3-latest-Linux-x86_64.sh -b -p miniconda3
 eval "$($HOME/miniconda3/bin/conda shell.bash hook)"
 conda init
 conda --version
@@ -181,8 +181,11 @@ echo $SEP
 
 # install my conda env recipes
 # https://github.com/AngryMaciek/conda-envs
+echo $(date)
+echo "Building conda environments"
 git clone https://github.com/AngryMaciek/conda-envs.git
 # and build them!
+echo $SEP
 
 
 
