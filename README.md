@@ -29,7 +29,7 @@ Depending on your operating system please execute one of the following installat
 
 * Ubuntu-based Linux distributions (execution requires root privileges)
   ```bash
-  bash system-setup/install-ubuntu.sh
+  bash system-setup/install-ubuntu.sh 2>&1 | tee system-setup/setup.log
   ```
 
 ## License
