@@ -136,13 +136,26 @@ sudo apt-get install gfortran --yes
 gfortran --version
 echo $SEP
 
+# install Visual Studio Code
+echo $(date)
+echo "Installing VS Code"
+sudo apt-get install software-properties-common --yes
+sudo apt-get install apt-transport-https --yes
+sudo apt-get install wget --yes
+wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+sudo apt-get update
+sudo apt-get install code
+code --version
+echo $SEP
+
 # install important software:
 echo $(date)
 echo "Installing specified software"
-sudo apt-get install wget --yes
-wget --version
 sudo apt-get install guake --yes
 guake --help
+sudo apt-get install htop --yes
+htop --version
 sudo apt-get install terminator --yes
 terminator --version
 sudo apt-get install tmux --yes
@@ -226,6 +239,12 @@ git clone https://github.com/AngryMaciek/SC4DA.git
 conda env create --prefix SC4DA/env --file SC4DA/conda_packages.yaml
 echo $SEP
 
+# clean conda: cache, lock files, unused packages and tarballs
+echo $(date)
+echo "Removing unused packages and cache from conda"
+conda clean --all --yes
+echo $SEP
+
 # set a wallpaper
 # https://askubuntu.com/questions/66914/how-to-change-desktop-background-from-command-line-in-unity
 echo $(date)
@@ -233,6 +252,12 @@ echo "Setting a wallpaper"
 RESOLUTION=$(xdpyinfo | awk '/dimensions/{print $2}')
 gsettings set org.gnome.desktop.background picture-uri \
 file://$HOME/system-setup/wallpaper-ubuntu/$RESOLUTION.jpg
+echo $SEP
+
+# Install GNOME Flashback desktop environment
+echo $(date)
+echo "Installing GNOME Flashback"
+sudo apt-get install gnome-session-flashback --yes
 echo $SEP
 
 # finish with rebooting the system
@@ -250,9 +275,9 @@ sleep 60
 
 # aliases conda-
 # trap function
-# install sublime
-# install gnome 3 shell
+# set gnome flashback as default after installation
 # remove other unnecessary software
 # test pylintrc automatic detection $ test gitconfig
-# R env fails
+# vimrc from Rafal!
+# vscode config! plugins?
 # #shellckech and lint this script at the end!
