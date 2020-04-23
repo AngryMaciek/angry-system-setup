@@ -186,7 +186,8 @@ gtk2-engines-murrine:i386 \
 libatk-adaptor:i386 \
 --yes
 wget ftp://ftp.adobe.com/pub/adobe/reader/unix/9.x/9.5.5/enu/AdbeRdr9.5.5-1_i386linux_enu.deb
-yes | sudo gdebi AdbeRdr9.5.5-1_i386linux_enu.deb
+yes | sudo gdebi AdbeRdr9.5.5-1_i386linux_enu.deb & # workaround for this installer
+sleep 180
 rm -rf AdbeRdr9.5.5-1_i386linux_enu.deb
 acroread -version
 echo $SEP
@@ -194,7 +195,7 @@ echo $SEP
 # install GIMP
 echo $(date)
 echo "Installing GIMP"
-sudo add-apt-repository ppa:otto-kesselgulasch/gimp
+sudo add-apt-repository ppa:otto-kesselgulasch/gimp --yes
 sudo apt-get update --yes
 sudo apt-get install gimp --yes
 gimp --version
@@ -203,7 +204,7 @@ echo $SEP
 # install Inkscape
 echo $(date)
 echo "Installing Inkscape"
-sudo add-apt-repository ppa:inkscape.dev/stable-daily
+sudo add-apt-repository ppa:inkscape.dev/stable-daily --yes
 sudo apt-get update --yes
 sudo apt-get install inkscape --yes
 inkscape --version
@@ -275,7 +276,7 @@ echo $(date)
 echo "Building conda environments"
 git clone https://github.com/AngryMaciek/conda-envs.git
 bash conda-envs/Nextflow/create-virtual-environment.sh
-bash conda-envs/Python_Jupyter/create-virtual-environment.sh
+#bash conda-envs/Python_Jupyter/create-virtual-environment.sh
 #bash conda-envs/R/create-virtual-environment.sh
 bash conda-envs/Snakemake/create-virtual-environment.sh
 # ...and add bash aliases:
@@ -342,7 +343,7 @@ sleep 60
 
 # test on 20.04 LTS
 # order of install: gnome on top? update, purge, upgrade, intall?
-# R conda env
+# R conda env, Python Jupyter
 # aliases conda-
 # trap function
 # test pylintrc automatic detection $ test gitconfig
