@@ -190,6 +190,24 @@ sudo gdebi AdbeRdr9.5.5-1_i386linux_enu.deb --yes
 acroread --version
 echo $SEP
 
+# install GIMP
+echo $(date)
+echo "Installing GIMP"
+sudo add-apt-repository ppa:otto-kesselgulasch/gimp
+sudo apt-get update --yes
+sudo apt-get install gimp --yes
+gimp --version
+echo $SEP
+
+# install Inkscape
+echo $(date)
+echo "Installing Inkscape"
+sudo add-apt-repository ppa:inkscape.dev/stable-daily
+sudo apt-get update --yes
+sudo apt-get install inkscape --yes
+inkscape --version
+echo $SEP
+
 # temporarily allow non-zero exit commands
 set +e
 
