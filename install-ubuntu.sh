@@ -187,7 +187,8 @@ libatk-adaptor:i386 \
 --yes
 wget ftp://ftp.adobe.com/pub/adobe/reader/unix/9.x/9.5.5/enu/AdbeRdr9.5.5-1_i386linux_enu.deb
 yes | sudo gdebi AdbeRdr9.5.5-1_i386linux_enu.deb
-acroread --version
+rm -rf AdbeRdr9.5.5-1_i386linux_enu.deb
+acroread -version
 echo $SEP
 
 # install GIMP
