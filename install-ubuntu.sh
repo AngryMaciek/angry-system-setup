@@ -16,6 +16,8 @@
 echo "Please type root password:"
 sudo echo "Password correct"
 
+SECONDS=0
+
 SEP="############################################################"
 echo $SEP
 
@@ -151,9 +153,9 @@ echo $SEP
 
 # install important software:
 echo $(date)
-echo "Installing specified software"
+echo "Installing additional software"
 sudo apt-get install guake --yes
-guake --help
+guake --version
 sudo apt-get install htop --yes
 htop --version
 sudo apt-get install terminator --yes
@@ -168,9 +170,25 @@ google-chrome --version
 rm -f google-chrome-stable_current_amd64.deb
 sudo apt-get install vim --yes
 vim --version
+sudo apt-get install snap --yes
+sudo snap install vlc
+vlc --version
 echo $SEP
-# sublime
-# https://linuxize.com/post/how-to-install-sublime-text-3-on-ubuntu-18-04/
+
+# install Adobe Reader
+echo $(date)
+echo "Installing Adobe Reader"
+sudo apt-get install \
+gdebi-core \
+libxml2:i386 \
+libcanberra-gtk-module:i386 \
+gtk2-engines-murrine:i386 \
+libatk-adaptor:i386 \
+--yes
+wget ftp://ftp.adobe.com/pub/adobe/reader/unix/9.x/9.5.5/enu/AdbeRdr9.5.5-1_i386linux_enu.deb
+sudo gdebi AdbeRdr9.5.5-1_i386linux_enu.deb --yes
+acroread --version
+echo $SEP
 
 # temporarily allow non-zero exit commands
 set +e
@@ -186,7 +204,19 @@ hash thunderbird 2>/dev/null && exit 1
 sudo apt-get purge firefox --yes
 sudo apt-get purge firefox-locale-en --yes
 hash firefox 2>/dev/null && exit 1
+sudo apt-get purge aisleriot gnome-mahjongg gnome-mines gnome-sudoku --yes
+sudo apt-get purge remmina --yes
+sudo apt-get purge remmina-common --yes
+hash remmina 2>/dev/null && exit 1
+sudo apt-get purge libreoffice* --yes
+hash libreoffice 2>/dev/null && exit 1
+sudo apt-get purge totem totem-plugins --yes
+hash totem 2>/dev/null && exit 1
+
 echo $SEP
+
+#sudo apt-get clean
+#sudo apt-get autoremove
 
 # exit on first non-zero exit status command
 set -e
@@ -229,6 +259,10 @@ bash conda-envs/Nextflow/create-virtual-environment.sh
 bash conda-envs/Python_Jupyter/create-virtual-environment.sh
 #bash conda-envs/R/create-virtual-environment.sh
 bash conda-envs/Snakemake/create-virtual-environment.sh
+# ...and add bash aliases:
+ALIAS_NEXTFLOW="alias conda-nextflow=\"conda activate ~/conda-envs/Nextflow/env\""
+echo $'\n\n' >> custom_bash/bashrc.local
+echo $ALIAS_NEXTFLOW >> custom_bash/bashrc.local
 echo $SEP
 
 # install my general data analytic env
@@ -260,8 +294,14 @@ echo "Installing GNOME Flashback"
 sudo apt-get install gnome-session-flashback --yes
 echo $SEP
 
+duration=$SECONDS
+duration_h=$(($duration / 3600))
+duration_m=$((($duration / 60) % 60))
+duration_s=$(($duration % 60))
+
 # finish with rebooting the system
 echo $(date)
+echo "Setup time: "$duration_h"h"$duration_m"m"$duration_s"s"
 echo "Setup completed successfully!"
 echo "System will reboot in 60s"
 echo $SEP
@@ -269,15 +309,22 @@ sleep 60
 #reboot
 
 
+###############################################################################
+#
+# Future releases: 
+#
+# * gnome flashback as default desktop, clean icons and panels (gnome dotfile?)
+# * vs code config - dotfiles? plugins?
+# * .guake
+# * .terminator
+# * include new repo with vimrc
+#
+###############################################################################
 
 
-#===================================================================
-
+# order of install: gnome on top? update, purge, upgrade, intall?
+# R conda env
 # aliases conda-
 # trap function
-# set gnome flashback as default after installation
-# remove other unnecessary software
 # test pylintrc automatic detection $ test gitconfig
-# vimrc from Rafal!
-# vscode config! plugins?
 # #shellckech and lint this script at the end!
