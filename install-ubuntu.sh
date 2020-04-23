@@ -186,7 +186,7 @@ gtk2-engines-murrine:i386 \
 libatk-adaptor:i386 \
 --yes
 wget ftp://ftp.adobe.com/pub/adobe/reader/unix/9.x/9.5.5/enu/AdbeRdr9.5.5-1_i386linux_enu.deb
-sudo gdebi AdbeRdr9.5.5-1_i386linux_enu.deb --yes
+yes | sudo gdebi AdbeRdr9.5.5-1_i386linux_enu.deb
 acroread --version
 echo $SEP
 
@@ -339,7 +339,7 @@ sleep 60
 #
 ###############################################################################
 
-
+# test on 20.04 LTS
 # order of install: gnome on top? update, purge, upgrade, intall?
 # R conda env
 # aliases conda-
