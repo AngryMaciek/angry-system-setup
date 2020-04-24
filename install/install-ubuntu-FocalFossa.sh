@@ -240,6 +240,7 @@ bash conda-envs/Nextflow/create-virtual-environment.sh
 bash conda-envs/Python_Jupyter/create-virtual-environment.sh
 bash conda-envs/R/create-virtual-environment.sh
 bash conda-envs/Snakemake/create-virtual-environment.sh
+bash conda-envs/code_linting/create-virtual-environment.sh
 # ...and add bash aliases:
 ALIAS_NEXTFLOW="alias conda-nextflow=\"conda activate ~/conda-envs/Nextflow/env\""
 echo $'\n' >> custom_bash/bashrc.local
@@ -253,6 +254,9 @@ echo $ALIAS_R >> custom_bash/bashrc.local
 ALIAS_SNAKEMAKE="alias conda-snakemake=\"conda activate ~/conda-envs/Snakemake/env\""
 echo $'\n' >> custom_bash/bashrc.local
 echo $ALIAS_SNAKEMAKE >> custom_bash/bashrc.local
+ALIAS_CODE_LINT="alias conda-lint=\"conda activate ~/conda-envs/code_linting/env\""
+echo $'\n' >> custom_bash/bashrc.local
+echo $ALIAS_CODE_LINT >> custom_bash/bashrc.local
 echo $SEP
 
 # install my general data analytic env
@@ -312,7 +316,12 @@ sleep 60
 ###############################################################################
 
 
+# test pylintrc automatic detection $ test gitconfig and conda alias
+
+# remember sudo for 5h
+
 # order of install: gnome on top? update, purge, upgrade, intall?
+
 # trap function
-# test pylintrc automatic detection $ test gitconfig
+
 # #shellckech and lint this script at the end!
