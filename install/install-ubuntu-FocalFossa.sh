@@ -153,7 +153,7 @@ sudo apt-get install htop --yes
 htop --version
 sudo apt-get install terminator --yes
 terminator --version
-sudo snap install tmux
+sudo snap install tmux --classic
 hash tmux
 sudo apt-get install sshfs --yes
 sshfs --version
@@ -165,7 +165,7 @@ sudo apt-get install vim --yes
 vim --version
 sudo snap install gimp
 gimp --version
-sudo snap install inkscape --yes
+sudo snap install inkscape
 inkscape --version
 # install Adobe Reader
 sudo apt-get install \
