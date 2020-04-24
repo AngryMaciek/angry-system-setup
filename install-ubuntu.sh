@@ -80,7 +80,6 @@ sudo snap install core
 echo $(date)
 echo "Installing Git version control system"
 sudo apt-get install git --yes
-sudo snap install git-ubuntu --classic
 echo $SEP
 
 # backup old configs
@@ -136,7 +135,7 @@ echo $SEP
 echo $(date)
 echo "Installing GCC, G++, GFORTRAN compilers"
 sudo apt-get install gcc --yes
-gcc --versiongit		sud
+gcc --version
 sudo apt-get install g++ --yes
 g++ --version
 sudo apt-get install gfortran --yes
