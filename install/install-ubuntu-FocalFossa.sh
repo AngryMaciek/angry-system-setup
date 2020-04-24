@@ -67,7 +67,7 @@ set -euo pipefail
 
 # remember paths
 user_dir=$PWD
-repository_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+install_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 # work in home directory
 cd $HOME
@@ -103,8 +103,8 @@ echo $SEP
 # copy the dotflies
 echo $(date)
 echo "Copying configuration files"
-cp $repository_dir/dotfiles/.gitconfig .gitconfig
-cp $repository_dir/dotfiles/.pylintrc .pylintrc
+cp $install_dir/../dotfiles/.gitconfig .gitconfig
+cp $install_dir/../dotfiles/.pylintrc .pylintrc
 echo $SEP
 
 # install my bash configuration
