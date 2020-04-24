@@ -163,6 +163,10 @@ google-chrome --version
 rm -f google-chrome-stable_current_amd64.deb
 sudo apt-get install vim --yes
 vim --version
+sudo snap install slack --classic
+hash slack
+sudo snap install bitwarden
+hash bitwarden
 sudo snap install gimp
 gimp --version
 sudo snap install inkscape
@@ -204,7 +208,7 @@ echo $(date)
 echo "Cloning textfile templates"
 git clone https://github.com/AngryMaciek/textfile-templates.git
 EXPORT_TEMPLATES="export PATH=$PATH\":$HOME/textfile-templates\""
-echo $'\n\n' >> custom_bash/bashrc.local
+echo $'\n' >> custom_bash/bashrc.local
 echo $EXPORT_TEMPLATES >> custom_bash/bashrc.local
 chmod +x textfile-templates/template
 echo $SEP
@@ -233,13 +237,22 @@ echo $(date)
 echo "Building conda environments"
 git clone https://github.com/AngryMaciek/conda-envs.git
 bash conda-envs/Nextflow/create-virtual-environment.sh
-#bash conda-envs/Python_Jupyter/create-virtual-environment.sh
-#bash conda-envs/R/create-virtual-environment.sh
+bash conda-envs/Python_Jupyter/create-virtual-environment.sh
+bash conda-envs/R/create-virtual-environment.sh
 bash conda-envs/Snakemake/create-virtual-environment.sh
 # ...and add bash aliases:
 ALIAS_NEXTFLOW="alias conda-nextflow=\"conda activate ~/conda-envs/Nextflow/env\""
-echo $'\n\n' >> custom_bash/bashrc.local
+echo $'\n' >> custom_bash/bashrc.local
 echo $ALIAS_NEXTFLOW >> custom_bash/bashrc.local
+ALIAS_PYTHON_JUPYTER="alias conda-jupyter=\"conda activate ~/conda-envs/Python_Jupyter/env\""
+echo $'\n' >> custom_bash/bashrc.local
+echo $ALIAS_PYTHON_JUPYTER >> custom_bash/bashrc.local
+ALIAS_R="alias conda-r=\"conda activate ~/conda-envs/R/env\""
+echo $'\n' >> custom_bash/bashrc.local
+echo $ALIAS_R >> custom_bash/bashrc.local
+ALIAS_SNAKEMAKE="alias conda-snakemake=\"conda activate ~/conda-envs/Snakemake/env\""
+echo $'\n' >> custom_bash/bashrc.local
+echo $ALIAS_SNAKEMAKE >> custom_bash/bashrc.local
 echo $SEP
 
 # install my general data analytic env
@@ -260,9 +273,9 @@ echo $SEP
 # https://askubuntu.com/questions/66914/how-to-change-desktop-background-from-command-line-in-unity
 echo $(date)
 echo "Setting a wallpaper"
-RESOLUTION=$(xdpyinfo | awk '/dimensions/{print $2}')
+#RESOLUTION=$(xdpyinfo | awk '/dimensions/{print $2}')
 gsettings set org.gnome.desktop.background picture-uri \
-file://$HOME/system-setup/wallpaper-ubuntu/$RESOLUTION.jpg
+file://$HOME/system-setup/ubuntu-wallpaper-3840x2160.jpg
 echo $SEP
 
 # Install GNOME Flashback desktop environment
@@ -298,10 +311,8 @@ sleep 60
 #
 ###############################################################################
 
-# test on 20.04 LTS
+
 # order of install: gnome on top? update, purge, upgrade, intall?
-# R conda env, Python Jupyter
-# aliases conda-
 # trap function
 # test pylintrc automatic detection $ test gitconfig
 # #shellckech and lint this script at the end!
