@@ -72,11 +72,15 @@ repository_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 # work in home directory
 cd $HOME
 
+# snap
+sudo snap install core
+
 # install git if it has not been already installed
 # (the newest version available)
 echo $(date)
 echo "Installing Git version control system"
 sudo apt-get install git --yes
+sudo snap install git-ubuntu --classic
 echo $SEP
 
 # backup old configs
@@ -115,7 +119,7 @@ ln -s custom_bash/bashrc .bashrc
 touch custom_bash/bashrc.local
 echo $SEP
 
-# update package lists
+# update apt-get package lists
 echo $(date)
 echo "Updating package lists"
 sudo apt-get update --yes
@@ -124,6 +128,7 @@ echo $SEP
 # fetch new versions of installed packages
 echo $(date)
 echo "Upgrading installed packages"
+sudo snap refresh
 sudo apt-get upgrade --yes
 echo $SEP
 
@@ -131,36 +136,24 @@ echo $SEP
 echo $(date)
 echo "Installing GCC, G++, GFORTRAN compilers"
 sudo apt-get install gcc --yes
-gcc --version
+gcc --versiongit		sud
 sudo apt-get install g++ --yes
 g++ --version
 sudo apt-get install gfortran --yes
 gfortran --version
 echo $SEP
 
-# install Visual Studio Code
-echo $(date)
-echo "Installing VS Code"
-sudo apt-get install software-properties-common --yes
-sudo apt-get install apt-transport-https --yes
-sudo apt-get install wget --yes
-wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-sudo apt-get update
-sudo apt-get install code
-code --version
-echo $SEP
-
 # install important software:
 echo $(date)
-echo "Installing additional software"
-sudo apt-get install guake --yes
-guake --version
+echo "Installing important software"
+sudo snap install code --classic
+code --version
+sudoguake --version
 sudo apt-get install htop --yes
 htop --version
 sudo apt-get install terminator --yes
 terminator --version
-sudo apt-get install tmux --yes
+sudo snap install tmux
 hash tmux
 sudo apt-get install sshfs --yes
 sshfs --version
@@ -170,14 +163,11 @@ google-chrome --version
 rm -f google-chrome-stable_current_amd64.deb
 sudo apt-get install vim --yes
 vim --version
-sudo apt-get install snap --yes
-sudo snap install vlc
-vlc --version
-echo $SEP
-
+sudo snap install gimp
+gimp --version
+sudo snap install inkscape --yes
+inkscape --version
 # install Adobe Reader
-echo $(date)
-echo "Installing Adobe Reader"
 sudo apt-get install \
 gdebi-core \
 libxml2:i386 \
@@ -192,51 +182,18 @@ rm -rf AdbeRdr9.5.5-1_i386linux_enu.deb
 acroread -version
 echo $SEP
 
-# install GIMP
-echo $(date)
-echo "Installing GIMP"
-sudo add-apt-repository ppa:otto-kesselgulasch/gimp --yes
-sudo apt-get update --yes
-sudo apt-get install gimp --yes
-gimp --version
-echo $SEP
-
-# install Inkscape
-echo $(date)
-echo "Installing Inkscape"
-sudo add-apt-repository ppa:inkscape.dev/stable-daily --yes
-sudo apt-get update --yes
-sudo apt-get install inkscape --yes
-inkscape --version
-echo $SEP
-
 # temporarily allow non-zero exit commands
 set +e
 
 # remove unnecessary software
 echo $(date)
 echo "Uninstalling unnecessary software"
-sudo apt-get purge rhythmbox --yes
-sudo apt-get purge rhythmbox-data --yes
-hash rhythmbox 2>/dev/null && exit 1
-sudo apt-get purge thunderbird --yes
-hash thunderbird 2>/dev/null && exit 1
-sudo apt-get purge firefox --yes
-sudo apt-get purge firefox-locale-en --yes
-hash firefox 2>/dev/null && exit 1
-sudo apt-get purge aisleriot gnome-mahjongg gnome-mines gnome-sudoku --yes
-sudo apt-get purge remmina --yes
-sudo apt-get purge remmina-common --yes
-hash remmina 2>/dev/null && exit 1
-sudo apt-get purge libreoffice* --yes
-hash libreoffice 2>/dev/null && exit 1
-sudo apt-get purge totem totem-plugins --yes
-hash totem 2>/dev/null && exit 1
-
+sudo apt-get purge firefox* --yes
+hash firefox 2>/dev/null &&libre
 echo $SEP
-
 #sudo apt-get clean
 #sudo apt-get autoremove
+# snap?
 
 # exit on first non-zero exit status command
 set -e
