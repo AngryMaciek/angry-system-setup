@@ -147,7 +147,8 @@ echo $(date)
 echo "Installing important software"
 sudo snap install code --classic
 code --version
-sudo guake --version
+sudo apt-get install guake --yes
+guake --version
 sudo apt-get install htop --yes
 htop --version
 sudo apt-get install terminator --yes
