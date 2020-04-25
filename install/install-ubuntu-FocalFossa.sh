@@ -46,16 +46,14 @@ if [[ $CPU_arch != "x86_64" ]]
         exit 1
 fi
 
-
-
-
-#cleanup () {
-#    rc=$?
-#    rm -rf backup
-#    cd "$user_dir"
-#    echo "Exit status: $rc"
-#}
-#trap cleanup EXIT
+# prepare a clean-up function to call on ERR exit status
+cleanup () {
+    rc=$?
+    #rm -rf $HOME/backup
+    cd "$user_dir"
+    echo "Exit status: $rc"
+}
+trap cleanup ERR
 
 
 
@@ -145,6 +143,8 @@ echo $SEP
 # install important software:
 echo $(date)
 echo "Installing important software"
+sudo apt-get install gparted --yes
+hash gparted
 sudo snap install code --classic
 code --version
 sudo apt-get install guake --yes
@@ -186,21 +186,16 @@ rm -rf AdbeRdr9.5.5-1_i386linux_enu.deb
 acroread -version
 echo $SEP
 
-# temporarily allow non-zero exit commands
-set +e
+
 
 # remove unnecessary software
 echo $(date)
 echo "Uninstalling unnecessary software"
 sudo apt-get purge firefox* --yes
-hash firefox 2>/dev/null &&libre
 echo $SEP
 #sudo apt-get clean
 #sudo apt-get autoremove
-# snap?
 
-# exit on first non-zero exit status command
-set -e
 
 # install my textfile templates
 # https://github.com/AngryMaciek/textfile-templates
@@ -208,7 +203,7 @@ echo $(date)
 echo "Cloning textfile templates"
 git clone https://github.com/AngryMaciek/textfile-templates.git
 EXPORT_TEMPLATES="export PATH=$PATH\":$HOME/textfile-templates\""
-echo $'\n' >> custom_bash/bashrc.local
+echo $'' >> custom_bash/bashrc.local
 echo $EXPORT_TEMPLATES >> custom_bash/bashrc.local
 chmod +x textfile-templates/template
 echo $SEP
@@ -243,19 +238,19 @@ bash conda-envs/Snakemake/create-virtual-environment.sh
 bash conda-envs/code_linting/create-virtual-environment.sh
 # ...and add bash aliases:
 ALIAS_NEXTFLOW="alias conda-nextflow=\"conda activate ~/conda-envs/Nextflow/env\""
-echo $'\n' >> custom_bash/bashrc.local
+echo $'' >> custom_bash/bashrc.local
 echo $ALIAS_NEXTFLOW >> custom_bash/bashrc.local
 ALIAS_PYTHON_JUPYTER="alias conda-jupyter=\"conda activate ~/conda-envs/Python_Jupyter/env\""
-echo $'\n' >> custom_bash/bashrc.local
+echo $'' >> custom_bash/bashrc.local
 echo $ALIAS_PYTHON_JUPYTER >> custom_bash/bashrc.local
 ALIAS_R="alias conda-r=\"conda activate ~/conda-envs/R/env\""
-echo $'\n' >> custom_bash/bashrc.local
+echo $'' >> custom_bash/bashrc.local
 echo $ALIAS_R >> custom_bash/bashrc.local
 ALIAS_SNAKEMAKE="alias conda-snakemake=\"conda activate ~/conda-envs/Snakemake/env\""
-echo $'\n' >> custom_bash/bashrc.local
+echo $'' >> custom_bash/bashrc.local
 echo $ALIAS_SNAKEMAKE >> custom_bash/bashrc.local
 ALIAS_CODE_LINT="alias conda-lint=\"conda activate ~/conda-envs/code_linting/env\""
-echo $'\n' >> custom_bash/bashrc.local
+echo $'' >> custom_bash/bashrc.local
 echo $ALIAS_CODE_LINT >> custom_bash/bashrc.local
 echo $SEP
 
@@ -316,12 +311,10 @@ sleep 60
 ###############################################################################
 
 
-# test pylintrc automatic detection $ test gitconfig and conda alias
+# trap function
 
 # remember sudo for 5h
 
 # order of install: gnome on top? update, purge, upgrade, intall?
-
-# trap function
 
 # #shellckech and lint this script at the end!
