@@ -46,17 +46,38 @@ if [[ $CPU_arch != "x86_64" ]]
         exit 1
 fi
 
-# prepare a clean-up function to call on ERR exit status
+# prepare a clean-up function to call on EXIT signal
 cleanup () {
+    # This is not ideal, it assumes that an error occured
+    # already after backup of the dotfies (most probable case).
     rc=$?
-    #rm -rf $HOME/backup
+    # remove all new dotfiles
+    rm -f .bashrc .gitconfig .pylintrc
+    # restore old dotfiles
+    cp backup/.bashrc .bashrc
+    if [[ -f backup/.gitconfig ]]
+        then
+            mv backup/.gitconfig .gitconfig
+    fi
+    # remove all new directories from $HOME
+    rm -rf \
+    backup \
+    custom_bash \
+    google-chrome-stable_current_amd64.deb \
+    AdbeRdr9.5.5-1_i386linux_enu.deb \
+    textfile-templates \
+    cookiecutters \
+    Miniconda3-latest-Linux-x86_64.sh \
+    miniconda3 \
+    .conda \
+    conda-envs \
+    SC4DA \
     cd "$user_dir"
+    echo "Installation aborted!"
     echo "Exit status: $rc"
+    echo $SEP
 }
-trap cleanup ERR
-
-
-
+trap cleanup EXIT # move this after Backup?
 
 # exit script on first non-zero exit-status command
 # exit script when unset variables are used
@@ -295,6 +316,7 @@ echo "Setup completed successfully!"
 echo "System will reboot in 60s"
 echo $SEP
 sleep 60
+echo $SUDO_USER
 #reboot
 
 
@@ -311,10 +333,14 @@ sleep 60
 ###############################################################################
 
 
-# trap function
+# test trap function
 
-# remember sudo for 5h
+# add cisco installation
 
-# order of install: gnome on top? update, purge, upgrade, intall?
+# solve: remember sudo for 5h
+
+# modify -qq install 4 apt
+
+# reorder install: gnome on top? update, purge, upgrade, intall?
 
 # #shellckech and lint this script at the end!
