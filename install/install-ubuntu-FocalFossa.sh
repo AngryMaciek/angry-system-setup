@@ -13,9 +13,6 @@
 #
 ###############################################################################
 
-echo "Please type root password:"
-sudo echo "Password correct"
-
 SECONDS=0
 
 SEP="############################################################"
@@ -26,10 +23,10 @@ echo "Script started"
 echo $SEP
 
 # check root privileges
-if [[ $(id -u) -eq 0 ]]
+if [[ $(id -u) -ne 0 ]]
     then
         echo $(date)
-        echo "Do not run the script as root, run as a regular user"
+        echo "Please run this script with root privileges."
         echo "Exiting..."
         echo $SEP
         exit 1
@@ -54,24 +51,23 @@ cleanup () {
     # remove all new dotfiles
     rm -f .bashrc .gitconfig .pylintrc
     # restore old dotfiles
-    cp backup/.bashrc .bashrc
-    if [[ -f backup/.gitconfig ]]
+    cp Backup/.bashrc .bashrc
+    if [[ -f Backup/.gitconfig ]]
         then
-            mv backup/.gitconfig .gitconfig
+            mv Backup/.gitconfig .gitconfig
     fi
     # remove all new directories from $HOME
-    #rm -rf \
-    #backup \
-    #custom_bash \
-    #google-chrome-stable_current_amd64.deb \
-    #AdbeRdr9.5.5-1_i386linux_enu.deb \
-    #textfile-templates \
-    #cookiecutters \
-    #Miniconda3-latest-Linux-x86_64.sh \
-    #miniconda3 \
-    #.conda \
-    #conda-envs \
-    #SC4DA \
+    rm -rf Backup
+    rm -rf custom_bash
+    rm -rf google-chrome-stable_current_amd64.deb
+    rm -rf AdbeRdr9.5.5-1_i386linux_enu.deb
+    rm -rf textfile-templates
+    rm -rf cookiecutters
+    rm -rf Miniconda3-latest-Linux-x86_64.sh
+    rm -rf miniconda3
+    rm -rf .conda
+    rm -rf conda-envs
+    rm -rf SC4DA
     cd "$user_dir"
     echo "Installation aborted!"
     echo "Exit status: $rc"
@@ -92,118 +88,118 @@ install_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 cd $HOME
 
 # snap
-sudo snap install core
+snap install core
 
 # install git if it has not been already installed
 # (the newest version available)
 echo $(date)
 echo "Installing Git version control system"
-sudo apt-get install git -qq
+apt-get install git -qq
 echo $SEP
 
 # backup old configs
 echo $(date)
 echo "Backing up old config files"
-if [[ -d "backup" ]]
+if [[ -d "Backup" ]]
     then
-        echo "Directory '~/backup' already exists!"
+        echo "Directory '~/Backup' already exists!"
         echo "Exiting..."
         echo $SEP
         exit 1
 fi
-mkdir backup
-cp .bashrc backup/.bashrc # .bashrc is always present
+mkdir Backup
+cp .bashrc Backup/.bashrc # .bashrc is always present
 if [[ -f .gitconfig ]]
     then
-        mv .gitconfig backup/.gitconfig
+        mv .gitconfig Backup/.gitconfig
 fi
 echo $SEP
 
 # copy the dotflies
 echo $(date)
 echo "Copying configuration files"
-cp $install_dir/../dotfiles/.gitconfig .gitconfig
-cp $install_dir/../dotfiles/.pylintrc .pylintrc
+sudo -u $SUDO_USER cp $install_dir/../dotfiles/.gitconfig .gitconfig
+sudo -u $SUDO_USER cp $install_dir/../dotfiles/.pylintrc .pylintrc
 echo $SEP
 
 # install my bash configuration
 # https://github.com/AngryMaciek/custom_bash
 echo $(date)
 echo "Configuring bash"
-git clone https://github.com/AngryMaciek/custom_bash.git
-rm -f .bashrc
-ln -s custom_bash/bashrc .bashrc
+sudo -u $SUDO_USER git clone https://github.com/AngryMaciek/custom_bash.git
+sudo -u $SUDO_USER rm -f .bashrc
+sudo -u $SUDO_USER ln -s custom_bash/bashrc .bashrc
 # bashrc.local is an additional space for all local bash configuration
-touch custom_bash/bashrc.local
+sudo -u $SUDO_USER touch custom_bash/bashrc.local
 echo $SEP
 
 # update apt-get package lists
 echo $(date)
 echo "Updating package lists"
-sudo apt-get update --yes
+apt-get update --yes
 echo $SEP
 
 # fetch new versions of installed packages
 echo $(date)
 echo "Upgrading installed packages"
-sudo snap refresh
-sudo apt-get upgrade --yes
+snap refresh
+apt-get upgrade --yes
 echo $SEP
 
 # install compilers
 echo $(date)
 echo "Installing GCC, G++, GFORTRAN compilers"
-sudo apt-get install gcc -qq
+apt-get install gcc -qq
 gcc --version
-sudo apt-get install g++ -qq
+apt-get install g++ -qq
 g++ --version
-sudo apt-get install gfortran -qq
+apt-get install gfortran -qq
 gfortran --version
 echo $SEP
 
 # install important software:
 echo $(date)
 echo "Installing important software"
-sudo apt-get install gparted -qq
+apt-get install gparted -qq
 hash gparted
-sudo snap install code --classic
+snap install code --classic
 code --version
-sudo apt-get install guake -qq
+apt-get install guake -qq
 guake --version
-sudo apt-get install htop -qq
+apt-get install htop -qq
 htop --version
-sudo apt-get install terminator -qq
+apt-get install terminator -qq
 terminator --version
-sudo snap install tmux --classic
+snap install tmux --classic
 hash tmux
-sudo apt-get install sshfs -qq
+apt-get install sshfs -qq
 sshfs --version
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt-get install ./google-chrome-stable_current_amd64.deb -qq
+sudo -u $SUDO_USER wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+apt-get install ./google-chrome-stable_current_amd64.deb -qq
 google-chrome --version
-rm -f google-chrome-stable_current_amd64.deb
-sudo apt-get install vim -qq
+sudo -u $SUDO_USER rm -f google-chrome-stable_current_amd64.deb
+apt-get install vim -qq
 vim --version
-sudo snap install slack --classic
+snap install slack --classic
 hash slack
-sudo snap install bitwarden
+snap install bitwarden
 hash bitwarden
-sudo snap install gimp
+snap install gimp
 gimp --version
-sudo snap install inkscape
+snap install inkscape
 inkscape --version
 # install Adobe Reader
-sudo apt-get install \
+apt-get install \
 gdebi-core \
 libxml2:i386 \
 libcanberra-gtk-module:i386 \
 gtk2-engines-murrine:i386 \
 libatk-adaptor:i386 \
 -qq
-wget ftp://ftp.adobe.com/pub/adobe/reader/unix/9.x/9.5.5/enu/AdbeRdr9.5.5-1_i386linux_enu.deb
-yes | sudo gdebi AdbeRdr9.5.5-1_i386linux_enu.deb & # workaround for this installer
+sudo -u $SUDO_USER wget ftp://ftp.adobe.com/pub/adobe/reader/unix/9.x/9.5.5/enu/AdbeRdr9.5.5-1_i386linux_enu.deb
+yes | gdebi AdbeRdr9.5.5-1_i386linux_enu.deb & # workaround for this installer
 sleep 180
-rm -rf AdbeRdr9.5.5-1_i386linux_enu.deb
+sudo -u $SUDO_USER rm -rf AdbeRdr9.5.5-1_i386linux_enu.deb
 acroread -version
 echo $SEP
 
@@ -212,7 +208,7 @@ echo $SEP
 # remove unnecessary software
 echo $(date)
 echo "Uninstalling unnecessary software"
-sudo apt-get purge firefox* -qq
+apt-get purge firefox* -qq
 echo $SEP
 #sudo apt-get clean
 #sudo apt-get autoremove
@@ -222,71 +218,71 @@ echo $SEP
 # https://github.com/AngryMaciek/textfile-templates
 echo $(date)
 echo "Cloning textfile templates"
-git clone https://github.com/AngryMaciek/textfile-templates.git
+sudo -u $SUDO_USER git clone https://github.com/AngryMaciek/textfile-templates.git
 EXPORT_TEMPLATES="export PATH=$PATH\":$HOME/textfile-templates\""
-echo $'' >> custom_bash/bashrc.local
-echo $EXPORT_TEMPLATES >> custom_bash/bashrc.local
-chmod +x textfile-templates/template
+sudo -u $SUDO_USER echo $'' >> custom_bash/bashrc.local
+sudo -u $SUDO_USER echo $EXPORT_TEMPLATES >> custom_bash/bashrc.local
+sudo -u $SUDO_USER chmod +x textfile-templates/template
 echo $SEP
 
 # install my cookiecutters
 # https://github.com/AngryMaciek/cookiecutters
 echo $(date)
 echo "Cloning cookiecutters"
-git clone https://github.com/AngryMaciek/cookiecutters.git;
+sudo -u $SUDO_USER git clone https://github.com/AngryMaciek/cookiecutters.git;
 echo $SEP
 
 # download and install Miniconda3
 echo $(date)
 echo "Installing Miniconda3"
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-bash Miniconda3-latest-Linux-x86_64.sh -b -p miniconda3
-eval "$($HOME/miniconda3/bin/conda shell.bash hook)"
-conda init
-conda --version
-rm -f Miniconda3-latest-Linux-x86_64.sh
+sudo -u $SUDO_USER wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+sudo -u $SUDO_USER bash Miniconda3-latest-Linux-x86_64.sh -b -p miniconda3
+sudo -u $SUDO_USER eval "$($HOME/miniconda3/bin/conda shell.bash hook)"
+sudo -u $SUDO_USER conda init
+sudo -u $SUDO_USER conda --version
+sudo -u $SUDO_USER rm -f Miniconda3-latest-Linux-x86_64.sh
 echo $SEP
 
 # install my conda env recipes
 # https://github.com/AngryMaciek/conda-envs
 echo $(date)
 echo "Building conda environments"
-git clone https://github.com/AngryMaciek/conda-envs.git
-bash conda-envs/Nextflow/create-virtual-environment.sh
-bash conda-envs/Python_Jupyter/create-virtual-environment.sh
-bash conda-envs/R/create-virtual-environment.sh
-bash conda-envs/Snakemake/create-virtual-environment.sh
-bash conda-envs/code_linting/create-virtual-environment.sh
+sudo -u $SUDO_USER git clone https://github.com/AngryMaciek/conda-envs.git
+sudo -u $SUDO_USER bash conda-envs/Nextflow/create-virtual-environment.sh
+sudo -u $SUDO_USER bash conda-envs/Python_Jupyter/create-virtual-environment.sh
+sudo -u $SUDO_USER bash conda-envs/R/create-virtual-environment.sh
+sudo -u $SUDO_USER bash conda-envs/Snakemake/create-virtual-environment.sh
+sudo -u $SUDO_USER bash conda-envs/code_linting/create-virtual-environment.sh
 # ...and add bash aliases:
 ALIAS_NEXTFLOW="alias conda-nextflow=\"conda activate ~/conda-envs/Nextflow/env\""
-echo $'' >> custom_bash/bashrc.local
-echo $ALIAS_NEXTFLOW >> custom_bash/bashrc.local
+sudo -u $SUDO_USER echo $'' >> custom_bash/bashrc.local
+sudo -u $SUDO_USER echo $ALIAS_NEXTFLOW >> custom_bash/bashrc.local
 ALIAS_PYTHON_JUPYTER="alias conda-jupyter=\"conda activate ~/conda-envs/Python_Jupyter/env\""
-echo $'' >> custom_bash/bashrc.local
-echo $ALIAS_PYTHON_JUPYTER >> custom_bash/bashrc.local
+sudo -u $SUDO_USER echo $'' >> custom_bash/bashrc.local
+sudo -u $SUDO_USER echo $ALIAS_PYTHON_JUPYTER >> custom_bash/bashrc.local
 ALIAS_R="alias conda-r=\"conda activate ~/conda-envs/R/env\""
-echo $'' >> custom_bash/bashrc.local
-echo $ALIAS_R >> custom_bash/bashrc.local
+sudo -u $SUDO_USER echo $'' >> custom_bash/bashrc.local
+sudo -u $SUDO_USER echo $ALIAS_R >> custom_bash/bashrc.local
 ALIAS_SNAKEMAKE="alias conda-snakemake=\"conda activate ~/conda-envs/Snakemake/env\""
-echo $'' >> custom_bash/bashrc.local
-echo $ALIAS_SNAKEMAKE >> custom_bash/bashrc.local
+sudo -u $SUDO_USER echo $'' >> custom_bash/bashrc.local
+sudo -u $SUDO_USER echo $ALIAS_SNAKEMAKE >> custom_bash/bashrc.local
 ALIAS_CODE_LINT="alias conda-lint=\"conda activate ~/conda-envs/code_linting/env\""
-echo $'' >> custom_bash/bashrc.local
-echo $ALIAS_CODE_LINT >> custom_bash/bashrc.local
+sudo -u $SUDO_USER echo $'' >> custom_bash/bashrc.local
+sudo -u $SUDO_USER echo $ALIAS_CODE_LINT >> custom_bash/bashrc.local
 echo $SEP
 
 # install my general data analytic env
 # https://github.com/AngryMaciek/SC4DA
 echo $(date)
 echo "Building main development environment (SC4DA)"
-git clone https://github.com/AngryMaciek/SC4DA.git
-conda env create --prefix SC4DA/env --file SC4DA/conda_packages.yaml
+sudo -u $SUDO_USER git clone https://github.com/AngryMaciek/SC4DA.git
+sudo -u $SUDO_USER conda env create --prefix SC4DA/env --file SC4DA/conda_packages.yaml
 echo $SEP
 
 # clean conda: cache, lock files, unused packages and tarballs
 echo $(date)
 echo "Removing unused packages and cache from conda"
-conda clean --all --yes
+sudo -u $SUDO_USER conda clean --all --yes
 echo $SEP
 
 # set a wallpaper
@@ -294,14 +290,14 @@ echo $SEP
 echo $(date)
 echo "Setting a wallpaper"
 #RESOLUTION=$(xdpyinfo | awk '/dimensions/{print $2}')
-gsettings set org.gnome.desktop.background picture-uri \
+sudo -u $SUDO_USER gsettings set org.gnome.desktop.background picture-uri \
 file://$HOME/system-setup/ubuntu-wallpaper-3840x2160.jpg
 echo $SEP
 
 # Install GNOME Flashback desktop environment
 echo $(date)
 echo "Installing GNOME Flashback"
-sudo apt-get install gnome-session-flashback -qq
+apt-get install gnome-session-flashback -qq
 echo $SEP
 
 duration=$SECONDS
@@ -332,11 +328,8 @@ echo $SUDO_USER
 #
 ###############################################################################
 
+# reorder install: gnome on top? update, purge, upgrade, intall?
 
 # test trap function, ctrlC, dummy command with exit !=0
-
-# solve: remember sudo for 5h
-
-# reorder install: gnome on top? update, purge, upgrade, intall?
 
 # #shellckech and lint this script at the end!

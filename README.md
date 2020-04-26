@@ -30,7 +30,7 @@ Depending on your operating system please execute one of the following installat
 * Ubuntu-based Linux distributions (execution requires root privileges)  
   **Installation requires at least 6GB of RAM and 30GB free disk space**  
   ```bash
-  bash system-setup/install/install-ubuntu-FocalFossa.sh 2>&1 | tee system-setup/setup.log
+  sudo bash system-setup/install/install-ubuntu-FocalFossa.sh 2>&1 | tee system-setup/setup.log
   ```
 
 ## License
