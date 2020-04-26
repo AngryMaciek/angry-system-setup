@@ -118,7 +118,7 @@ echo $SEP
 # copy the dotflies
 echo $(date)
 echo "Copying configuration files"
-sudo -u $SUDO_USER cp $install_dir/../dotfiles/.gitconfig .gitconfig
+cp $install_dir/../dotfiles/.gitconfig .gitconfig
 sudo -u $SUDO_USER cp $install_dir/../dotfiles/.pylintrc .pylintrc
 echo $SEP
 
