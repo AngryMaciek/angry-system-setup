@@ -60,18 +60,18 @@ cleanup () {
             mv backup/.gitconfig .gitconfig
     fi
     # remove all new directories from $HOME
-    rm -rf \
-    backup \
-    custom_bash \
-    google-chrome-stable_current_amd64.deb \
-    AdbeRdr9.5.5-1_i386linux_enu.deb \
-    textfile-templates \
-    cookiecutters \
-    Miniconda3-latest-Linux-x86_64.sh \
-    miniconda3 \
-    .conda \
-    conda-envs \
-    SC4DA \
+    #rm -rf \
+    #backup \
+    #custom_bash \
+    #google-chrome-stable_current_amd64.deb \
+    #AdbeRdr9.5.5-1_i386linux_enu.deb \
+    #textfile-templates \
+    #cookiecutters \
+    #Miniconda3-latest-Linux-x86_64.sh \
+    #miniconda3 \
+    #.conda \
+    #conda-envs \
+    #SC4DA \
     cd "$user_dir"
     echo "Installation aborted!"
     echo "Exit status: $rc"
@@ -98,7 +98,7 @@ sudo snap install core
 # (the newest version available)
 echo $(date)
 echo "Installing Git version control system"
-sudo apt-get install git --yes
+sudo apt-get install git -qq
 echo $SEP
 
 # backup old configs
@@ -153,36 +153,36 @@ echo $SEP
 # install compilers
 echo $(date)
 echo "Installing GCC, G++, GFORTRAN compilers"
-sudo apt-get install gcc --yes
+sudo apt-get install gcc -qq
 gcc --version
-sudo apt-get install g++ --yes
+sudo apt-get install g++ -qq
 g++ --version
-sudo apt-get install gfortran --yes
+sudo apt-get install gfortran -qq
 gfortran --version
 echo $SEP
 
 # install important software:
 echo $(date)
 echo "Installing important software"
-sudo apt-get install gparted --yes
+sudo apt-get install gparted -qq
 hash gparted
 sudo snap install code --classic
 code --version
-sudo apt-get install guake --yes
+sudo apt-get install guake -qq
 guake --version
-sudo apt-get install htop --yes
+sudo apt-get install htop -qq
 htop --version
-sudo apt-get install terminator --yes
+sudo apt-get install terminator -qq
 terminator --version
 sudo snap install tmux --classic
 hash tmux
-sudo apt-get install sshfs --yes
+sudo apt-get install sshfs -qq
 sshfs --version
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt-get install ./google-chrome-stable_current_amd64.deb --yes
+sudo apt-get install ./google-chrome-stable_current_amd64.deb -qq
 google-chrome --version
 rm -f google-chrome-stable_current_amd64.deb
-sudo apt-get install vim --yes
+sudo apt-get install vim -qq
 vim --version
 sudo snap install slack --classic
 hash slack
@@ -199,7 +199,7 @@ libxml2:i386 \
 libcanberra-gtk-module:i386 \
 gtk2-engines-murrine:i386 \
 libatk-adaptor:i386 \
---yes
+-qq
 wget ftp://ftp.adobe.com/pub/adobe/reader/unix/9.x/9.5.5/enu/AdbeRdr9.5.5-1_i386linux_enu.deb
 yes | sudo gdebi AdbeRdr9.5.5-1_i386linux_enu.deb & # workaround for this installer
 sleep 180
@@ -212,7 +212,7 @@ echo $SEP
 # remove unnecessary software
 echo $(date)
 echo "Uninstalling unnecessary software"
-sudo apt-get purge firefox* --yes
+sudo apt-get purge firefox* -qq
 echo $SEP
 #sudo apt-get clean
 #sudo apt-get autoremove
@@ -301,7 +301,7 @@ echo $SEP
 # Install GNOME Flashback desktop environment
 echo $(date)
 echo "Installing GNOME Flashback"
-sudo apt-get install gnome-session-flashback --yes
+sudo apt-get install gnome-session-flashback -qq
 echo $SEP
 
 duration=$SECONDS
@@ -335,11 +335,7 @@ echo $SUDO_USER
 
 # test trap function
 
-# add cisco installation
-
 # solve: remember sudo for 5h
-
-# modify -qq install 4 apt
 
 # reorder install: gnome on top? update, purge, upgrade, intall?
 
