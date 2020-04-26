@@ -77,7 +77,7 @@ cleanup () {
     echo "Exit status: $rc"
     echo $SEP
 }
-trap cleanup EXIT # move this after Backup?
+trap cleanup EXIT SIGINT # move this after Backup?
 
 # exit script on first non-zero exit-status command
 # exit script when unset variables are used
@@ -333,7 +333,7 @@ echo $SUDO_USER
 ###############################################################################
 
 
-# test trap function
+# test trap function, ctrlC, dummy command with exit !=0
 
 # solve: remember sudo for 5h
 
