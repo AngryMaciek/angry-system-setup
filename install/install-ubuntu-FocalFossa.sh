@@ -163,7 +163,7 @@ echo "Installing important software"
 apt-get install gparted -qq
 hash gparted
 snap install code --classic
-code --version
+sudo -u $SUDO_USER code --version
 apt-get install guake -qq
 guake --version
 apt-get install htop -qq
@@ -312,7 +312,6 @@ echo "Setup completed successfully!"
 echo "System will reboot in 60s"
 echo $SEP
 sleep 60
-echo $SUDO_USER
 #reboot
 
 
@@ -329,6 +328,8 @@ echo $SUDO_USER
 ###############################################################################
 
 # reorder install: gnome on top? update, purge, upgrade, intall?
+
+# test while clonning to different location and calling from another one!
 
 # test trap function, ctrlC, dummy command with exit !=0
 
