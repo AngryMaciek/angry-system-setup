@@ -237,7 +237,8 @@ echo $(date)
 echo "Installing Miniconda3"
 sudo -u $SUDO_USER wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 sudo -u $SUDO_USER bash Miniconda3-latest-Linux-x86_64.sh -b -p miniconda3
-sudo -u $SUDO_USER -H -s eval "$($USER_HOME/miniconda3/bin/conda shell.bash hook)"
+sudo -u $SUDO_USER -H -s eval '$($USER_HOME/miniconda3/bin/conda shell.bash hook)'
+#sudo -u $SUDO_USER -H -s eval "$($USER_HOME/miniconda3/bin/conda shell.bash hook)"
 sudo -u $SUDO_USER conda init
 sudo -u $SUDO_USER conda --version
 sudo -u $SUDO_USER rm -f Miniconda3-latest-Linux-x86_64.sh
