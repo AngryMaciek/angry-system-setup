@@ -187,7 +187,7 @@ hash bitwarden
 snap install gimp
 gimp --version
 snap install inkscape
-inkscape --version
+sudo -u $SUDO_USER inkscape --version
 # install Adobe Reader
 apt-get install \
 gdebi-core \
