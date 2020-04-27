@@ -250,6 +250,7 @@ echo "Building conda environments"
 sudo -u $SUDO_USER git clone https://github.com/AngryMaciek/conda-envs.git
 sudo -u $SUDO_USER bash conda-envs/Nextflow/create-virtual-environment.sh
 sudo -u $SUDO_USER bash conda-envs/Python_Jupyter/create-virtual-environment.sh
+sudo -u $SUDO_USER bash conda-envs/Python_DL/create-virtual-environment.sh
 sudo -u $SUDO_USER bash conda-envs/R/create-virtual-environment.sh
 sudo -u $SUDO_USER bash conda-envs/Snakemake/create-virtual-environment.sh
 sudo -u $SUDO_USER bash conda-envs/code_linting/create-virtual-environment.sh
@@ -260,6 +261,9 @@ sudo -u $SUDO_USER echo $ALIAS_NEXTFLOW >> custom_bash/bashrc.local
 ALIAS_PYTHON_JUPYTER="alias conda-jupyter=\"conda activate ~/conda-envs/Python_Jupyter/env\""
 sudo -u $SUDO_USER echo $'' >> custom_bash/bashrc.local
 sudo -u $SUDO_USER echo $ALIAS_PYTHON_JUPYTER >> custom_bash/bashrc.local
+ALIAS_PYTHON_DL="alias conda-dl=\"conda activate ~/conda-envs/Python_DL/env\""
+sudo -u $SUDO_USER echo $'' >> custom_bash/bashrc.local
+sudo -u $SUDO_USER echo $ALIAS_PYTHON_DL >> custom_bash/bashrc.local
 ALIAS_R="alias conda-r=\"conda activate ~/conda-envs/R/env\""
 sudo -u $SUDO_USER echo $'' >> custom_bash/bashrc.local
 sudo -u $SUDO_USER echo $ALIAS_R >> custom_bash/bashrc.local
