@@ -56,7 +56,7 @@ cleanup () {
         then
             mv Backup/.gitconfig .gitconfig
     fi
-    # remove all new directories from $HOME
+    # remove all new directories from $USER_HOME
     rm -rf Backup
     rm -rf custom_bash
     rm -rf google-chrome-stable_current_amd64.deb
@@ -84,8 +84,8 @@ set -euo pipefail
 user_dir=$PWD
 install_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
-# work in home directory
-cd $HOME
+# work in $SUDO_USER home directory
+USER_HOME=$(sudo -u $SUDO_USER -H -s eval 'echo $HOME')
 
 # snap
 snap install core
@@ -118,7 +118,7 @@ echo $SEP
 # copy the dotflies
 echo $(date)
 echo "Copying configuration files"
-cp $install_dir/../dotfiles/.gitconfig .gitconfig
+sudo -u $SUDO_USER cp $install_dir/../dotfiles/.gitconfig .gitconfig
 sudo -u $SUDO_USER cp $install_dir/../dotfiles/.pylintrc .pylintrc
 echo $SEP
 
@@ -219,7 +219,7 @@ echo $SEP
 echo $(date)
 echo "Cloning textfile templates"
 sudo -u $SUDO_USER git clone https://github.com/AngryMaciek/textfile-templates.git
-EXPORT_TEMPLATES="export PATH=$PATH\":$HOME/textfile-templates\""
+EXPORT_TEMPLATES="export PATH=$PATH\":$USER_HOME/textfile-templates\""
 sudo -u $SUDO_USER echo $'' >> custom_bash/bashrc.local
 sudo -u $SUDO_USER echo $EXPORT_TEMPLATES >> custom_bash/bashrc.local
 sudo -u $SUDO_USER chmod +x textfile-templates/template
@@ -237,7 +237,7 @@ echo $(date)
 echo "Installing Miniconda3"
 sudo -u $SUDO_USER wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 sudo -u $SUDO_USER bash Miniconda3-latest-Linux-x86_64.sh -b -p miniconda3
-sudo -u $SUDO_USER eval "$($HOME/miniconda3/bin/conda shell.bash hook)"
+sudo -u $SUDO_USER eval "$($USER_HOME/miniconda3/bin/conda shell.bash hook)"
 sudo -u $SUDO_USER conda init
 sudo -u $SUDO_USER conda --version
 sudo -u $SUDO_USER rm -f Miniconda3-latest-Linux-x86_64.sh
@@ -291,7 +291,7 @@ echo $(date)
 echo "Setting a wallpaper"
 #RESOLUTION=$(xdpyinfo | awk '/dimensions/{print $2}')
 sudo -u $SUDO_USER gsettings set org.gnome.desktop.background picture-uri \
-file://$HOME/system-setup/ubuntu-wallpaper-3840x2160.jpg
+file://$USER_HOME/system-setup/ubuntu-wallpaper-3840x2160.jpg
 echo $SEP
 
 # Install GNOME Flashback desktop environment
