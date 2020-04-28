@@ -239,10 +239,13 @@ sudo -u $SUDO_USER wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Li
 sudo -u $SUDO_USER bash Miniconda3-latest-Linux-x86_64.sh -b -p miniconda3
 #sudo -u $SUDO_USER -H -s eval '$($USER_HOME/miniconda3/bin/conda shell.bash hook)'
 #sudo -u $SUDO_USER -H -s eval "$($USER_HOME/miniconda3/bin/conda shell.bash hook)"
-sudo -u $SUDO_USER conda init
-sudo -u $SUDO_USER conda --version
+alias CONDA_ALIAS='$USER_HOME/miniconda3/bin/conda'
+sudo -u $SUDO_USER CONDA_ALIAS init
+sudo -u $SUDO_USER CONDA_ALIAS --version
 sudo -u $SUDO_USER rm -f Miniconda3-latest-Linux-x86_64.sh
 echo $SEP
+
+exit 1
 
 # install my conda env recipes
 # https://github.com/AngryMaciek/conda-envs
