@@ -130,35 +130,40 @@ set -euo pipefail
 #sudo -u $SUDO_USER touch custom_bash/bashrc.local
 #echo $SEP
 
+# install git!
+
+# install homebrew
+/bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 # install compilers
 #echo $(date)
-#echo "Installing GCC, G++, GFORTRAN compilers"
-#apt-get install gcc -qq
+#echo "Installing GNU Compiler Collection"
+#brew install gcc@9
 #gcc --version
-#apt-get install g++ -qq
 #g++ --version
-#apt-get install gfortran -qq
 #gfortran --version
 #echo $SEP
 
 # install important software:
 #echo $(date)
 #echo "Installing important software"
-#apt-get install gparted -qq
-#hash gparted
-#snap install code --classic
-#sudo -u $SUDO_USER code --version
-#apt-get install guake -qq
-#guake --version
-#apt-get install htop -qq
+#brew tap caskroom/cask
+#brew cask search visual-studio-code
+#brew cask install visual-studio-code 
+#code --version
+#brew cask install iterm2
+#iterm2 --version
+#brew search htop
+#brew install htop
 #htop --version
-#apt-get install terminator -qq
-#terminator --version
+
 #snap install tmux --classic
 #hash tmux
+
 #apt-get install sshfs -qq
 #sshfs --version
+
+
 #sudo -u $SUDO_USER wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 #apt-get install ./google-chrome-stable_current_amd64.deb -qq
 #google-chrome --version
