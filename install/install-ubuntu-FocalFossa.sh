@@ -332,6 +332,7 @@ sleep 60
 # * .guake
 # * .terminator
 # * include new repo with vimrc
+# * include new repo with custom_zsh + install zsh
 #
 ###############################################################################
 
