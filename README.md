@@ -36,7 +36,3 @@ Depending on your operating system please execute one of the following installat
 ## License
 
 MIT License
-
-## Future releases
-
-* add instructions for macOS
