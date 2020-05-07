@@ -329,12 +329,12 @@ sleep 60
 # * vs code config - dotfiles? plugins?
 # * .guake
 # * .terminator
-# * include new repo with vimrc
-# * include new repo with custom_zsh + install zsh
 #
 ###############################################################################
 
-# sc4da install
+# * include new repo with vimrc
+
+# * include new repo with custom_zsh + install zsh
 
 # reorder install: gnome on top? update, purge, upgrade, intall?
 
