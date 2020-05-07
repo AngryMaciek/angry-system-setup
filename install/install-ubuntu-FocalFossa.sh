@@ -237,11 +237,7 @@ echo $(date)
 echo "Installing Miniconda3"
 sudo -u $SUDO_USER wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 sudo -u $SUDO_USER bash Miniconda3-latest-Linux-x86_64.sh -b -p miniconda3
-#sudo -u $SUDO_USER -H -s eval '$($USER_HOME/miniconda3/bin/conda shell.bash hook)'
-#sudo -u $SUDO_USER -H -s eval "$($USER_HOME/miniconda3/bin/conda shell.bash hook)"
-alias CONDA_ALIAS='$USER_HOME/miniconda3/bin/conda'
-sudo -u $SUDO_USER CONDA_ALIAS init
-sudo -u $SUDO_USER CONDA_ALIAS --version
+sudo -u $SUDO_USER cat $install_dir/conda-init.txt >> .bashrc
 sudo -u $SUDO_USER rm -f Miniconda3-latest-Linux-x86_64.sh
 echo $SEP
 
@@ -250,12 +246,12 @@ echo $SEP
 echo $(date)
 echo "Building conda environments"
 sudo -u $SUDO_USER git clone https://github.com/AngryMaciek/conda-envs.git
-sudo -u $SUDO_USER bash conda-envs/Nextflow/create-virtual-environment.sh
-sudo -u $SUDO_USER bash conda-envs/Python_Jupyter/create-virtual-environment.sh
-sudo -u $SUDO_USER bash conda-envs/Python_DL/create-virtual-environment.sh
-sudo -u $SUDO_USER bash conda-envs/R/create-virtual-environment.sh
-sudo -u $SUDO_USER bash conda-envs/Snakemake/create-virtual-environment.sh
-sudo -u $SUDO_USER bash conda-envs/code_linting/create-virtual-environment.sh
+sudo -i -u $SUDO_USER bash -i conda-envs/Nextflow/create-virtual-environment.sh
+sudo -i -u $SUDO_USER bash -i conda-envs/Python_Jupyter/create-virtual-environment.sh
+sudo -i -u $SUDO_USER bash -i conda-envs/Python_DL/create-virtual-environment.sh
+sudo -i -u $SUDO_USER bash -i conda-envs/R/create-virtual-environment.sh
+sudo -i -u $SUDO_USER bash -i conda-envs/Snakemake/create-virtual-environment.sh
+sudo -i -u $SUDO_USER bash -i conda-envs/code_linting/create-virtual-environment.sh
 # ...and add bash aliases:
 ALIAS_NEXTFLOW="alias conda-nextflow=\"conda activate ~/conda-envs/Nextflow/env\""
 sudo -u $SUDO_USER echo $'' >> custom_bash/bashrc.local
@@ -279,16 +275,17 @@ echo $SEP
 
 # install my general data analytic env
 # https://github.com/AngryMaciek/SC4DA
-echo $(date)
-echo "Building main development environment (SC4DA)"
-sudo -u $SUDO_USER git clone https://github.com/AngryMaciek/SC4DA.git
-sudo -u $SUDO_USER conda env create --prefix SC4DA/env --file SC4DA/conda_packages.yaml
-echo $SEP
+#echo $(date)
+#echo "Building main development environment (SC4DA)"
+#sudo -u $SUDO_USER git clone https://github.com/AngryMaciek/SC4DA.git
+#sudo -u $SUDO_USER conda env create --prefix SC4DA/env --file SC4DA/conda_packages.yaml
+#echo $SEP
 
 # clean conda: cache, lock files, unused packages and tarballs
 echo $(date)
 echo "Removing unused packages and cache from conda"
-sudo -u $SUDO_USER conda clean --all --yes
+#sudo -u $SUDO_USER conda clean --all --yes
+sudo -i -u $SUDO_USER bash -i conda-clean.sh # -i?
 echo $SEP
 
 # set a wallpaper
@@ -332,6 +329,8 @@ sleep 60
 # * include new repo with vimrc
 #
 ###############################################################################
+
+# sc4da install
 
 # reorder install: gnome on top? update, purge, upgrade, intall?
 
