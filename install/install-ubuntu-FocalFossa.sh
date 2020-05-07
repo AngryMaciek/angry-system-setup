@@ -245,8 +245,6 @@ sudo -u $SUDO_USER CONDA_ALIAS --version
 sudo -u $SUDO_USER rm -f Miniconda3-latest-Linux-x86_64.sh
 echo $SEP
 
-exit 1
-
 # install my conda env recipes
 # https://github.com/AngryMaciek/conda-envs
 echo $(date)
