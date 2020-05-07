@@ -275,11 +275,14 @@ echo $SEP
 
 # install my general data analytic env
 # https://github.com/AngryMaciek/SC4DA
-#echo $(date)
-#echo "Building main development environment (SC4DA)"
-#sudo -u $SUDO_USER git clone https://github.com/AngryMaciek/SC4DA.git
-#sudo -u $SUDO_USER conda env create --prefix SC4DA/env --file SC4DA/conda_packages.yaml
-#echo $SEP
+echo $(date)
+echo "Building main development environment (SC4DA)"
+sudo -u $SUDO_USER git clone https://github.com/AngryMaciek/SC4DA.git
+sudo -i -u $SUDO_USER bash -i SC4DA/create-conda-virtual-environment.sh
+ALIAS_SC4DA="alias sc4da=\"conda activate ~/SC4DA/env\""
+sudo -u $SUDO_USER echo $'' >> custom_bash/bashrc.local
+sudo -u $SUDO_USER echo $ALIAS_SC4DA >> custom_bash/bashrc.local
+echo $SEP
 
 # clean conda: cache, lock files, unused packages and tarballs
 echo $(date)
