@@ -56,6 +56,10 @@ cleanup () {
         then
             mv Backup/.gitconfig .gitconfig
     fi
+    if [[ -f Backup/.vimrc ]]
+        then
+            mv Backup/.vimrc .vimrc
+    fi
     # remove all new directories from $USER_HOME
     rm -rf Backup
     rm -rf custom_bash
@@ -68,6 +72,7 @@ cleanup () {
     rm -rf .conda
     rm -rf conda-envs
     rm -rf SC4DA
+    # clean vim and prezto stuff
     cd "$user_dir"
     echo "Installation aborted!"
     echo "Exit status: $rc"
@@ -112,6 +117,10 @@ cp .bashrc Backup/.bashrc # .bashrc is always present
 if [[ -f .gitconfig ]]
     then
         mv .gitconfig Backup/.gitconfig
+fi
+if [[ -f .vimrc ]]
+    then
+        mv .vimrc Backup/.vimrc
 fi
 echo $SEP
 
@@ -215,17 +224,27 @@ echo $SEP
 #sudo apt-get clean
 #sudo apt-get autoremove
 
+
+# Clone Vim Configuration
+# https://github.com/AngryMaciek/custom_vim
+echo $(date)
+echo "Cloning Vim configuration"
+sudo -u $SUDO_USER git clone https://github.com/AngryMaciek/custom_vim.git
+sudo -u $SUDO_USER rm -f .vimrc
+sudo -u $SUDO_USER ln -s custom_vim/vimrc .vimrc
+echo $SEP
+
 # Clone Prezto (Zsh Configuration)
 # https://github.com/AngryMaciek/prezto
 echo $(date)
 echo "Cloning Prezto"
-sudo -u $SUDO_USER git clone git clone --recursive https://github.com/AngryMaciek/prezto.git .zprezto
-ln -s .zprezto/zlogin .zlogin
-ln -s .zprezto/zlogout .zlogout
-ln -s .zprezto/zpreztorc .zpreztorc
-ln -s .zprezto/zprofile .zprofile
-ln -s .zprezto/zshenv .zshenv
-ln -s .zprezto/zshrc .zshrc
+sudo -u $SUDO_USER git clone --recursive https://github.com/AngryMaciek/prezto.git .zprezto
+sudo -u $SUDO_USER ln -s .zprezto/zlogin .zlogin
+sudo -u $SUDO_USER ln -s .zprezto/zlogout .zlogout
+sudo -u $SUDO_USER ln -s .zprezto/zpreztorc .zpreztorc
+sudo -u $SUDO_USER ln -s .zprezto/zprofile .zprofile
+sudo -u $SUDO_USER ln -s .zprezto/zshenv .zshenv
+sudo -u $SUDO_USER ln -s .zprezto/zshrc .zshrc
 echo $SEP
 
 # install my textfile templates
@@ -345,8 +364,6 @@ sleep 60
 # * .terminator
 #
 ###############################################################################
-
-# * include new repo with vimrc
 
 # reorder install: gnome on top? update, purge, upgrade, intall?
 
