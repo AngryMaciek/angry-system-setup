@@ -61,6 +61,7 @@ cleanup () {
             mv Backup/.vimrc .vimrc
     fi
     # remove all new directories from $USER_HOME
+    chattr -i Backup
     rm -rf Backup
     rm -rf custom_bash
     rm -rf google-chrome-stable_current_amd64.deb
@@ -181,8 +182,7 @@ hash gparted
 apt-get install zsh -qq
 zsh --version
 snap install code --classic
-#sudo -u $SUDO_USER code --version
-code --version
+sudo -u $SUDO_USER code --version
 apt-get install guake -qq
 guake --version
 apt-get install htop -qq
@@ -208,8 +208,7 @@ hash bitwarden
 snap install gimp
 gimp --version
 snap install inkscape
-#sudo -u $SUDO_USER inkscape --version
-inkscape --version
+sudo -u $SUDO_USER inkscape --version
 # install Adobe Reader:
 apt-get install \
 gdebi-core \
