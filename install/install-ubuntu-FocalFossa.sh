@@ -49,7 +49,7 @@ cleanup () {
     # already after backup of the dotfies (most probable case).
     rc=$?
     # remove all new dotfiles
-    rm -f .bashrc .gitconfig .pylintrc
+    rm -f .bashrc .gitconfig .pylintrc .vimrc
     # restore old dotfiles
     cp Backup/.bashrc .bashrc
     if [[ -f Backup/.gitconfig ]]
@@ -64,22 +64,23 @@ cleanup () {
     chattr -i Backup
     rm -rf Backup
     rm -rf custom_bash
+    rm -rf custom_vim
     rm -rf google-chrome-stable_current_amd64.deb
     rm -rf AdbeRdr9.5.5-1_i386linux_enu.deb
     rm -rf textfile-templates
     rm -rf cookiecutters
     rm -rf Miniconda3-latest-Linux-x86_64.sh
-    rm -rf miniconda3
-    rm -rf .conda
+    rm -rf miniconda3 .conda
     rm -rf conda-envs
     rm -rf SC4DA
+    rm -rf bin
     # clean vim and prezto stuff
     cd "$USER_DIR"
     echo "Installation aborted!"
     echo "Exit status: $rc"
     echo $SEP
 }
-trap cleanup EXIT SIGINT # move this after Backup?
+trap cleanup ERR SIGINT SIGTERM KILL # move this after Backup?
 
 # exit script on first non-zero exit-status command
 # exit script when unset variables are used
@@ -365,6 +366,8 @@ sleep 60
 # * .terminator
 #
 ###############################################################################
+
+# test vim zsh
 
 # test while clonning to different location and calling from another one!
 
