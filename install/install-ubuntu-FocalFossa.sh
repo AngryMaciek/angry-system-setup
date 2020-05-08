@@ -113,7 +113,6 @@ if [[ -d "Backup" ]]
         exit 1
 fi
 mkdir Backup
-chattr +i Backup
 cp .bashrc Backup/.bashrc # .bashrc is always present
 if [[ -f .gitconfig ]]
     then
@@ -123,6 +122,7 @@ if [[ -f .vimrc ]]
     then
         mv .vimrc Backup/.vimrc
 fi
+chattr +i Backup
 echo $SEP
 
 # copy the dotflies
