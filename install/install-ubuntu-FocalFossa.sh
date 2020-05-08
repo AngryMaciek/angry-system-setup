@@ -162,6 +162,8 @@ echo $(date)
 echo "Installing important software"
 apt-get install gparted -qq
 hash gparted
+apt-get install zsh -qq
+zsh --version
 snap install code --classic
 sudo -u $SUDO_USER code --version
 apt-get install guake -qq
@@ -213,6 +215,18 @@ echo $SEP
 #sudo apt-get clean
 #sudo apt-get autoremove
 
+# Clone Prezto (Zsh Configuration)
+# https://github.com/AngryMaciek/prezto
+echo $(date)
+echo "Cloning Prezto"
+sudo -u $SUDO_USER git clone git clone --recursive https://github.com/AngryMaciek/prezto.git .zprezto
+ln -s .zprezto/zlogin .zlogin
+ln -s .zprezto/zlogout .zlogout
+ln -s .zprezto/zpreztorc .zpreztorc
+ln -s .zprezto/zprofile .zprofile
+ln -s .zprezto/zshenv .zshenv
+ln -s .zprezto/zshrc .zshrc
+echo $SEP
 
 # install my textfile templates
 # https://github.com/AngryMaciek/textfile-templates
@@ -333,8 +347,6 @@ sleep 60
 ###############################################################################
 
 # * include new repo with vimrc
-
-# * include new repo with custom_zsh + install zsh
 
 # reorder install: gnome on top? update, purge, upgrade, intall?
 
