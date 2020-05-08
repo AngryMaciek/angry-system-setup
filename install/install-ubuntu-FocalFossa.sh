@@ -315,6 +315,8 @@ sudo -u $SUDO_USER echo $ALIAS_SNAKEMAKE >> custom_bash/bashrc.local
 ALIAS_CODE_LINT="alias conda-lint=\"conda activate ~/conda-envs/code_linting/env\""
 sudo -u $SUDO_USER echo $'' >> custom_bash/bashrc.local
 sudo -u $SUDO_USER echo $ALIAS_CODE_LINT >> custom_bash/bashrc.local
+# clean conda: cache, lock files, unused packages and tarballs
+sudo -i -u $SUDO_USER bash -i $INSTALL_DIR/conda-clean.sh
 echo $SEP
 
 # install my general data analytic env
@@ -326,13 +328,8 @@ sudo -i -u $SUDO_USER bash -i SC4DA/create-conda-virtual-environment.sh
 ALIAS_SC4DA="alias sc4da=\"conda activate ~/SC4DA/env\""
 sudo -u $SUDO_USER echo $'' >> custom_bash/bashrc.local
 sudo -u $SUDO_USER echo $ALIAS_SC4DA >> custom_bash/bashrc.local
-echo $SEP
-
 # clean conda: cache, lock files, unused packages and tarballs
-echo $(date)
-echo "Removing unused packages and cache from conda"
-#sudo -u $SUDO_USER conda clean --all --yes
-sudo -i -u $SUDO_USER bash -i conda-clean.sh
+sudo -i -u $SUDO_USER bash -i $INSTALL_DIR/conda-clean.sh
 echo $SEP
 
 # set a wallpaper
