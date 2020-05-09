@@ -49,22 +49,22 @@ cleanup () {
     # already after backup of the dotfies (most probable case).
     rc=$?
     # remove all new dotfiles
-    rm -f .bashrc .gitconfig .pylintrc .vimrc
+    rm -f .bashrc .gitconfig .pylintrc #.vimrc
     # restore old dotfiles
     cp Backup/.bashrc .bashrc
     if [[ -f Backup/.gitconfig ]]
         then
             mv Backup/.gitconfig .gitconfig
     fi
-    if [[ -f Backup/.vimrc ]]
-        then
-            mv Backup/.vimrc .vimrc
-    fi
+    #if [[ -f Backup/.vimrc ]]
+    #    then
+    #        mv Backup/.vimrc .vimrc
+    #fi
     # remove all new directories from $USER_HOME
     chattr -i Backup
     rm -rf Backup
     rm -rf custom_bash
-    rm -rf custom_vim
+    #rm -rf custom_vim
     rm -rf google-chrome-stable_current_amd64.deb
     rm -rf AdbeRdr9.5.5-1_i386linux_enu.deb
     rm -rf textfile-templates
@@ -74,6 +74,8 @@ cleanup () {
     rm -rf conda-envs
     rm -rf SC4DA
     rm -rf bin
+    rm -rf .zprezto
+    rm -f .zlogin .zlogout .zpreztorc .zprofile .zshenv .zshrc
     # clean prezto stuff
     cd "$USER_DIR"
     echo "Installation aborted!"
@@ -120,10 +122,10 @@ if [[ -f .gitconfig ]]
     then
         mv .gitconfig Backup/.gitconfig
 fi
-if [[ -f .vimrc ]]
-    then
-        mv .vimrc Backup/.vimrc
-fi
+#if [[ -f .vimrc ]]
+#    then
+#        mv .vimrc Backup/.vimrc
+#fi
 chattr +i Backup
 echo $SEP
 
@@ -367,8 +369,6 @@ sleep 60
 # * add repo with vim configuration 
 #
 ###############################################################################
-
-# test zsh
 
 # test while clonning to different location and calling from another one!
 
