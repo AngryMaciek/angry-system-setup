@@ -49,10 +49,10 @@ cleanup () {
     # remove all new dotfiles
     rm -f .bashrc .gitconfig .pylintrc #.vimrc
     # restore old dotfiles
-    sudo -u $SUDO_USER cp Backup/.bashrc .bashrc
+    cp Backup/.bashrc .bashrc
     if [[ -f Backup/.gitconfig ]]
         then
-            sudo -u $SUDO_USER mv Backup/.gitconfig .gitconfig
+            mv Backup/.gitconfig .gitconfig
     fi
     #if [[ -f Backup/.vimrc ]]
     #    then
