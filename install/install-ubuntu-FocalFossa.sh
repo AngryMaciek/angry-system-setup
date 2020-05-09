@@ -74,7 +74,7 @@ cleanup () {
     rm -rf conda-envs
     rm -rf SC4DA
     rm -rf bin
-    # clean vim and prezto stuff
+    # clean prezto stuff
     cd "$USER_DIR"
     echo "Installation aborted!"
     echo "Exit status: $rc"
@@ -237,24 +237,24 @@ echo $SEP
 
 # Clone Vim Configuration
 # https://github.com/AngryMaciek/custom_vim
-echo $(date)
-echo "Cloning Vim configuration"
-sudo -u $SUDO_USER git clone https://github.com/AngryMaciek/custom_vim.git
-sudo -u $SUDO_USER rm -f .vimrc
-sudo -u $SUDO_USER ln -s custom_vim/vimrc .vimrc
-echo $SEP
+#echo $(date)
+#echo "Cloning Vim configuration"
+#sudo -u $SUDO_USER git clone https://github.com/AngryMaciek/custom_vim.git
+#sudo -u $SUDO_USER rm -f .vimrc
+#sudo -u $SUDO_USER ln -s custom_vim/vimrc .vimrc
+#echo $SEP
 
 # Clone Prezto (Zsh Configuration)
 # https://github.com/AngryMaciek/prezto
 echo $(date)
 echo "Cloning Prezto"
 sudo -u $SUDO_USER git clone --recursive https://github.com/AngryMaciek/prezto.git .zprezto
-sudo -u $SUDO_USER ln -s .zprezto/zlogin .zlogin
-sudo -u $SUDO_USER ln -s .zprezto/zlogout .zlogout
-sudo -u $SUDO_USER ln -s .zprezto/zpreztorc .zpreztorc
-sudo -u $SUDO_USER ln -s .zprezto/zprofile .zprofile
-sudo -u $SUDO_USER ln -s .zprezto/zshenv .zshenv
-sudo -u $SUDO_USER ln -s .zprezto/zshrc .zshrc
+sudo -u $SUDO_USER ln -s .zprezto/runcoms/zlogin .zlogin
+sudo -u $SUDO_USER ln -s .zprezto/runcoms/zlogout .zlogout
+sudo -u $SUDO_USER ln -s .zprezto/runcoms/zpreztorc .zpreztorc
+sudo -u $SUDO_USER ln -s .zprezto/runcoms/zprofile .zprofile
+sudo -u $SUDO_USER ln -s .zprezto/runcoms/zshenv .zshenv
+sudo -u $SUDO_USER ln -s .zprezto/runcoms/zshrc .zshrc
 echo $SEP
 
 # install my textfile templates
@@ -364,13 +364,14 @@ sleep 60
 # * vs code config - dotfiles? plugins?
 # * .guake
 # * .terminator
+# * add repo with vim configuration 
 #
 ###############################################################################
 
-# test vim zsh
+# test zsh
 
 # test while clonning to different location and calling from another one!
 
 # test trap function, ctrlC, dummy command with exit !=0
 
-# #shellckech and lint this script at the end!
+# #shellckech and lint this script at the end! test ALL
