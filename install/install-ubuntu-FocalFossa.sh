@@ -49,10 +49,10 @@ cleanup () {
     # remove all new dotfiles
     rm -f .bashrc .gitconfig .pylintrc #.vimrc
     # restore old dotfiles
-    cp Backup/.bashrc .bashrc
+    sudo -u $SUDO_USER cp Backup/.bashrc .bashrc
     if [[ -f Backup/.gitconfig ]]
         then
-            mv Backup/.gitconfig .gitconfig
+            sudo -u $SUDO_USER mv Backup/.gitconfig .gitconfig
     fi
     #if [[ -f Backup/.vimrc ]]
     #    then
@@ -356,8 +356,6 @@ echo "System will reboot in 60s"
 echo $SEP
 sleep 60
 #reboot
-
-
 exit 1
 
 
@@ -372,7 +370,3 @@ exit 1
 # * add repo with vim configuration 
 #
 ###############################################################################
-
-# test trap function, ctrlC, dummy command with exit !=0
-
-# #shellckech and lint this script at the end! test ALL
