@@ -95,6 +95,7 @@ INSTALL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 # work in $SUDO_USER home directory
 USER_HOME=$(sudo -u $SUDO_USER -H -s eval 'echo $HOME')
+cd $USER_HOME
 
 # snap
 snap install core
