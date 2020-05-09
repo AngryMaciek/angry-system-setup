@@ -43,10 +43,8 @@ if [[ $CPU_arch != "x86_64" ]]
         exit 1
 fi
 
-# prepare a clean-up function to call on EXIT signal
+# prepare a clean-up function to call on non-zero exit signal
 cleanup () {
-    # This is not ideal, it assumes that an error occured
-    # already after backup of the dotfies (most probable case).
     rc=$?
     # remove all new dotfiles
     rm -f .bashrc .gitconfig .pylintrc #.vimrc
@@ -76,18 +74,16 @@ cleanup () {
     rm -rf bin
     rm -rf .zprezto
     rm -f .zlogin .zlogout .zpreztorc .zprofile .zshenv .zshrc
-    # clean prezto stuff
     cd "$USER_DIR"
     echo "Installation aborted!"
     echo "Exit status: $rc"
     echo $SEP
+    exit $rc
 }
-trap cleanup ERR SIGINT SIGTERM KILL # move this after Backup?
 
-# exit script on first non-zero exit-status command
-# exit script when unset variables are used
+# unset variables are errors when substituting
 # do not mask the return code
-set -euo pipefail
+set -uo pipefail
 
 # remember paths
 USER_DIR=$PWD
@@ -96,16 +92,6 @@ INSTALL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 # work in $SUDO_USER home directory
 USER_HOME=$(sudo -u $SUDO_USER -H -s eval 'echo $HOME')
 cd $USER_HOME
-
-# snap
-snap install core
-
-# install git if it has not been already installed
-# (the newest version available)
-echo $(date)
-echo "Installing Git version control system"
-apt-get install git -qq
-echo $SEP
 
 # backup old configs
 echo $(date)
@@ -135,6 +121,19 @@ echo $(date)
 echo "Copying configuration files"
 sudo -u $SUDO_USER cp $INSTALL_DIR/../dotfiles/.gitconfig .gitconfig
 sudo -u $SUDO_USER cp $INSTALL_DIR/../dotfiles/.pylintrc .pylintrc
+echo $SEP
+
+# from this point use cleanup() on errors
+trap cleanup ERR SIGINT SIGTERM KILL
+
+# snap
+snap install core
+
+# install git if it has not been already installed
+# (the newest version available)
+echo $(date)
+echo "Installing Git version control system"
+apt-get install git -qq
 echo $SEP
 
 # install my bash configuration
@@ -359,9 +358,12 @@ sleep 60
 #reboot
 
 
+exit 1
+
+
 ###############################################################################
 #
-# Future releases: 
+# Future releases:
 #
 # * auto switch to gnome flashback, clean icons and panels (dotfile?)
 # * vs code config - dotfiles? plugins?
@@ -370,8 +372,6 @@ sleep 60
 # * add repo with vim configuration 
 #
 ###############################################################################
-
-# test while clonning to different location and calling from another one!
 
 # test trap function, ctrlC, dummy command with exit !=0
 
