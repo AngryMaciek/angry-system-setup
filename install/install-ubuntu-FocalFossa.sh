@@ -129,8 +129,6 @@ trap cleanup ERR SIGINT SIGTERM
 # snap
 snap install core
 
-hash myawesomecommand
-
 # install git if it has not been already installed
 # (the newest version available)
 date
