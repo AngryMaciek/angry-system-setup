@@ -350,7 +350,7 @@ DURATION_S=$(($DURATION % 60))
 
 # finish with rebooting the system
 date
-echo "Setup time: "$DURATION_H"h"$DURATION_M"m"$DURATION_S"s"
+echo "Setup time: $DURATION_H h $DURATION_M m $DURATION_S s"
 echo "Setup completed successfully!"
 echo "System will reboot in 60s"
 echo $SEP
