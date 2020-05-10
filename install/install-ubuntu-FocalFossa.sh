@@ -356,7 +356,8 @@ echo "System will reboot in 60s"
 echo $SEP
 sleep 60
 #reboot
-exit 1
+
+myawesomecommand
 
 
 ###############################################################################
