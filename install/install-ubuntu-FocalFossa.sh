@@ -357,7 +357,7 @@ echo $SEP
 sleep 60
 #reboot
 
-myawesomecommand
+hash myawesomecommand
 
 
 ###############################################################################
