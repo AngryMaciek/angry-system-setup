@@ -91,7 +91,7 @@ INSTALL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 # work in "$SUDO_USER" home directory
 USER_HOME=$(sudo -u "$SUDO_USER" -H -s eval 'echo $HOME')
-cd $USER_HOME || exit 1
+cd "$USER_HOME" || exit 1
 
 # backup old configs
 date
@@ -119,15 +119,17 @@ echo $SEP
 # copy the dotflies
 date
 echo "Copying configuration files"
-sudo -u "$SUDO_USER" cp $INSTALL_DIR/../dotfiles/.gitconfig .gitconfig
-sudo -u "$SUDO_USER" cp $INSTALL_DIR/../dotfiles/.pylintrc .pylintrc
+sudo -u "$SUDO_USER" cp "$INSTALL_DIR"/../dotfiles/.gitconfig .gitconfig
+sudo -u "$SUDO_USER" cp "$INSTALL_DIR"/../dotfiles/.pylintrc .pylintrc
 echo $SEP
 
 # from this point use cleanup() on errors
-trap cleanup ERR SIGINT SIGTERM KILL
+trap cleanup ERR SIGINT SIGTERM
 
 # snap
 snap install core
+
+hash myawesomecommand
 
 # install git if it has not been already installed
 # (the newest version available)
@@ -266,7 +268,7 @@ echo "Cloning textfile templates"
 sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/textfile-templates.git
 EXPORT_TEMPLATES="export PATH=$PATH\":$USER_HOME/textfile-templates\""
 sudo -u "$SUDO_USER" echo $'' >> custom_bash/bashrc.local
-sudo -u "$SUDO_USER" echo $EXPORT_TEMPLATES >> custom_bash/bashrc.local
+sudo -u "$SUDO_USER" echo "$EXPORT_TEMPLATES" >> custom_bash/bashrc.local
 sudo -u "$SUDO_USER" chmod +x textfile-templates/template
 echo $SEP
 
@@ -283,7 +285,7 @@ echo "Installing Miniconda3"
 #sudo -u "$SUDO_USER" wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 sudo -u "$SUDO_USER" bash Miniconda3-latest-Linux-x86_64.sh -b -p miniconda3
-sudo -u "$SUDO_USER" cat $INSTALL_DIR/conda-init.txt >> .bashrc
+sudo -u "$SUDO_USER" cat "$INSTALL_DIR"/conda-init.txt >> .bashrc
 #sudo -u "$SUDO_USER" rm -f Miniconda3-latest-Linux-x86_64.sh
 rm -f Miniconda3-latest-Linux-x86_64.sh
 echo $SEP
@@ -302,24 +304,24 @@ sudo -i -u "$SUDO_USER" bash -i conda-envs/code_linting/create-virtual-environme
 # ...and add bash aliases:
 ALIAS_NEXTFLOW="alias conda-nextflow=\"conda activate ~/conda-envs/Nextflow/env\""
 sudo -u "$SUDO_USER" echo $'' >> custom_bash/bashrc.local
-sudo -u "$SUDO_USER" echo $ALIAS_NEXTFLOW >> custom_bash/bashrc.local
+sudo -u "$SUDO_USER" echo "$ALIAS_NEXTFLOW" >> custom_bash/bashrc.local
 ALIAS_PYTHON_JUPYTER="alias conda-jupyter=\"conda activate ~/conda-envs/Python_Jupyter/env\""
 sudo -u "$SUDO_USER" echo $'' >> custom_bash/bashrc.local
-sudo -u "$SUDO_USER" echo $ALIAS_PYTHON_JUPYTER >> custom_bash/bashrc.local
+sudo -u "$SUDO_USER" echo "$ALIAS_PYTHON_JUPYTER" >> custom_bash/bashrc.local
 ALIAS_PYTHON_DL="alias conda-dl=\"conda activate ~/conda-envs/Python_DL/env\""
 sudo -u "$SUDO_USER" echo $'' >> custom_bash/bashrc.local
-sudo -u "$SUDO_USER" echo $ALIAS_PYTHON_DL >> custom_bash/bashrc.local
+sudo -u "$SUDO_USER" echo "$ALIAS_PYTHON_DL" >> custom_bash/bashrc.local
 ALIAS_R="alias conda-r=\"conda activate ~/conda-envs/R/env\""
 sudo -u "$SUDO_USER" echo $'' >> custom_bash/bashrc.local
-sudo -u "$SUDO_USER" echo $ALIAS_R >> custom_bash/bashrc.local
+sudo -u "$SUDO_USER" echo "$ALIAS_R" >> custom_bash/bashrc.local
 ALIAS_SNAKEMAKE="alias conda-snakemake=\"conda activate ~/conda-envs/Snakemake/env\""
 sudo -u "$SUDO_USER" echo $'' >> custom_bash/bashrc.local
-sudo -u "$SUDO_USER" echo $ALIAS_SNAKEMAKE >> custom_bash/bashrc.local
+sudo -u "$SUDO_USER" echo "$ALIAS_SNAKEMAKE" >> custom_bash/bashrc.local
 ALIAS_CODE_LINT="alias conda-lint=\"conda activate ~/conda-envs/code_linting/env\""
 sudo -u "$SUDO_USER" echo $'' >> custom_bash/bashrc.local
-sudo -u "$SUDO_USER" echo $ALIAS_CODE_LINT >> custom_bash/bashrc.local
+sudo -u "$SUDO_USER" echo "$ALIAS_CODE_LINT" >> custom_bash/bashrc.local
 # clean conda: cache, lock files, unused packages and tarballs
-sudo -i -u "$SUDO_USER" bash -i $INSTALL_DIR/conda-clean.sh
+sudo -i -u "$SUDO_USER" bash -i "$INSTALL_DIR"/conda-clean.sh
 echo $SEP
 
 # install my general data analytic env
@@ -330,9 +332,9 @@ sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/SC4DA.git
 sudo -i -u "$SUDO_USER" bash -i SC4DA/create-conda-virtual-environment.sh
 ALIAS_SC4DA="alias sc4da=\"conda activate ~/SC4DA/env\""
 sudo -u "$SUDO_USER" echo $'' >> custom_bash/bashrc.local
-sudo -u "$SUDO_USER" echo $ALIAS_SC4DA >> custom_bash/bashrc.local
+sudo -u "$SUDO_USER" echo "$ALIAS_SC4DA" >> custom_bash/bashrc.local
 # clean conda: cache, lock files, unused packages and tarballs
-sudo -i -u "$SUDO_USER" bash -i $INSTALL_DIR/conda-clean.sh
+sudo -i -u "$SUDO_USER" bash -i "$INSTALL_DIR"/conda-clean.sh
 echo $SEP
 
 # set a wallpaper
@@ -340,7 +342,7 @@ date
 echo "Setting a wallpaper"
 #RESOLUTION=$(xdpyinfo | awk '/dimensions/{print $2}')
 sudo -u "$SUDO_USER" gsettings set org.gnome.desktop.background picture-uri \
-file://$INSTALL_DIR/../ubuntu-wallpaper-3840x2160.jpg
+file://"$INSTALL_DIR"/../ubuntu-wallpaper-3840x2160.jpg
 echo $SEP
 
 DURATION=$SECONDS
@@ -356,8 +358,6 @@ echo "System will reboot in 60s"
 echo $SEP
 sleep 60
 #reboot
-
-hash myawesomecommand
 
 
 ###############################################################################
