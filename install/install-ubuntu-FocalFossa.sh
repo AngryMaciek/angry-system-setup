@@ -24,23 +24,23 @@ echo $SEP
 
 # check root privileges
 if [[ $(id -u) -ne 0 ]]
-    then
-        date
-        echo "Please run this script with root privileges."
-        echo "Exiting..."
-        echo $SEP
-        exit 1
+then
+    date
+    echo "Please run this script with root privileges."
+    echo "Exiting..."
+    echo $SEP
+    exit 1
 fi
 
 # check the CPU architecture
 CPU_arch=$(uname -m)
 if [[ $CPU_arch != "x86_64" ]]
-    then
-        date
-        echo "This script only works on 64bit systems, sorry!"
-        echo "Exiting..."
-        echo $SEP
-        exit 1
+then
+    date
+    echo "This script only works on 64bit systems, sorry!"
+    echo "Exiting..."
+    echo $SEP
+    exit 1
 fi
 
 # prepare a clean-up function to call on non-zero exit signal
@@ -51,8 +51,8 @@ cleanup () {
     # restore old dotfiles
     cp Backup/.bashrc .bashrc
     if [[ -f Backup/.gitconfig ]]
-        then
-            mv Backup/.gitconfig .gitconfig
+    then
+        mv Backup/.gitconfig .gitconfig
     fi
     #if [[ -f Backup/.vimrc ]]
     #    then
@@ -97,17 +97,17 @@ cd "$USER_HOME" || exit 1
 date
 echo "Backing up old config files"
 if [[ -d "Backup" ]]
-    then
-        echo "Directory '~/Backup' already exists!"
-        echo "Exiting..."
-        echo $SEP
-        exit 1
+then
+    echo "Directory '~/Backup' already exists!"
+    echo "Exiting..."
+    echo $SEP
+    exit 1
 fi
 mkdir Backup
 cp .bashrc Backup/.bashrc # .bashrc is always present
 if [[ -f .gitconfig ]]
-    then
-        mv .gitconfig Backup/.gitconfig
+then
+    mv .gitconfig Backup/.gitconfig
 fi
 #if [[ -f .vimrc ]]
 #    then
@@ -212,12 +212,12 @@ snap install inkscape
 sudo -u "$SUDO_USER" inkscape --version
 # install Adobe Reader:
 apt-get install \
-gdebi-core \
-libxml2:i386 \
-libcanberra-gtk-module:i386 \
-gtk2-engines-murrine:i386 \
-libatk-adaptor:i386 \
--qq
+    gdebi-core \
+    libxml2:i386 \
+    libcanberra-gtk-module:i386 \
+    gtk2-engines-murrine:i386 \
+    libatk-adaptor:i386 \
+    -qq
 wget ftp://ftp.adobe.com/pub/adobe/reader/unix/9.x/9.5.5/enu/AdbeRdr9.5.5-1_i386linux_enu.deb
 yes | gdebi AdbeRdr9.5.5-1_i386linux_enu.deb & # workaround for this installer
 sleep 180
@@ -334,7 +334,7 @@ date
 echo "Setting a wallpaper"
 #RESOLUTION=$(xdpyinfo | awk '/dimensions/{print $2}')
 sudo -u "$SUDO_USER" gsettings set org.gnome.desktop.background picture-uri \
-file://"$INSTALL_DIR"/../ubuntu-wallpaper-3840x2160.jpg
+    file://"$INSTALL_DIR"/../ubuntu-wallpaper-3840x2160.jpg
 echo $SEP
 
 DURATION=$SECONDS
@@ -360,6 +360,6 @@ sleep 60
 # * vs code config - dotfiles? plugins?
 # * .guake
 # * .terminator
-# * add repo with vim configuration 
+# * add repo with vim configuration
 #
 ###############################################################################
