@@ -292,6 +292,9 @@ echo "Building conda environments"
 sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/conda-envs.git
 sudo -i -u "$SUDO_USER" bash -i conda-envs/Nextflow/create-virtual-environment.sh
 sudo -i -u "$SUDO_USER" bash -i conda-envs/Python_Jupyter/create-virtual-environment.sh
+# adjust syntax for env to work under zsh:
+sudo -i -u "$SUDO_USER" sed -i '7s/\[/\[\[/' conda-envs/Python_Jupyter/env/etc/conda/activate.d/java_home.sh
+sudo -i -u "$SUDO_USER" sed -i '7s/\]/\]\]/' conda-envs/Python_Jupyter/env/etc/conda/activate.d/java_home.sh
 sudo -i -u "$SUDO_USER" bash -i conda-envs/Python_DL/create-virtual-environment.sh
 sudo -i -u "$SUDO_USER" bash -i conda-envs/R/create-virtual-environment.sh
 sudo -i -u "$SUDO_USER" bash -i conda-envs/Snakemake/create-virtual-environment.sh
@@ -305,9 +308,6 @@ echo "$ALIAS_NEXTFLOW" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 ALIAS_PYTHON_JUPYTER="alias conda-jupyter=\"conda activate ~/conda-envs/Python_Jupyter/env\""
 echo "$ALIAS_PYTHON_JUPYTER" | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
 echo "$ALIAS_PYTHON_JUPYTER" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
-# adjust syntax for env to work under zsh:
-sudo -i -u "$SUDO_USER" sed -i '7s/\[/\[\[/' Python_Jupyter/env/etc/conda/activate.d/java_home.sh
-sudo -i -u "$SUDO_USER" sed -i '7s/\]/\]\]/' Python_Jupyter/env/etc/conda/activate.d/java_home.sh
 ALIAS_PYTHON_DL="alias conda-dl=\"conda activate ~/conda-envs/Python_DL/env\""
 echo "$ALIAS_PYTHON_DL" | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
 echo "$ALIAS_PYTHON_DL" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
@@ -330,12 +330,12 @@ date
 echo "Building main development environment (SC4DA)"
 sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/SC4DA.git
 sudo -i -u "$SUDO_USER" bash -i SC4DA/create-conda-virtual-environment.sh
-ALIAS_SC4DA="alias sc4da=\"conda activate ~/SC4DA/env\""
-echo "$ALIAS_SC4DA" | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
-echo "$ALIAS_SC4DA" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 # adjust syntax for env to work under zsh:
 sudo -i -u "$SUDO_USER" sed -i '7s/\[/\[\[/' SC4DA/env/etc/conda/activate.d/java_home.sh
 sudo -i -u "$SUDO_USER" sed -i '7s/\]/\]\]/' SC4DA/env/etc/conda/activate.d/java_home.sh
+ALIAS_SC4DA="alias sc4da=\"conda activate ~/SC4DA/env\""
+echo "$ALIAS_SC4DA" | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
+echo "$ALIAS_SC4DA" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 # clean conda: cache, lock files, unused packages and tarballs
 sudo -i -u "$SUDO_USER" bash -i "$INSTALL_DIR"/conda-clean.sh
 echo $SEP
