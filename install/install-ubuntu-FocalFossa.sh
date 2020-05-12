@@ -68,7 +68,7 @@ cleanup () {
     rm -rf textfile-templates
     rm -rf cookiecutters
     rm -rf Miniconda3-latest-Linux-x86_64.sh
-    rm -rf miniconda3 .conda
+    rm -rf miniconda3 .conda .condarc
     rm -rf conda-envs
     rm -rf SC4DA
     rm -rf bin
@@ -242,19 +242,6 @@ echo $SEP
 #sudo -u "$SUDO_USER" ln -s custom_vim/vimrc .vimrc
 #echo $SEP
 
-# Clone Prezto (Zsh Configuration)
-# https://github.com/AngryMaciek/prezto
-date
-echo "Cloning Prezto"
-sudo -u "$SUDO_USER" git clone --recursive https://github.com/AngryMaciek/prezto.git .zprezto
-sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zlogin .zlogin
-sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zlogout .zlogout
-sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zpreztorc .zpreztorc
-sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zprofile .zprofile
-sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zshenv .zshenv
-sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zshrc .zshrc
-echo $SEP
-
 # install my textfile templates
 # https://github.com/AngryMaciek/textfile-templates
 date
@@ -338,6 +325,20 @@ echo "$ALIAS_SC4DA" | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /de
 echo "$ALIAS_SC4DA" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 # clean conda: cache, lock files, unused packages and tarballs
 sudo -i -u "$SUDO_USER" bash -i "$INSTALL_DIR"/conda-clean.sh
+echo $SEP
+
+# Clone and set up Prezto (Zsh Configuration)
+# https://github.com/AngryMaciek/prezto
+date
+echo "Cloning Prezto"
+sudo -u "$SUDO_USER" git clone --recursive https://github.com/AngryMaciek/prezto.git .zprezto
+sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zlogin .zlogin
+sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zlogout .zlogout
+sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zpreztorc .zpreztorc
+sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zprofile .zprofile
+sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zshenv .zshenv
+sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zshrc .zshrc
+sudo -i -u "$SUDO_USER" bash -i "$INSTALL_DIR"/conda-config-change-PS1.sh
 echo $SEP
 
 # set a wallpaper
