@@ -268,7 +268,6 @@ echo "Installing Miniconda3"
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 sudo -u "$SUDO_USER" bash Miniconda3-latest-Linux-x86_64.sh -b -p miniconda3
 sudo -u "$SUDO_USER" tee < "$INSTALL_DIR"/conda-init-bash.txt -a .bashrc > /dev/null
-sudo -u "$SUDO_USER" tee < "$INSTALL_DIR"/conda-init-zsh.txt -a .zshrc > /dev/null
 rm -f Miniconda3-latest-Linux-x86_64.sh
 echo $SEP
 
@@ -338,6 +337,7 @@ sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zpreztorc .zpreztorc
 sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zprofile .zprofile
 sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zshenv .zshenv
 sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zshrc .zshrc
+sudo -u "$SUDO_USER" tee < "$INSTALL_DIR"/conda-init-zsh.txt -a .zshrc > /dev/null
 sudo -i -u "$SUDO_USER" bash -i "$INSTALL_DIR"/conda-config-change-PS1.sh
 echo $SEP
 
