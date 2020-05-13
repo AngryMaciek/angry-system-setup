@@ -324,6 +324,7 @@ echo $SEP
 # https://github.com/AngryMaciek/prezto
 date
 echo "Cloning Prezto"
+EXPORT_CONDA_DEFAULT_ENV="export CONDA_DEFAULT_ENV=base"
 sudo -u "$SUDO_USER" git clone --recursive https://github.com/AngryMaciek/prezto.git .zprezto
 sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zlogin .zlogin
 sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zlogout .zlogout
@@ -336,6 +337,8 @@ sudo -i -u "$SUDO_USER" bash -i "$INSTALL_DIR"/conda-config-change-PS1.sh
 # add all the bashrc.local modifications to .zshrc as well:
 echo $'' | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 echo "$EXPORT_TEMPLATES" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
+echo $'' | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
+echo "$EXPORT_CONDA_DEFAULT_ENV" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 echo $'' | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 echo "$ALIAS_NEXTFLOW" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 echo "$ALIAS_PYTHON_JUPYTER" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
