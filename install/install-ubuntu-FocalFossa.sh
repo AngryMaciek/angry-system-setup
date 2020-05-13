@@ -249,9 +249,7 @@ echo "Cloning textfile templates"
 sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/textfile-templates.git
 EXPORT_TEMPLATES="export PATH=$PATH\":$USER_HOME/textfile-templates\""
 echo $'' | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
-echo $'' | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 echo "$EXPORT_TEMPLATES" | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
-echo "$EXPORT_TEMPLATES" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 sudo -u "$SUDO_USER" chmod +x textfile-templates/template
 echo $SEP
 
@@ -279,8 +277,10 @@ sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/conda-envs.git
 sudo -i -u "$SUDO_USER" bash -i conda-envs/Nextflow/create-virtual-environment.sh
 sudo -i -u "$SUDO_USER" bash -i conda-envs/Python_Jupyter/create-virtual-environment.sh
 # adjust syntax for env to work under zsh:
+# ---
 sudo -i -u "$SUDO_USER" sed -i '7s/\[/\[\[/' conda-envs/Python_Jupyter/env/etc/conda/activate.d/java_home.sh
 sudo -i -u "$SUDO_USER" sed -i '7s/\]/\]\]/' conda-envs/Python_Jupyter/env/etc/conda/activate.d/java_home.sh
+# ---
 sudo -i -u "$SUDO_USER" bash -i conda-envs/Python_DL/create-virtual-environment.sh
 sudo -i -u "$SUDO_USER" bash -i conda-envs/R/create-virtual-environment.sh
 sudo -i -u "$SUDO_USER" bash -i conda-envs/Snakemake/create-virtual-environment.sh
@@ -288,24 +288,17 @@ sudo -i -u "$SUDO_USER" bash -i conda-envs/code_linting/create-virtual-environme
 # ...and add bash aliases:
 ALIAS_NEXTFLOW="alias conda-nextflow=\"conda activate ~/conda-envs/Nextflow/env\""
 echo $'' | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
-echo $'' | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 echo "$ALIAS_NEXTFLOW" | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
-echo "$ALIAS_NEXTFLOW" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 ALIAS_PYTHON_JUPYTER="alias conda-jupyter=\"conda activate ~/conda-envs/Python_Jupyter/env\""
 echo "$ALIAS_PYTHON_JUPYTER" | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
-echo "$ALIAS_PYTHON_JUPYTER" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 ALIAS_PYTHON_DL="alias conda-dl=\"conda activate ~/conda-envs/Python_DL/env\""
 echo "$ALIAS_PYTHON_DL" | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
-echo "$ALIAS_PYTHON_DL" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 ALIAS_R="alias conda-r=\"conda activate ~/conda-envs/R/env\""
 echo "$ALIAS_R" | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
-echo "$ALIAS_R" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 ALIAS_SNAKEMAKE="alias conda-snakemake=\"conda activate ~/conda-envs/Snakemake/env\""
 echo "$ALIAS_SNAKEMAKE" | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
-echo "$ALIAS_SNAKEMAKE" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 ALIAS_CODE_LINT="alias conda-lint=\"conda activate ~/conda-envs/code_linting/env\""
 echo "$ALIAS_CODE_LINT" | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
-echo "$ALIAS_CODE_LINT" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 # clean conda: cache, lock files, unused packages and tarballs
 sudo -i -u "$SUDO_USER" bash -i "$INSTALL_DIR"/conda-clean.sh
 echo $SEP
@@ -317,11 +310,12 @@ echo "Building main development environment (SC4DA)"
 sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/SC4DA.git
 sudo -i -u "$SUDO_USER" bash -i SC4DA/create-conda-virtual-environment.sh
 # adjust syntax for env to work under zsh:
+# ---
 sudo -i -u "$SUDO_USER" sed -i '7s/\[/\[\[/' SC4DA/env/etc/conda/activate.d/java_home.sh
 sudo -i -u "$SUDO_USER" sed -i '7s/\]/\]\]/' SC4DA/env/etc/conda/activate.d/java_home.sh
+# ---
 ALIAS_SC4DA="alias sc4da=\"conda activate ~/SC4DA/env\""
 echo "$ALIAS_SC4DA" | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
-echo "$ALIAS_SC4DA" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 # clean conda: cache, lock files, unused packages and tarballs
 sudo -i -u "$SUDO_USER" bash -i "$INSTALL_DIR"/conda-clean.sh
 echo $SEP
@@ -339,6 +333,17 @@ sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zshenv .zshenv
 sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zshrc .zshrc
 sudo -u "$SUDO_USER" tee < "$INSTALL_DIR"/conda-init-zsh.txt -a .zshrc > /dev/null
 sudo -i -u "$SUDO_USER" bash -i "$INSTALL_DIR"/conda-config-change-PS1.sh
+# add all the bashrc.local modifications to .zshrc as well:
+echo $'' | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
+echo "$EXPORT_TEMPLATES" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
+echo $'' | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
+echo "$ALIAS_NEXTFLOW" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
+echo "$ALIAS_PYTHON_JUPYTER" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
+echo "$ALIAS_PYTHON_DL" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
+echo "$ALIAS_R" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
+echo "$ALIAS_SNAKEMAKE" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
+echo "$ALIAS_CODE_LINT" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
+echo "$ALIAS_SC4DA" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 echo $SEP
 
 # set a wallpaper
