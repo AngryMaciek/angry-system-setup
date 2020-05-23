@@ -381,5 +381,7 @@ reboot
 # * .guake
 # * .terminator
 # * add repo with vim configuration
+# * install tree
+# * https://github.com/pavanjadhaw/betterlockscreen
 #
 ###############################################################################
