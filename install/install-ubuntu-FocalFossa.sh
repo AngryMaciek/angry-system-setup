@@ -61,7 +61,7 @@ cleanup () {
     # remove all new directories from $USER_HOME
     chattr -i Backup
     rm -rf Backup
-    rm -rf custom_bash
+    rm -rf custom-bash
     #rm -rf custom_vim
     rm -rf google-chrome-stable_current_amd64.deb
     rm -rf AdbeRdr9.5.5-1_i386linux_enu.deb
@@ -137,14 +137,14 @@ apt-get install git -qq
 echo $SEP
 
 # install my bash configuration
-# https://github.com/AngryMaciek/custom_bash
+# https://github.com/AngryMaciek/custom-bash
 date
 echo "Configuring bash"
-sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/custom_bash.git
+sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/custom-bash.git
 sudo -u "$SUDO_USER" rm -f .bashrc
-sudo -u "$SUDO_USER" ln -s custom_bash/bashrc .bashrc
+sudo -u "$SUDO_USER" ln -s custom-bash/bashrc .bashrc
 # bashrc.local is an additional space for all local bash configuration
-sudo -u "$SUDO_USER" touch custom_bash/bashrc.local
+sudo -u "$SUDO_USER" touch custom-bash/bashrc.local
 echo $SEP
 
 # update apt-get package lists
