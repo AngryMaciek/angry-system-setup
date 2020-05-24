@@ -377,9 +377,7 @@ reboot
 # Future releases:
 #
 # * auto switch to gnome flashback, clean icons and panels (dotfile?)
-# * vs code config - dotfiles? plugins?
-# * .guake
-# * .terminator
+# * vs code plugins?
 # * add repo with vim configuration
 # * install tree
 # * https://github.com/pavanjadhaw/betterlockscreen
