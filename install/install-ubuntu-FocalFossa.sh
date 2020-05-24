@@ -383,5 +383,6 @@ reboot
 # * add repo with vim configuration
 # * install tree
 # * https://github.com/pavanjadhaw/betterlockscreen
+# * remove the dotfiles directory, use stow and the small-dotfiles repo
 #
 ###############################################################################
