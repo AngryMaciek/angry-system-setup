@@ -248,8 +248,8 @@ date
 echo "Cloning textfile templates"
 sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/textfile-templates.git
 EXPORT_TEMPLATES="export PATH=$PATH\":$USER_HOME/textfile-templates\""
-echo $'' | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
-echo "$EXPORT_TEMPLATES" | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
+echo $'' | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
+echo "$EXPORT_TEMPLATES" | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
 sudo -u "$SUDO_USER" chmod +x textfile-templates/template
 echo $SEP
 
@@ -287,18 +287,18 @@ sudo -i -u "$SUDO_USER" bash -i conda-envs/Snakemake/create-virtual-environment.
 sudo -i -u "$SUDO_USER" bash -i conda-envs/code_linting/create-virtual-environment.sh
 # ...and add bash aliases:
 ALIAS_NEXTFLOW="alias conda-nextflow=\"conda activate ~/conda-envs/Nextflow/env\""
-echo $'' | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
-echo "$ALIAS_NEXTFLOW" | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
+echo $'' | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
+echo "$ALIAS_NEXTFLOW" | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
 ALIAS_PYTHON_JUPYTER="alias conda-jupyter=\"conda activate ~/conda-envs/Python_Jupyter/env\""
-echo "$ALIAS_PYTHON_JUPYTER" | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
+echo "$ALIAS_PYTHON_JUPYTER" | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
 ALIAS_PYTHON_DL="alias conda-dl=\"conda activate ~/conda-envs/Python_DL/env\""
-echo "$ALIAS_PYTHON_DL" | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
+echo "$ALIAS_PYTHON_DL" | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
 ALIAS_R="alias conda-r=\"conda activate ~/conda-envs/R/env\""
-echo "$ALIAS_R" | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
+echo "$ALIAS_R" | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
 ALIAS_SNAKEMAKE="alias conda-snakemake=\"conda activate ~/conda-envs/Snakemake/env\""
-echo "$ALIAS_SNAKEMAKE" | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
+echo "$ALIAS_SNAKEMAKE" | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
 ALIAS_CODE_LINT="alias conda-lint=\"conda activate ~/conda-envs/code_linting/env\""
-echo "$ALIAS_CODE_LINT" | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
+echo "$ALIAS_CODE_LINT" | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
 # clean conda: cache, lock files, unused packages and tarballs
 sudo -i -u "$SUDO_USER" bash -i "$INSTALL_DIR"/conda-clean.sh
 echo $SEP
@@ -315,7 +315,7 @@ sudo -i -u "$SUDO_USER" sed -i '7s/\[/\[\[/' SC4DA/env/etc/conda/activate.d/java
 sudo -i -u "$SUDO_USER" sed -i '7s/\]/\]\]/' SC4DA/env/etc/conda/activate.d/java_home.sh
 # ---
 ALIAS_SC4DA="alias sc4da=\"conda activate ~/SC4DA/env\""
-echo "$ALIAS_SC4DA" | sudo -u "$SUDO_USER" tee -a custom_bash/bashrc.local > /dev/null
+echo "$ALIAS_SC4DA" | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
 # clean conda: cache, lock files, unused packages and tarballs
 sudo -i -u "$SUDO_USER" bash -i "$INSTALL_DIR"/conda-clean.sh
 echo $SEP
