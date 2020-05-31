@@ -69,6 +69,10 @@ cleanup () {
     rm -rf cookiecutters
     rm -rf Miniconda3-latest-Linux-x86_64.sh
     rm -rf miniconda3 .conda .condarc
+    rm -f conda-init-bash.sh
+    rm -f conda-init-zsh.sh
+    rm -f conda-config-change-PS1.sh
+    rm -f conda-clean.sh
     rm -rf conda-envs
     rm -rf SC4DA
     rm -rf bin
@@ -273,7 +277,10 @@ date
 echo "Installing Miniconda3"
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 sudo -u "$SUDO_USER" bash Miniconda3-latest-Linux-x86_64.sh -b -p miniconda3
-sudo -i -u "$SUDO_USER" bash -i "$INSTALL_DIR"/conda-init-bash.sh
+sudo -u "$SUDO_USER" echo "eval \"$($HOME/miniconda3/bin/conda shell.bash hook)\"" > conda-init-bash.sh
+sudo -u "$SUDO_USER" echo "conda init bash" >> conda-init-bash.sh
+sudo -i -u "$SUDO_USER" bash -i conda-init-bash.sh
+rm -f conda-init-bash.sh
 rm -f Miniconda3-latest-Linux-x86_64.sh
 echo $SEP
 
@@ -325,7 +332,9 @@ sudo -i -u "$SUDO_USER" sed -i '7s/\]/\]\]/' SC4DA/env/etc/conda/activate.d/java
 ALIAS_SC4DA="alias sc4da=\"conda activate ~/SC4DA/env\""
 echo "$ALIAS_SC4DA" | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
 # clean conda: cache, lock files, unused packages and tarballs
-sudo -i -u "$SUDO_USER" bash -i "$INSTALL_DIR"/conda-clean.sh
+sudo -u "$SUDO_USER" echo "conda clean --all --yes" > conda-clean.sh
+sudo -i -u "$SUDO_USER" bash -i conda-clean.sh
+rm -f conda-clean.sh
 echo $SEP
 
 # Clone and set up Prezto (Zsh Configuration)
@@ -340,8 +349,12 @@ sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zpreztorc .zpreztorc
 sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zprofile .zprofile
 sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zshenv .zshenv
 sudo -u "$SUDO_USER" ln -s .zprezto/runcoms/zshrc .zshrc
-sudo -i -u "$SUDO_USER" bash -i "$INSTALL_DIR"/conda-init-zsh.sh
-sudo -i -u "$SUDO_USER" bash -i "$INSTALL_DIR"/conda-config-change-PS1.sh
+sudo -u "$SUDO_USER" echo "conda init zsh" > conda-init-zsh.sh
+sudo -i -u "$SUDO_USER" bash -i conda-init-zsh.sh
+rm -f conda-init-zsh.sh
+sudo -u "$SUDO_USER" echo "conda config --set changeps1 False" > conda-config-change-PS1.sh
+sudo -i -u "$SUDO_USER" bash -i conda-config-change-PS1.sh
+rm -f conda-config-change-PS1.sh
 # add all the bashrc.local modifications to .zshrc as well:
 echo $'' | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 echo "$EXPORT_TEMPLATES" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
