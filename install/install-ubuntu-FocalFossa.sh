@@ -186,7 +186,7 @@ date
 echo "Installing important software"
 apt-get install gparted -qq
 hash gparted
-apt-get install gnome-tweaks
+apt-get install gnome-tweaks -qq
 gnome-tweaks --version
 snap install tree
 tree --version
