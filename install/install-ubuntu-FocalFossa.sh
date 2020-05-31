@@ -182,6 +182,8 @@ date
 echo "Installing important software"
 apt-get install gparted -qq
 hash gparted
+apt-get install gnome-tweaks
+gnome-tweaks --version
 apt-get install zsh -qq
 zsh --version
 snap install code --classic
@@ -349,10 +351,14 @@ echo "$ALIAS_CODE_LINT" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 echo "$ALIAS_SC4DA" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 echo $SEP
 
-# set a wallpaper
+# prepare the desktop environment
 date
-echo "Setting a wallpaper"
+echo "Preparing desktop environment"
 #RESOLUTION=$(xdpyinfo | awk '/dimensions/{print $2}')
+sudo -u "$SUDO_USER" gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
+sudo -u "$SUDO_USER" gsettings set org.gnome.desktop.interface icon-theme Adwaita
+sudo -u "$SUDO_USER" gsettings set org.gnome.desktop.screensaver picture-uri \
+    file://"$INSTALL_DIR"/../ubuntu-wallpaper-3840x2160.jpg
 sudo -u "$SUDO_USER" gsettings set org.gnome.desktop.background picture-uri \
     file://"$INSTALL_DIR"/../ubuntu-wallpaper-3840x2160.jpg
 echo $SEP
@@ -380,7 +386,6 @@ reboot
 # * vs code plugins?
 # * add repo with vim configuration
 # * install tree
-# * https://github.com/pavanjadhaw/betterlockscreen
 # * remove the dotfiles directory, use stow and the small-dotfiles repo
 # * fix conda workaround?
 #
