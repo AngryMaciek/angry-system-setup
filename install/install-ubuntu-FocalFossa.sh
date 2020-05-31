@@ -401,9 +401,8 @@ reboot
 #
 # Future releases:
 #
-# * auto switch to gnome flashback, clean icons and panels (dotfile?)
-# * add repo with vim configuration
 # * remove the dotfiles directory, use stow and the small-dotfiles repo
-# * fix conda workaround?
+# * auto switch to gnome flashback, clean icons and panels (dotfile?)
+# * add repo with vim configuration (shellcheck all)
 #
 ###############################################################################
