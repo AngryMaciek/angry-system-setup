@@ -190,6 +190,10 @@ apt-get install zsh -qq
 zsh --version
 snap install code --classic
 sudo -u "$SUDO_USER" code --version
+code --install-extension ms-azuretools.vscode-docker
+code --install-extension ms-python.anaconda-extension-pack
+code --install-extension yzhang.markdown-all-in-one
+code --install-extension dunstontc.viml
 apt-get install guake -qq
 guake --version
 apt-get install htop -qq
@@ -385,7 +389,6 @@ reboot
 # Future releases:
 #
 # * auto switch to gnome flashback, clean icons and panels (dotfile?)
-# * vs code plugins?
 # * add repo with vim configuration
 # * remove the dotfiles directory, use stow and the small-dotfiles repo
 # * fix conda workaround?
