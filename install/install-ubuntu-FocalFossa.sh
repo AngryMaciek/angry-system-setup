@@ -184,6 +184,8 @@ apt-get install gparted -qq
 hash gparted
 apt-get install gnome-tweaks
 gnome-tweaks --version
+snap install tree
+tree --version
 apt-get install zsh -qq
 zsh --version
 snap install code --classic
@@ -385,7 +387,6 @@ reboot
 # * auto switch to gnome flashback, clean icons and panels (dotfile?)
 # * vs code plugins?
 # * add repo with vim configuration
-# * install tree
 # * remove the dotfiles directory, use stow and the small-dotfiles repo
 # * fix conda workaround?
 #
