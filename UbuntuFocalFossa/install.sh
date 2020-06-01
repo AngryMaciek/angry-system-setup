@@ -408,11 +408,7 @@ reboot
 
 
 ###############################################################################
-#
 # Future releases:
-#
-# * use stow and the small-dotfiles repo
 # * auto switch to gnome flashback, clean panels
 # * add repo with vim configuration (shellcheck all)
-#
 ###############################################################################
