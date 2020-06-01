@@ -375,6 +375,8 @@ sudo -u "$SUDO_USER" gsettings set org.gnome.desktop.background picture-uri \
     file://"$INSTALL_DIR"/../ubuntu-wallpaper-3840x2160.jpg
 sudo -u "$SUDO_USER" gsettings set org.gnome.nautilus.preferences default-folder-viewer 'list-view'
 sudo -u "$SUDO_USER" gsettings set org.gnome.nautilus.list-view default-zoom-level 'small'
+sudo -u "$SUDO_USER" gsettings set org.gnome.gnome-flashback.desktop.icons show-home false
+sudo -u "$SUDO_USER" gsettings set org.gnome.gnome-flashback.desktop.icons show-trash false
 echo $SEP
 
 DURATION=$SECONDS
@@ -396,7 +398,6 @@ reboot
 #
 # Future releases:
 #
-# * remove initial desktop icons (while Gnome Tweaks/Extensions patched)
 # * use stow and the small-dotfiles repo
 # * auto switch to gnome flashback, clean panels
 # * add repo with vim configuration (shellcheck all)
