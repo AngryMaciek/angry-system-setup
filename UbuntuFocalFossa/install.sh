@@ -82,6 +82,7 @@ cleanup () {
     rm -f conda-init-zsh.sh
     rm -f conda-config-change-PS1.sh
     rm -f conda-clean.sh
+    rm -rf small-dotfiles
     rm -rf conda-envs
     rm -rf SC4DA
     rm -rf bin
