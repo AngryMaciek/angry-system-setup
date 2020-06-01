@@ -25,12 +25,12 @@ git clone https://github.com/AngryMaciek/system-setup.git
 
 ## Execute setup script
 
-Depending on your operating system please execute one of the following installation scripts:
+Depending on your operating system please execute one of the following installation scripts (requires root privileges):
 
-* Ubuntu-based Linux distributions (execution requires root privileges)  
+* Linux: Ubuntu Focal Fossa (20.04 LTS)  
   **Installation requires at least 6GB of RAM and 30GB free disk space**  
   ```bash
-  sudo bash system-setup/install/install-ubuntu-FocalFossa.sh 2>&1 | tee system-setup/setup.log
+  sudo bash system-setup/UbuntuFocalFossa/install.sh 2>&1 | tee system-setup/setup.log
   ```
 
 ## License
