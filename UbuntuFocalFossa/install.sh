@@ -396,8 +396,9 @@ reboot
 #
 # Future releases:
 #
-# * remove the dotfiles directory, use stow and the small-dotfiles repo
-# * auto switch to gnome flashback, clean icons and panels (dotfile?)
+# * remove initial desktop icons (while Gnome Tweaks/Extensions patched)
+# * use stow and the small-dotfiles repo
+# * auto switch to gnome flashback, clean panels
 # * add repo with vim configuration (shellcheck all)
 #
 ###############################################################################
