@@ -120,13 +120,6 @@ fi
 chattr +i Backup
 echo $SEP
 
-# copy the dotflies
-date
-echo "Copying configuration files"
-sudo -u "$SUDO_USER" cp "$INSTALL_DIR"/../dotfiles/.gitconfig .gitconfig
-sudo -u "$SUDO_USER" cp "$INSTALL_DIR"/../dotfiles/.pylintrc .pylintrc
-echo $SEP
-
 # from this point use cleanup() on errors
 trap cleanup ERR SIGINT SIGTERM
 
