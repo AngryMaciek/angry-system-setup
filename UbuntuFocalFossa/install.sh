@@ -256,7 +256,9 @@ echo $SEP
 date
 echo "Cloning configuration files"
 sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/small-dotfiles.git
-sudo -u "$SUDO_USER" stow -vSt $USER_HOME small-dotfiles/dotfiles/*
+cd small-dotfiles/dotfiles
+sudo -u "$SUDO_USER" stow -vSt $USER_HOME *
+cd $USER_HOME
 echo $SEP
 
 # install my textfile templates
