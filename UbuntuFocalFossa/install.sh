@@ -9,7 +9,7 @@
 #   CONTACT: wsciekly.maciek@gmail.com
 #   CREATED: 16-04-2020
 #   LICENSE: MIT
-#   USAGE: sudo bash install-ubuntu-FocalFossa.sh
+#   USAGE: sudo bash install.sh
 #
 ###############################################################################
 
