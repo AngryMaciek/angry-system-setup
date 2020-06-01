@@ -374,6 +374,7 @@ sudo -u "$SUDO_USER" gsettings set org.gnome.desktop.screensaver picture-uri \
 sudo -u "$SUDO_USER" gsettings set org.gnome.desktop.background picture-uri \
     file://"$INSTALL_DIR"/../ubuntu-wallpaper-3840x2160.jpg
 sudo -u "$SUDO_USER" gsettings set org.gnome.nautilus.preferences default-folder-viewer 'list-view'
+sudo -u "$SUDO_USER" gsettings set org.gnome.nautilus.list-view default-zoom-level 'small'
 echo $SEP
 
 DURATION=$SECONDS
