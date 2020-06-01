@@ -373,6 +373,7 @@ sudo -u "$SUDO_USER" gsettings set org.gnome.desktop.screensaver picture-uri \
     file://"$INSTALL_DIR"/../ubuntu-wallpaper-3840x2160.jpg
 sudo -u "$SUDO_USER" gsettings set org.gnome.desktop.background picture-uri \
     file://"$INSTALL_DIR"/../ubuntu-wallpaper-3840x2160.jpg
+sudo -u "$SUDO_USER" gsettings set org.gnome.nautilus.preferences default-folder-viewer 'list-view'
 echo $SEP
 
 DURATION=$SECONDS
