@@ -308,7 +308,8 @@ echo "$ALIAS_SNAKEMAKE" | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local >
 ALIAS_CODE_LINT="alias conda-lint=\"conda activate ~/conda-envs/code_linting/env\""
 echo "$ALIAS_CODE_LINT" | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
 # clean conda: cache, lock files, unused packages and tarballs
-sudo -i -u "$SUDO_USER" bash -i "$INSTALL_DIR"/conda-clean.sh
+sudo -u "$SUDO_USER" echo "conda clean --all --yes" > conda-clean.sh
+sudo -i -u "$SUDO_USER" bash -i conda-clean.sh
 echo $SEP
 
 # install my general data analytic env
@@ -325,7 +326,6 @@ sudo -i -u "$SUDO_USER" sed -i '7s/\]/\]\]/' SC4DA/env/etc/conda/activate.d/java
 ALIAS_SC4DA="alias sc4da=\"conda activate ~/SC4DA/env\""
 echo "$ALIAS_SC4DA" | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
 # clean conda: cache, lock files, unused packages and tarballs
-sudo -u "$SUDO_USER" echo "conda clean --all --yes" > conda-clean.sh
 sudo -i -u "$SUDO_USER" bash -i conda-clean.sh
 rm -f conda-clean.sh
 echo $SEP
