@@ -43,9 +43,18 @@ then
     exit 1
 fi
 
+# remember paths
+USER_DIR=$PWD
+INSTALL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+
+# work in "$SUDO_USER" home directory
+USER_HOME=$(sudo -u "$SUDO_USER" -H -s eval 'echo $HOME')
+cd "$USER_HOME" || exit 1
+
 # prepare a clean-up function to call on non-zero exit signal
 cleanup () {
     rc=$?
+    cd $USER_HOME
     # remove all new dotfiles
     rm -f .bashrc .gitconfig .pylintrc #.vimrc
     # restore old dotfiles
@@ -88,14 +97,6 @@ cleanup () {
 # unset variables are errors when substituting
 # do not mask the return code
 set -uo pipefail
-
-# remember paths
-USER_DIR=$PWD
-INSTALL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-
-# work in "$SUDO_USER" home directory
-USER_HOME=$(sudo -u "$SUDO_USER" -H -s eval 'echo $HOME')
-cd "$USER_HOME" || exit 1
 
 # backup old configs
 date
@@ -185,6 +186,8 @@ snap install tree
 tree --version
 apt-get install zsh -qq
 zsh --version
+apt-get install stow -qq
+stow --version
 snap install code --classic
 sudo -u "$SUDO_USER" code --version
 sudo -u "$SUDO_USER" code --install-extension ms-azuretools.vscode-docker
@@ -246,6 +249,16 @@ echo $SEP
 #sudo -u "$SUDO_USER" rm -f .vimrc
 #sudo -u "$SUDO_USER" ln -s custom_vim/vimrc .vimrc
 #echo $SEP
+
+# install my personal dorfiles
+# https://github.com/AngryMaciek/small-dotfiles
+date
+echo "Cloning configuration files"
+sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/small-dotfiles.git
+sudo -u "$SUDO_USER" cd small-dotfiles/dotfiles
+sudo -u "$SUDO_USER" stow -vSt $USER_HOME *
+sudo -u "$SUDO_USER" cd $USER_HOME
+echo $SEP
 
 # install my textfile templates
 # https://github.com/AngryMaciek/textfile-templates
