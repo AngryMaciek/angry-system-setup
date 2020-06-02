@@ -174,6 +174,7 @@ echo $SEP
 date
 echo "Installing GNOME Flashback"
 apt-get install gnome-session-flashback -qq
+sed -i 's/XSession=/XSession=gnome-flashback-metacity/g' /var/lib/AccountsService/users/$SUDO_USER
 echo $SEP
 
 # install important software:
