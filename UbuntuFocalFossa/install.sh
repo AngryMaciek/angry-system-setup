@@ -411,6 +411,7 @@ reboot
 
 ###############################################################################
 # Future releases:
-# * auto switch to gnome flashback, clean panels
 # * add repo with vim configuration (shellcheck all)
+# * clean gnome-flashback panels:
+#   https://askubuntu.com/questions/1246077/modify-gnome-flashback-panels-in-ubuntu-20-04-lts-from-the-terminal
 ###############################################################################
