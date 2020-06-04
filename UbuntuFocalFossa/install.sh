@@ -174,6 +174,7 @@ echo $SEP
 date
 echo "Installing GNOME Flashback"
 apt-get install gnome-session-flashback -qq
+apt-get install gnome-applets -qq
 sed -i 's/XSession=/XSession=gnome-flashback-metacity/g' /var/lib/AccountsService/users/$SUDO_USER
 echo $SEP
 
@@ -392,6 +393,11 @@ sudo -u "$SUDO_USER" gsettings set org.gnome.nautilus.preferences default-folder
 sudo -u "$SUDO_USER" gsettings set org.gnome.nautilus.list-view default-zoom-level 'small'
 sudo -u "$SUDO_USER" gsettings set org.gnome.gnome-flashback.desktop.icons show-home false
 sudo -u "$SUDO_USER" gsettings set org.gnome.gnome-flashback.desktop.icons show-trash false
+cp "$INSTALL_DIR"/maciek-gnome-flashback.layout /usr/share/gnome-panel/layouts/maciek-gnome-flashback.layout
+#gnome-panel --replace &
+killall gnome-panel
+dconf reset -f /org/gnome/gnome-panel/
+gsettings set org.gnome.gnome-panel.general default-layout "maciek-gnome-flashback"
 echo $SEP
 
 DURATION=$SECONDS
@@ -411,7 +417,5 @@ reboot
 
 ###############################################################################
 # Future releases:
-# * add repo with vim configuration (shellcheck all)
-# * clean gnome-flashback panels:
-#   https://askubuntu.com/questions/1246077/modify-gnome-flashback-panels-in-ubuntu-20-04-lts-from-the-terminal
+# * add repo with vim configuration (shellcheck all -> GitHub Release)
 ###############################################################################
