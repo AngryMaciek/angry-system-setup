@@ -394,8 +394,8 @@ sudo -u "$SUDO_USER" gsettings set org.gnome.nautilus.list-view default-zoom-lev
 sudo -u "$SUDO_USER" gsettings set org.gnome.gnome-flashback.desktop.icons show-home false
 sudo -u "$SUDO_USER" gsettings set org.gnome.gnome-flashback.desktop.icons show-trash false
 cp "$INSTALL_DIR"/maciek-gnome-flashback.layout /usr/share/gnome-panel/layouts/maciek-gnome-flashback.layout
-dconf reset -f /org/gnome/gnome-panel/
-gsettings set org.gnome.gnome-panel.general default-layout "maciek-gnome-flashback"
+sudo -u "$SUDO_USER" dconf reset -f /org/gnome/gnome-panel/
+sudo -u "$SUDO_USER" gsettings set org.gnome.gnome-panel.general default-layout "maciek-gnome-flashback"
 echo $SEP
 
 DURATION=$SECONDS
