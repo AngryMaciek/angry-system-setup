@@ -56,7 +56,7 @@ cleanup () {
     rc=$?
     cd $USER_HOME
     # remove all new dotfiles
-    rm -f .bashrc .gitconfig .pylintrc #.vimrc
+    rm -f .bashrc .gitconfig .pylintrc .config/htop/htoprc #.vimrc
     # restore old dotfiles
     cp Backup/.bashrc .bashrc
     if [[ -f Backup/.gitconfig ]]
