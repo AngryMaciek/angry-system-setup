@@ -253,14 +253,13 @@ echo $SEP
 #sudo -u "$SUDO_USER" ln -s custom_vim/vimrc .vimrc
 #echo $SEP
 
-# install my personal dorfiles
+# install my personal dotfiles
 # https://github.com/AngryMaciek/small-dotfiles
 date
 echo "Cloning configuration files"
 sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/small-dotfiles.git
-cd small-dotfiles/dotfiles
-sudo -u "$SUDO_USER" stow -vSt $USER_HOME *
-cd $USER_HOME
+sudo -u "$SUDO_USER" stow -vSt $USER_HOME small-dotfiles/dotfiles/git
+sudo -u "$SUDO_USER" stow -vSt $USER_HOME small-dotfiles/dotfiles/pylint
 echo $SEP
 
 # install my textfile templates
