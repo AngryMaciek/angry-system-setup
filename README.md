@@ -1,4 +1,4 @@
-# Setup instructions for a fresh OS
+# Setup instructions for a fresh Angry OS
 *Maciek Bak*  
 
 This is a very small repository of mine which allows me to quickly re-create my working environment completely from scratch.  
@@ -20,7 +20,7 @@ Depending on your operating system please install `git` with one of the followin
 
 Use `git` command to clone this repository into your local machine:
 ```bash
-git clone https://github.com/AngryMaciek/system-setup.git
+git clone https://github.com/AngryMaciek/angry-system-setup.git
 ```
 
 ## Execute setup script
@@ -30,7 +30,7 @@ Depending on your operating system please execute one of the following installat
 * Linux: Ubuntu Focal Fossa (20.04 LTS)  
   **Installation requires at least 6GB of RAM and 30GB free disk space**  
   ```bash
-  sudo bash system-setup/UbuntuFocalFossa/install.sh 2>&1 | tee system-setup/setup.log
+  sudo bash angry-system-setup/UbuntuFocalFossa/install.sh 2>&1 | tee angry-system-setup/setup.log
   ```
 
 ## License
