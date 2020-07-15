@@ -136,14 +136,14 @@ apt-get install git -qq
 echo $SEP
 
 # install my bash configuration
-# https://github.com/AngryMaciek/custom-bash
+# https://github.com/AngryMaciek/angry-bash
 date
 echo "Configuring bash"
-sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/custom-bash.git
+sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/angry-bash.git
 sudo -u "$SUDO_USER" rm -f .bashrc
-sudo -u "$SUDO_USER" ln -s custom-bash/bashrc .bashrc
+sudo -u "$SUDO_USER" ln -s angry-bash/bashrc .bashrc
 # bashrc.local is an additional space for all local bash configuration
-sudo -u "$SUDO_USER" touch custom-bash/bashrc.local
+sudo -u "$SUDO_USER" touch angry-bash/bashrc.local
 echo $SEP
 
 # update apt-get package lists
@@ -254,33 +254,33 @@ echo $SEP
 #echo $SEP
 
 # install my personal dotfiles
-# https://github.com/AngryMaciek/small-dotfiles
+# https://github.com/AngryMaciek/angry-dotfiles
 date
 echo "Cloning configuration files"
-sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/small-dotfiles.git
+sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/angry-dotfiles.git
 rm -f .gitconfig .pylintrc .config/htop/htoprc
-cd small-dotfiles/dotfiles
+cd angry-dotfiles/dotfiles
 sudo -u "$SUDO_USER" stow -vSt $USER_HOME git pylint htop
 cd $USER_HOME
 
 echo $SEP
 
 # install my textfile templates
-# https://github.com/AngryMaciek/textfile-templates
+# https://github.com/AngryMaciek/angry-textfile-templates
 date
 echo "Cloning textfile templates"
-sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/textfile-templates.git
-EXPORT_TEMPLATES="export PATH=$PATH\":$USER_HOME/textfile-templates\""
+sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/angry-textfile-templates.git
+EXPORT_TEMPLATES="export PATH=$PATH\":$USER_HOME/angry-textfile-templates\""
 echo $'' | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
 echo "$EXPORT_TEMPLATES" | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
-sudo -u "$SUDO_USER" chmod +x textfile-templates/template
+sudo -u "$SUDO_USER" chmod +x angry-textfile-templates/template
 echo $SEP
 
 # clone my cookiecutters
-# https://github.com/AngryMaciek/cookiecutters
+# https://github.com/AngryMaciek/angry-cookiecutters
 date
 echo "Cloning cookiecutters"
-sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/cookiecutters.git;
+sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/angry-cookiecutters.git;
 echo $SEP
 
 # download and install Miniconda3
