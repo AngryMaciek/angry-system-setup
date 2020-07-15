@@ -70,20 +70,20 @@ cleanup () {
     # remove all new directories from $USER_HOME
     chattr -i Backup
     rm -rf Backup
-    rm -rf custom-bash
+    rm -rf angry-bash
     #rm -rf custom_vim
     rm -rf google-chrome-stable_current_amd64.deb
     rm -rf AdbeRdr9.5.5-1_i386linux_enu.deb
-    rm -rf textfile-templates
-    rm -rf cookiecutters
+    rm -rf angry-textfile-templates
+    rm -rf angry-cookiecutters
     rm -rf Miniconda3-latest-Linux-x86_64.sh
     rm -rf miniconda3 .conda .condarc
     rm -f conda-init-bash.sh
     rm -f conda-init-zsh.sh
     rm -f conda-config-change-PS1.sh
     rm -f conda-clean.sh
-    rm -rf small-dotfiles
-    rm -rf conda-envs
+    rm -rf angry-dotfiles
+    rm -rf angry-conda-environments
     rm -rf SC4DA
     rm -rf bin
     rm -rf .zprezto
@@ -296,34 +296,34 @@ rm -f Miniconda3-latest-Linux-x86_64.sh
 echo $SEP
 
 # install my conda env recipes
-# https://github.com/AngryMaciek/conda-envs
+# https://github.com/AngryMaciek/angry-conda-environments
 date
 echo "Building conda environments"
-sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/conda-envs.git
-sudo -i -u "$SUDO_USER" bash -i conda-envs/Nextflow/create-virtual-environment.sh
-sudo -i -u "$SUDO_USER" bash -i conda-envs/Python_Jupyter/create-virtual-environment.sh
+sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/angry-conda-environments.git
+sudo -i -u "$SUDO_USER" bash -i angry-conda-environments/Nextflow/create-virtual-environment.sh
+sudo -i -u "$SUDO_USER" bash -i angry-conda-environments/Python_Jupyter/create-virtual-environment.sh
 # adjust syntax for env to work under zsh:
 # ---
-sudo -i -u "$SUDO_USER" sed -i '7s/\[/\[\[/' conda-envs/Python_Jupyter/env/etc/conda/activate.d/java_home.sh
-sudo -i -u "$SUDO_USER" sed -i '7s/\]/\]\]/' conda-envs/Python_Jupyter/env/etc/conda/activate.d/java_home.sh
+sudo -i -u "$SUDO_USER" sed -i '7s/\[/\[\[/' angry-conda-environments/Python_Jupyter/env/etc/conda/activate.d/java_home.sh
+sudo -i -u "$SUDO_USER" sed -i '7s/\]/\]\]/' angry-conda-environments/Python_Jupyter/env/etc/conda/activate.d/java_home.sh
 # ---
-sudo -i -u "$SUDO_USER" bash -i conda-envs/Python_DL/create-virtual-environment.sh
-sudo -i -u "$SUDO_USER" bash -i conda-envs/R/create-virtual-environment.sh
-sudo -i -u "$SUDO_USER" bash -i conda-envs/Snakemake/create-virtual-environment.sh
-sudo -i -u "$SUDO_USER" bash -i conda-envs/code_linting/create-virtual-environment.sh
+sudo -i -u "$SUDO_USER" bash -i angry-conda-environments/Python_DL/create-virtual-environment.sh
+sudo -i -u "$SUDO_USER" bash -i angry-conda-environments/R/create-virtual-environment.sh
+sudo -i -u "$SUDO_USER" bash -i angry-conda-environments/Snakemake/create-virtual-environment.sh
+sudo -i -u "$SUDO_USER" bash -i angry-conda-environments/code_linting/create-virtual-environment.sh
 # ...and add bash aliases:
-ALIAS_NEXTFLOW="alias conda-nextflow=\"conda activate ~/conda-envs/Nextflow/env\""
+ALIAS_NEXTFLOW="alias conda-nextflow=\"conda activate ~/angry-conda-environments/Nextflow/env\""
 echo $'' | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
 echo "$ALIAS_NEXTFLOW" | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
-ALIAS_PYTHON_JUPYTER="alias conda-jupyter=\"conda activate ~/conda-envs/Python_Jupyter/env\""
+ALIAS_PYTHON_JUPYTER="alias conda-jupyter=\"conda activate ~/angry-conda-environments/Python_Jupyter/env\""
 echo "$ALIAS_PYTHON_JUPYTER" | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
-ALIAS_PYTHON_DL="alias conda-dl=\"conda activate ~/conda-envs/Python_DL/env\""
+ALIAS_PYTHON_DL="alias conda-dl=\"conda activate ~/angry-conda-environments/Python_DL/env\""
 echo "$ALIAS_PYTHON_DL" | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
-ALIAS_R="alias conda-r=\"conda activate ~/conda-envs/R/env\""
+ALIAS_R="alias conda-r=\"conda activate ~/angry-conda-environments/R/env\""
 echo "$ALIAS_R" | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
-ALIAS_SNAKEMAKE="alias conda-snakemake=\"conda activate ~/conda-envs/Snakemake/env\""
+ALIAS_SNAKEMAKE="alias conda-snakemake=\"conda activate ~/angry-conda-environments/Snakemake/env\""
 echo "$ALIAS_SNAKEMAKE" | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
-ALIAS_CODE_LINT="alias conda-lint=\"conda activate ~/conda-envs/code_linting/env\""
+ALIAS_CODE_LINT="alias conda-lint=\"conda activate ~/angry-conda-environments/code_linting/env\""
 echo "$ALIAS_CODE_LINT" | sudo -u "$SUDO_USER" tee -a custom-bash/bashrc.local > /dev/null
 # clean conda: cache, lock files, unused packages and tarballs
 sudo -u "$SUDO_USER" echo "conda clean --all --yes" > conda-clean.sh
