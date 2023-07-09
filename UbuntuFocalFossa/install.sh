@@ -162,7 +162,6 @@ zsh --version
 snap install code --classic
 sudo -u "$SUDO_USER" code --version
 sudo -u "$SUDO_USER" code --install-extension ms-azuretools.vscode-docker
-sudo -u "$SUDO_USER" code --install-extension ms-python.anaconda-extension-pack
 sudo -u "$SUDO_USER" code --install-extension yzhang.markdown-all-in-one
 sudo -u "$SUDO_USER" code --install-extension dunstontc.viml
 apt-get install make -qq
