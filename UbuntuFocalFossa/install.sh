@@ -55,36 +55,24 @@ cd "$USER_HOME" || exit 1
 cleanup () {
     rc=$?
     cd $USER_HOME
-    # remove all new dotfiles
-    rm -f .bashrc .gitconfig .pylintrc .config/htop/htoprc #.vimrc
+    # remove all new rcfiles
+    rm -f .bashrc .vimrc
     # restore old dotfiles
     cp Backup/.bashrc .bashrc
-    if [[ -f Backup/.gitconfig ]]
-    then
-        mv Backup/.gitconfig .gitconfig
-    fi
-    #if [[ -f Backup/.vimrc ]]
-    #    then
-    #        mv Backup/.vimrc .vimrc
-    #fi
     # remove all new directories from $USER_HOME
     chattr -i Backup
     rm -rf Backup
     rm -rf angry-bash
-    #rm -rf custom_vim
+    rm -rf angry-vim
     rm -rf google-chrome-stable_current_amd64.deb
     rm -rf AdbeRdr9.5.5-1_i386linux_enu.deb
-    rm -rf angry-textfile-templates
-    rm -rf angry-cookiecutters
+    rm -rf angry-skeletor
     rm -rf Miniconda3-latest-Linux-x86_64.sh
     rm -rf miniconda3 .conda .condarc
     rm -f conda-init-bash.sh
     rm -f conda-init-zsh.sh
     rm -f conda-config-change-PS1.sh
-    rm -f conda-clean.sh
-    rm -rf angry-dotfiles
     rm -rf angry-conda-environments
-    rm -rf SC4DA
     rm -rf bin
     rm -rf .zprezto
     rm -f .zlogin .zlogout .zpreztorc .zprofile .zshenv .zshrc
@@ -111,14 +99,6 @@ then
 fi
 mkdir Backup
 cp .bashrc Backup/.bashrc # .bashrc is always present
-if [[ -f .gitconfig ]]
-then
-    mv .gitconfig Backup/.gitconfig
-fi
-#if [[ -f .vimrc ]]
-#    then
-#        mv .vimrc Backup/.vimrc
-#fi
 chattr +i Backup
 echo $SEP
 
@@ -170,27 +150,15 @@ apt-get install gfortran -qq
 gfortran --version
 echo $SEP
 
-# Install GNOME Flashback desktop environment
-date
-echo "Installing GNOME Flashback"
-apt-get install gnome-session-flashback -qq
-apt-get install gnome-applets -qq
-sed -i 's/XSession=/XSession=gnome-flashback-metacity/g' /var/lib/AccountsService/users/$SUDO_USER
-echo $SEP
-
 # install important software:
 date
 echo "Installing important software"
 apt-get install gparted -qq
 hash gparted
-apt-get install gnome-tweaks -qq
-gnome-tweaks --version
 snap install tree
 tree --version
 apt-get install zsh -qq
 zsh --version
-apt-get install stow -qq
-stow --version
 snap install code --classic
 sudo -u "$SUDO_USER" code --version
 sudo -u "$SUDO_USER" code --install-extension ms-azuretools.vscode-docker
@@ -236,51 +204,31 @@ rm -rf AdbeRdr9.5.5-1_i386linux_enu.deb
 acroread -version
 echo $SEP
 
-# remove unnecessary software
+# clean up
 date
-echo "Uninstalling unnecessary software"
-apt-get purge firefox* -qq
+echo "System: apt-get cleanup"
 apt-get clean
 apt-get autoremove -qq
 echo $SEP
 
 # Clone Vim Configuration
-# https://github.com/AngryMaciek/custom_vim
-#date
-#echo "Cloning Vim configuration"
-#sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/custom_vim.git
-#sudo -u "$SUDO_USER" rm -f .vimrc
-#sudo -u "$SUDO_USER" ln -s custom_vim/vimrc .vimrc
-#echo $SEP
-
-# install my personal dotfiles
-# https://github.com/AngryMaciek/angry-dotfiles
+# https://github.com/AngryMaciek/angry-vim
 date
-echo "Cloning configuration files"
-sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/angry-dotfiles.git
-rm -f .gitconfig .pylintrc .config/htop/htoprc
-cd angry-dotfiles/dotfiles
-sudo -u "$SUDO_USER" stow -vSt $USER_HOME git pylint htop
-cd $USER_HOME
-
+echo "Cloning Vim configuration"
+sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/angry-vim.git
+sudo -u "$SUDO_USER" rm -f .vimrc
+sudo -u "$SUDO_USER" bash angry-vim/setup.sh
 echo $SEP
 
 # install my textfile templates
-# https://github.com/AngryMaciek/angry-textfile-templates
+# https://github.com/AngryMaciek/angry-skeletor
 date
 echo "Cloning textfile templates"
-sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/angry-textfile-templates.git
-EXPORT_TEMPLATES="export PATH=$PATH\":$USER_HOME/angry-textfile-templates\""
+sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/angry-skeletor.git
+EXPORT_TEMPLATES="export PATH=$PATH\":$USER_HOME/angry-skeletor\""
 echo $'' | sudo -u "$SUDO_USER" tee -a angry-bash/bashrc.local > /dev/null
 echo "$EXPORT_TEMPLATES" | sudo -u "$SUDO_USER" tee -a angry-bash/bashrc.local > /dev/null
-sudo -u "$SUDO_USER" chmod +x angry-textfile-templates/template
-echo $SEP
-
-# clone my cookiecutters
-# https://github.com/AngryMaciek/angry-cookiecutters
-date
-echo "Cloning cookiecutters"
-sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/angry-cookiecutters.git;
+sudo -u "$SUDO_USER" chmod +x angry-skeletor/template
 echo $SEP
 
 # download and install Miniconda3
@@ -293,59 +241,6 @@ sudo -u "$SUDO_USER" echo "conda init bash" >> conda-init-bash.sh
 sudo -i -u "$SUDO_USER" bash -i conda-init-bash.sh
 rm -f conda-init-bash.sh
 rm -f Miniconda3-latest-Linux-x86_64.sh
-echo $SEP
-
-# install my conda env recipes
-# https://github.com/AngryMaciek/angry-conda-environments
-date
-echo "Building conda environments"
-sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/angry-conda-environments.git
-sudo -i -u "$SUDO_USER" bash -i angry-conda-environments/Nextflow/create-virtual-environment.sh
-sudo -i -u "$SUDO_USER" bash -i angry-conda-environments/Python_Jupyter/create-virtual-environment.sh
-# adjust syntax for env to work under zsh:
-# ---
-sudo -i -u "$SUDO_USER" sed -i '7s/\[/\[\[/' angry-conda-environments/Python_Jupyter/env/etc/conda/activate.d/java_home.sh
-sudo -i -u "$SUDO_USER" sed -i '7s/\]/\]\]/' angry-conda-environments/Python_Jupyter/env/etc/conda/activate.d/java_home.sh
-# ---
-sudo -i -u "$SUDO_USER" bash -i angry-conda-environments/Python_DL/create-virtual-environment.sh
-sudo -i -u "$SUDO_USER" bash -i angry-conda-environments/R/create-virtual-environment.sh
-sudo -i -u "$SUDO_USER" bash -i angry-conda-environments/Snakemake/create-virtual-environment.sh
-sudo -i -u "$SUDO_USER" bash -i angry-conda-environments/code_linting/create-virtual-environment.sh
-# ...and add bash aliases:
-ALIAS_NEXTFLOW="alias conda-nextflow=\"conda activate ~/angry-conda-environments/Nextflow/env\""
-echo $'' | sudo -u "$SUDO_USER" tee -a angry-bash/bashrc.local > /dev/null
-echo "$ALIAS_NEXTFLOW" | sudo -u "$SUDO_USER" tee -a angry-bash/bashrc.local > /dev/null
-ALIAS_PYTHON_JUPYTER="alias conda-jupyter=\"conda activate ~/angry-conda-environments/Python_Jupyter/env\""
-echo "$ALIAS_PYTHON_JUPYTER" | sudo -u "$SUDO_USER" tee -a angry-bash/bashrc.local > /dev/null
-ALIAS_PYTHON_DL="alias conda-dl=\"conda activate ~/angry-conda-environments/Python_DL/env\""
-echo "$ALIAS_PYTHON_DL" | sudo -u "$SUDO_USER" tee -a angry-bash/bashrc.local > /dev/null
-ALIAS_R="alias conda-r=\"conda activate ~/angry-conda-environments/R/env\""
-echo "$ALIAS_R" | sudo -u "$SUDO_USER" tee -a angry-bash/bashrc.local > /dev/null
-ALIAS_SNAKEMAKE="alias conda-snakemake=\"conda activate ~/angry-conda-environments/Snakemake/env\""
-echo "$ALIAS_SNAKEMAKE" | sudo -u "$SUDO_USER" tee -a angry-bash/bashrc.local > /dev/null
-ALIAS_CODE_LINT="alias conda-lint=\"conda activate ~/angry-conda-environments/code_linting/env\""
-echo "$ALIAS_CODE_LINT" | sudo -u "$SUDO_USER" tee -a angry-bash/bashrc.local > /dev/null
-# clean conda: cache, lock files, unused packages and tarballs
-sudo -u "$SUDO_USER" echo "conda clean --all --yes" > conda-clean.sh
-sudo -i -u "$SUDO_USER" bash -i conda-clean.sh
-echo $SEP
-
-# install my general data analytic env
-# https://github.com/AngryMaciek/SC4DA
-date
-echo "Building main development environment (SC4DA)"
-sudo -u "$SUDO_USER" git clone https://github.com/AngryMaciek/SC4DA.git
-sudo -i -u "$SUDO_USER" bash -i SC4DA/create-conda-virtual-environment.sh
-# adjust syntax for env to work under zsh:
-# ---
-sudo -i -u "$SUDO_USER" sed -i '7s/\[/\[\[/' SC4DA/env/etc/conda/activate.d/java_home.sh
-sudo -i -u "$SUDO_USER" sed -i '7s/\]/\]\]/' SC4DA/env/etc/conda/activate.d/java_home.sh
-# ---
-ALIAS_SC4DA="alias sc4da=\"conda activate ~/SC4DA/env\""
-echo "$ALIAS_SC4DA" | sudo -u "$SUDO_USER" tee -a angry-bash/bashrc.local > /dev/null
-# clean conda: cache, lock files, unused packages and tarballs
-sudo -i -u "$SUDO_USER" bash -i conda-clean.sh
-rm -f conda-clean.sh
 echo $SEP
 
 # Clone and set up Prezto (Zsh Configuration)
@@ -371,33 +266,6 @@ echo $'' | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 echo "$EXPORT_TEMPLATES" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 echo $'' | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 echo "$EXPORT_CONDA_DEFAULT_ENV" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
-echo $'' | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
-echo "$ALIAS_NEXTFLOW" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
-echo "$ALIAS_PYTHON_JUPYTER" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
-echo "$ALIAS_PYTHON_DL" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
-echo "$ALIAS_R" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
-echo "$ALIAS_SNAKEMAKE" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
-echo "$ALIAS_CODE_LINT" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
-echo "$ALIAS_SC4DA" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
-echo $SEP
-
-# prepare the desktop environment
-date
-echo "Preparing desktop environment"
-#RESOLUTION=$(xdpyinfo | awk '/dimensions/{print $2}')
-sudo -u "$SUDO_USER" gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
-sudo -u "$SUDO_USER" gsettings set org.gnome.desktop.interface icon-theme Adwaita
-sudo -u "$SUDO_USER" gsettings set org.gnome.desktop.screensaver picture-uri \
-    file://"$INSTALL_DIR"/../ubuntu-wallpaper-3840x2160.jpg
-sudo -u "$SUDO_USER" gsettings set org.gnome.desktop.background picture-uri \
-    file://"$INSTALL_DIR"/../ubuntu-wallpaper-3840x2160.jpg
-sudo -u "$SUDO_USER" gsettings set org.gnome.nautilus.preferences default-folder-viewer 'list-view'
-sudo -u "$SUDO_USER" gsettings set org.gnome.nautilus.list-view default-zoom-level 'small'
-sudo -u "$SUDO_USER" gsettings set org.gnome.gnome-flashback.desktop.icons show-home false
-sudo -u "$SUDO_USER" gsettings set org.gnome.gnome-flashback.desktop.icons show-trash false
-cp "$INSTALL_DIR"/maciek-gnome-flashback.layout /usr/share/gnome-panel/layouts/maciek-gnome-flashback.layout
-sudo -u "$SUDO_USER" dconf reset -f /org/gnome/gnome-panel/
-sudo -u "$SUDO_USER" gsettings set org.gnome.gnome-panel.general default-layout "maciek-gnome-flashback"
 echo $SEP
 
 DURATION=$SECONDS
@@ -413,9 +281,3 @@ echo "System will reboot in 60s"
 echo $SEP
 sleep 60
 reboot
-
-
-###############################################################################
-# Future releases:
-# * add repo with vim configuration (shellcheck all -> GitHub Release)
-###############################################################################
