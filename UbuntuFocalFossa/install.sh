@@ -165,6 +165,8 @@ sudo -u "$SUDO_USER" code --install-extension ms-azuretools.vscode-docker
 sudo -u "$SUDO_USER" code --install-extension ms-python.anaconda-extension-pack
 sudo -u "$SUDO_USER" code --install-extension yzhang.markdown-all-in-one
 sudo -u "$SUDO_USER" code --install-extension dunstontc.viml
+apt-get install make -qq
+make --version
 apt-get install guake -qq
 guake --version
 apt-get install htop -qq
@@ -267,6 +269,10 @@ echo "$EXPORT_TEMPLATES" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 echo $'' | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 echo "$EXPORT_CONDA_DEFAULT_ENV" | sudo -u "$SUDO_USER" tee -a .zshrc > /dev/null
 echo $SEP
+
+# hide desktop icons
+sudo -u "$SUDO_USER" gsettings set org.gnome.shell.extensions.desktop-icons show-home false
+sudo -u "$SUDO_USER" gsettings set org.gnome.shell.extensions.desktop-icons show-trash false
 
 DURATION=$SECONDS
 DURATION_H=$((DURATION / 3600))
